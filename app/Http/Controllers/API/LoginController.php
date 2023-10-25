@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 
-class LoginController extends Controller
+class LoginController extends BaseController
 {
-    public function login(Request $request)
+    public function login_action(Request $request)
     {
+        // return $this->sendResponse($request->all(), 'User login successfully.');
         $request->validate([
             'email' => 'required',
             'password' => 'required',

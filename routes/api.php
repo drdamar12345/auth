@@ -15,8 +15,10 @@ use App\Http\Controllers\API\LoginController;
 |
 */
 
-Route::post('login', [LoginController::class, 'login']);
+Route::post('login', [LoginController::class, 'login_action']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group( function () {
+    // return $request->user();
 });
+
+// Route::post('login', [LoginController::class, 'login_action']);
