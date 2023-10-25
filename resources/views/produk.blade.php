@@ -3,7 +3,7 @@
 @section('content')
 <div class="container py-5">
     <div class="row" flex-direction="row">
-      @foreach ($data as $item)
+      @foreach ($product as $item)
       <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
         <div class="card">
           <div class="d-flex justify-content-between p-3">
@@ -20,8 +20,8 @@
               <h5 class="mb-0">{{$item->nama_product}}</h5>
               <h5 class="text-dark mb-0">{{$item->harga}}</h5>
             </div>
-            <p class="btn-holder"><a href="{{ route('add.to.cart', $item->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p>
-            <p class="btn-holder"><a href="{{ route('add.to.favourite', $item->id) }}" class="btn btn-info btn-block text-center" role="button">Add to favourite</a> </p>
+            {{--  <p class="btn-holder"><a href="{{ route('add.to.cart', $item->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p>
+            <p class="btn-holder"><a href="{{ route('add.to.favourite', $item->id) }}" class="btn btn-info btn-block text-center" role="button">Add to favourite</a> </p>  --}}
 
 
             <div class="d-flex justify-content-between mb-2">
