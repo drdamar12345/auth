@@ -132,7 +132,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../charts/chartjs.html" class="nav-link">
+                <a href="/keranjang" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Produk Chart</p>
                 </a>

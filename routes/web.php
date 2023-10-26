@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\KeranjangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::middleware('auth')->group( function () {
+    // dashboard
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    // daftar produk
     Route::get('produk', [ProductController::class, 'produk'])->name('produk');
+    // keranjang
+    Route::get('keranjang', [KeranjangController::class, 'keranjang'])->name('keranjang');
+    Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
+
 });
