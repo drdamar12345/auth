@@ -27,7 +27,7 @@ class ProductController extends Controller
             'harga'=>$product->harga,
             'user_id'=>$user,
             'qty'=>1,
-            'ukuransepatu'=>->ukuran,
+            'ukuransepatu'=>$request->ukuran,
         ]);
 
           
