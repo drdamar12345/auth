@@ -22,6 +22,7 @@ class LoginController extends BaseController
             $user = Auth::user(); 
             $success['token'] =  $user->createToken('MyApp')-> accessToken; 
             $success['name'] =  $user->name;
+            $success['is_superadmin'] = $user->is_superadmin;
 
             return $this->sendResponse($success, 'User login successfully.');
         } 
@@ -52,15 +53,19 @@ class LoginController extends BaseController
         $input['password'] = bcrypt($input['password']);
         $input['email'] = ($input['email']);
         $input['name'] = ($input['name']);
+        $input['is_superadmin'] = ($input['is_superadmin']);
         // $input['gambar'] = ($input['gambar']);
 
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
+        $success['is_superadmin'] =  $user->is_superadmin;
         // $success['gambar'] =  $user->gambar;
         
 
         return $this->sendResponse($success, 'User register successfully.');
 
     }
+
+    
 }

@@ -2,8 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\LoginController;
+use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +18,25 @@ use App\Http\Controllers\API\LoginController;
 |
 */
 
+//login register
 Route::post('login', [LoginController::class, 'login_action']);
 Route::post('register', [LoginController::class, 'register_action']);
 
-Route::middleware('auth:api')->group( function () {
-    // return $request->user();
-});
+//ubah password
+Route::post('ubah_pw', [PasswordController::class, 'password_action']);
 
+
+
+
+
+Route::middleware('auth:api')->group( function () {
+
+// data yang login
+Route::get('data', [UserController::class, 'profil']);
+
+// data produk
 Route::get('data_produk', [ProductController::class, 'produk']);
+
+//log out
+Route::post('keluar', [UserController::class, 'logout_action']);
+});
