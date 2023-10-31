@@ -19,6 +19,14 @@ class UserController extends Controller
     {
         return view('login1');
     }
+    public function Logout(Request $request) 
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login1');
+    }
     public function home()
     {
         return view('home');
@@ -29,6 +37,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'is_superadmin'=>'admin',
         ]);
         
 

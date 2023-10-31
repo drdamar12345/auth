@@ -30,12 +30,26 @@ Route::post('login1', [UserController::class, 'login_action'])->name('login_acti
 Route::get('ubahpassword', [UserController::class, 'ubahpassword'])->name('ubahpassword');
 Route::post('ubahpassword', [UserController::class, 'password_action'])->name('password_action');
 
+
 Auth::routes();
 
 
 Route::middleware('auth')->group( function () {
     // Super Admin
     Route::get('superadmin', [SuperController::class, 'superadmin'])->name('superadmin');
+    // Super Admin Add Store 
+    Route::get('formstore', [SuperController::class, 'formstore'])->name('formstore');
+    Route::post('formstore', [SuperController::class, 'actionformstore'])->name('actionformstore');
+    // Super Admin List Store
+    Route::get('daftarstore', [SuperController::class, 'daftarstore'])->name('daftarstore');
+    // Super Admin List Admin
+    Route::get('daftaradmin', [SuperController::class, 'daftaradmin'])->name('daftaradmin');
+    // Super Admin Add ID Admin
+    Route::post('daftaradmin/{id}', [SuperController::class, 'idadmin'])->name('idadmin');
+    // Show Detail Aadmin
+    Route::get('details/{id}', [SuperController::class, 'show'])->name('show');
+    Route::get('actionid', [SuperController::class, 'actionid'])->name('actionid');
+
     // Home
     Route::get('home', [UserController::class, 'home'])->name('home');
     // daftar produk
@@ -43,5 +57,6 @@ Route::middleware('auth')->group( function () {
     // keranjang
     Route::get('keranjang', [KeranjangController::class, 'keranjang'])->name('keranjang');
     Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
-
+    // LogOut
+    Route::get('/Logout', [UserController::class, 'Logout'])->name('Logout');
 });

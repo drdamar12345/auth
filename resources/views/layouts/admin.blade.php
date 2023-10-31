@@ -8,11 +8,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ ('admin/plugins/fontawesome-free/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{{ ('admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ ('admin/dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/dist/css/adminlte.min.css') }}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <!-- Site wrapper -->
@@ -124,19 +124,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/keranjang" class="nav-link">
+                <a href="/formstore" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Store</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../charts/flot.html" class="nav-link">
+                <a href="/daftarstore" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Daftar Store</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../charts/inline.html" class="nav-link">
+                <a href="/daftaradmin" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Daftar Admin</p>
                 </a>
@@ -144,6 +144,13 @@
             </ul>
           </li>
         </ul>
+        <li class="nav-item">
+          <a href="{{route('Logout')}}" class="nav-link">
+            <p>
+              Log Out
+            </p>
+          </a>
+        </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -221,14 +228,14 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="{{ ('admin/plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
-<script src="{{ ('admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- overlayScrollbars -->
-<script src="{{ ('admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+<script src="{{ asset('admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="{{ ('admin/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('admin/dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{ ('admin/dist/js/demo.js') }}"></script>
+<script src="{{ asset('admin/dist/js/demo.js') }}"></script>
 </body>
 </html>
