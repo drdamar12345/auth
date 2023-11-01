@@ -43,18 +43,18 @@ class SuperController extends Controller
         $admins = User::where('is_superadmin', ('admin'))->get();
         return view('daftaradmin', compact('admins'));
     }
-    public function idadmin(Request $request)
-    {
-        dd($request->all()); 
-        $admin = User::create([
-            'store_id' => $request->store_id,
-        ]);
+    // public function idadmin(Request $request)
+    // {
+    //     // dd($request->all()); 
+    //     $admin = User::create([
+    //         'store_id' => $request->store_id,
+    //     ]);
         
 
 
-        Session::flash('message', 'Add Toko Selesai.');
-        return redirect('daftaradmin');
-    }
+    //     Session::flash('message', 'Add Toko Selesai.');
+    //     return redirect('daftaradmin');
+    // }
     public function show($id)
     {
         $detail = User::find($id);

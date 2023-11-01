@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Size extends Model
 {
-    protected $table = 'tb_product_utama';
+    protected $table = 'tb_size';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nama_product',
-        'merk',
-        'warna',
-        'harga',
-        'gambar',
+        'id_product',
+        'size',
+        'stok',
+        'status',
         'store_id',
     ];
 }

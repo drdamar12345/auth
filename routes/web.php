@@ -57,6 +57,10 @@ Route::middleware('auth')->group( function () {
     // keranjang
     Route::get('keranjang', [KeranjangController::class, 'keranjang'])->name('keranjang');
     Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
+    // Add Product
+    Route::get('addproduct', [ProductController::class, 'addproduct'])->name('addproduct');
+    Route::post('addproduct', [ProductController::class, 'addnewproduct'])->name('addnewproduct');
+    Route::get('ab', [ProductController::class, 'ab'])->name('ab');
     // LogOut
     Route::get('/Logout', [UserController::class, 'Logout'])->name('Logout');
 });
