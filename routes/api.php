@@ -6,6 +6,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\PasswordController;
+use App\Http\Controllers\API\SuperAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,7 @@ Route::post('register', [LoginController::class, 'register_action']);
 //ubah password
 Route::post('ubah_pw', [PasswordController::class, 'password_action']);
 
-
+//
 
 
 
@@ -39,4 +40,16 @@ Route::get('data_produk', [ProductController::class, 'produk']);
 
 //log out
 Route::post('keluar', [UserController::class, 'logout_action']);
+
+//actionformstore
+Route::post('nama_store', [SuperAdminController::class, 'actionformstore']);
+
+//daftar store
+Route::get('data_store', [SuperAdminController::class, 'daftarstore']);
+
+//daftar admin
+Route::get('data_admin', [SuperAdminController::class, 'daftaradmin']);
+
+//mengubah id
+Route::post('ubah_id', [SuperAdminController::class, 'actionid']);
 });
