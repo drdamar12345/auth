@@ -52,4 +52,7 @@ Route::get('data_admin', [SuperAdminController::class, 'daftaradmin']);
 
 //mengubah id
 Route::post('ubah_id', [SuperAdminController::class, 'actionid']);
+
+//menambahkan produk baru
+Route::post('new_product', [ProductController::class, 'addnewproduct']);
 });
