@@ -17,5 +17,6 @@ class Keranjang extends Model
         'id_product',
         'qty',
         'ukuransepatu',
+        'store_id',
     ];
 }

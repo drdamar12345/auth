@@ -13,7 +13,8 @@ class ProductController extends Controller
 {
     public function produk()
     {
-        $product = Product::all();
+        $user = auth()->user()->store_id;
+        $product = Product::where('store_id', $user)->get();
         return view('produk', compact('product'));
     }
     public function addToCart(Request $request)
@@ -22,6 +23,7 @@ class ProductController extends Controller
         // dd($request->all()); 
         $user = auth()->user()->id;
         $product = Product::findOrFail($request->id);
+        $id = User::where('id', $user)->first();
         $admin = Keranjang::create([
             'id_product'=>$product->id,
             'nama_product'=>$product->nama_product,
@@ -29,51 +31,27 @@ class ProductController extends Controller
             'harga'=>$product->harga,
             'user_id'=>$user,
             'qty'=>1,
-            'ukuransepatu'=>$request->ukuran,
+            'ukuransepatu'=>$request->ukuransepatu,
+            'store_id'=>$id->store_id,
         ]);
-
-          
-
-        $keranjang = session()->get('keranjang', []);
-
-  
-
-        if(isset($keranjang[$product->id])) {
-
-            $keranjang[$product->id]['quantity']++;
-
-        } else {
-
-            $keranjang[$product->id] = [
-
-                "nama_product" => $product->nama_product,
-
-                "quantity" => 1,
-
-                "price" => $product->harga,
-
-                "image" => $product->gambar,
-
-            ];
-           
-
-        }
-
-          
-
-        session()->put('keranjang', $keranjang);
-        
-
         return redirect()->back()->with('success', 'Product added to cart successfully!');
+
+    }
+    public function removekeranjang($id, Request $request)
+
+    {
+        $productId = $request->input('id');
+    
+    // Logic to remove the product from the cart
+    Keranjang::where('id', $id)->delete();
+    
+    // Redirect back to the cart page or any other appropriate page
+    return redirect()->route('keranjang');
 
     }
     public function addproduct()
     {
         return view('addproduct');
-    }
-    public function ab()
-    {
-        return view('ab');
     }
     public function addnewproduct(Request $request)
     {

@@ -11,7 +11,11 @@ class KeranjangController extends Controller
     public function keranjang()
     {
         // return view('keranjang');
-        $cart = Keranjang::all();
+        $user = auth()->user()->store_id;
+        $cart = Keranjang::where('store_id', $user)->get();
+        // dd($cart);
         return view('keranjang', compact('cart'));
     }
+    
 }
+

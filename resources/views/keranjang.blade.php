@@ -23,11 +23,11 @@
         <tbody>
           @php $total = 0 @endphp
 
-          @if(session('keranjang'))
+          {{-- @if(session('keranjang')) --}}
   
               {{-- @foreach(session('cart') as $id => $details) --}}
               @foreach($cart as $id => $details)
-  
+            
                   @php $total += intval($details->harga) * intval($details->qty) @endphp
   
                   <tr data-id="{{ $id }}">
@@ -36,7 +36,7 @@
   
                           <div class="row">
   
-                              <div class="col-sm-3 hidden-xs"><img src="{{ $details->gambar }}" width="100" height="50" class="img-responsive"/></div>
+                              <div class="col-sm-3 hidden-xs"><img src="{{asset('/gambar/').'/'  . $details->gambar}}" width="100" height="50" class="img-responsive"/></div>
   
                               <div class="col-sm-9">
   
@@ -67,7 +67,7 @@
                   </tr>
   
               @endforeach
-          @endif
+          {{-- @endif --}}
         </tbody>
         <tfoot>
 
@@ -94,5 +94,46 @@
           </tr>
       </tfoot>
       </table>
-  </form>
+</form>
+  {{-- <script type="text/javascript">
+    $(".remove-from-keranjang").click(function (e) {
+    let rowid = $(this).attr('row-id');
+      e.preventDefault();
+
+
+
+      var ele = $(this);
+
+
+
+      if(confirm("Are you sure want to remove?")) {
+
+          $.ajax({
+
+              url: '{{ url('remove-from-keranjang') }}' + '/' + rowid,
+
+
+              method: "post",
+
+              data: {
+
+                  _token: '{{ csrf_token() }}', 
+
+                  id: rowid
+                  
+
+              },
+
+              success: function (response) {
+
+                  window.location.reload();
+
+              }
+
+          });
+
+      }
+
+  });
+</script> --}}
 @endsection

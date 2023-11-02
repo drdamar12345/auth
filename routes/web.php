@@ -54,13 +54,14 @@ Route::middleware('auth')->group( function () {
     Route::get('home', [UserController::class, 'home'])->name('home');
     // daftar produk
     Route::get('produk', [ProductController::class, 'produk'])->name('produk');
+    Route::post('proseschart', [ProductController::class, 'addToCart'])->name('proseschart');
     // keranjang
     Route::get('keranjang', [KeranjangController::class, 'keranjang'])->name('keranjang');
     Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
+    Route::post('remove-from-keranjang/{id}', [ProductController::class, 'removekeranjang'])->name('remove.from.keranjang');
     // Add Product
     Route::get('addproduct', [ProductController::class, 'addproduct'])->name('addproduct');
     Route::post('addproduct', [ProductController::class, 'addnewproduct'])->name('addnewproduct');
-    Route::get('ab', [ProductController::class, 'ab'])->name('ab');
     // LogOut
     Route::get('/Logout', [UserController::class, 'Logout'])->name('Logout');
 });
