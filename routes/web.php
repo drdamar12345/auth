@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SuperController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\KeranjangController;
 
 /*
@@ -62,6 +63,18 @@ Route::middleware('auth')->group( function () {
     // Add Product
     Route::get('addproduct', [ProductController::class, 'addproduct'])->name('addproduct');
     Route::post('addproduct', [ProductController::class, 'addnewproduct'])->name('addnewproduct');
+    // Data Customer
+    Route::get('addcustomer', [CustomerController::class, 'addcustomer'])->name('addcustomer');
+    Route::post('addCustomer', [CustomerController::class, 'addnewcustomer'])->name('addnewcustomer');
+    Route::get('daftarcustomer', [CustomerController::class, 'daftarcustomer'])->name('daftarcustomer');
+    // Edit Status Customer
+    Route::get('details/{id}', [CustomerController::class, 'editstatus'])->name('editstatus');
+    Route::get('actionstatus', [CustomerController::class, 'actionstatus'])->name('actionstatus');
+
+
+
+    Route::get('bayar', [ProductController::class, 'bayar'])->name('bayar');
+
     // LogOut
     Route::get('/Logout', [UserController::class, 'Logout'])->name('Logout');
 });

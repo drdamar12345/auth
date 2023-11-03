@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container py-5">
+<div class="container ">
   <div class="row" flex-direction="row">
       @foreach ($product as $item)
       <form action="{{route('proseschart')}}" method="POST" >

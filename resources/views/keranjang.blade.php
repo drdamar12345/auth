@@ -70,7 +70,17 @@
           {{-- @endif --}}
         </tbody>
         <tfoot>
-
+          <tr>
+            <div class="form-select">
+                {{-- {{$customer->nama}} --}}
+            <label><i class="fa fa-venus-mars"></i> Customer</label>
+            <select class="selectpicker" name="nama">
+                @foreach ($customer as $item)
+                <option type="radio" value="{{$item->id}}" title="">{{$item->nama}}</option>
+                @endforeach
+            </select>
+            </div>
+          </tr>
           <tr>
             <input type="hidden" name="subtotal" value="{{$total}}">
               <td colspan="5" class="text-right"><h3><strong>Total Rp{{ $total }}</strong></h3></td>

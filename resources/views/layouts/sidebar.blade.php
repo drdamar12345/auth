@@ -113,7 +113,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="/home" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-home	"></i>
               <p>
                 Dashboard
               </p>
@@ -129,7 +129,7 @@
           </li>
           <li class="nav-item">
             <a href="" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fa fa-shopping-cart"></i>
               <p>
                 Keranjang
                 <i class="right fas fa-angle-left"></i>
@@ -164,7 +164,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
+              <i class="nav-icon fas fa-file-invoice	"></i>
               <p>
                 INVOICE
                 <i class="fas fa-angle-left right"></i>
@@ -192,10 +192,41 @@
             </ul>
           </li>
           <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-address-card"></i>
+              <p>
+                CUSTOMER
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="daftarcustomer" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daftar Customer</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="addcustomer" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tambah Customer</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
             <a href="/addproduct" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-ad"></i>
               <p>
                 Add Product
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/bayar" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                bayar
               </p>
             </a>
           </li>

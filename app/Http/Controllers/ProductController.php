@@ -84,5 +84,9 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Add New Product');
 
     }
+    public function bayar()
+    {
+        return view('bayar');
+    }
 
 }
