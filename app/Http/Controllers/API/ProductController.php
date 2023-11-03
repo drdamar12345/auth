@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\Size;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Keranjang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\API\BaseController;
@@ -13,8 +14,40 @@ class ProductController extends BaseController
 {
     public function produk()
     {
-        $product = Product::all();
+        $user = auth()->user()->store_id;
+        $product = Product::where('store_id', $user)->get();
         return $this->sendResponse($product, 'Products retrieved successfully.');
+    }
+
+    public function keranjang()
+    {
+        // return view('keranjang');
+        $user = auth()->user()->store_id;
+        $cart = Keranjang::where('store_id', $user)->get();
+        // dd($cart);
+        return $this->sendResponse($cart, 'Products retrieved successfully.');
+    }
+
+    public function addToCart(Request $request)
+
+    {
+        // return $this->sendResponse($request->all(), 'Products retrieved successfully.');
+        // dd($request->all()); 
+        $user = auth()->user()->id;
+        $product = Product::findOrFail($request->id_product);
+        $id = User::where('id', $user)->first();
+        $keranjang = Keranjang::create([
+            'id_product'=>$request->id_product,
+            'nama'=>$product->nama_product,
+            'gambar'=>$product->gambar,
+            'harga'=>$product->harga,
+            'user_id'=>$user,
+            'qty'=>1,
+            'ukuransepatu'=>$request->ukuransepatu,
+            'store_id'=>$id->store_id,
+        ]);
+        return $this->sendResponse($keranjang, 'Products retrieved successfully.');
+
     }
 
     public function addnewproduct(Request $request)
@@ -41,7 +74,7 @@ class ProductController extends BaseController
             'merk'=>$request->merk,
             'warna'=>$request->warna,
             'harga'=>$request->harga,
-            'gambar'=>$attachment_name,
+            'gambar'=>$attachment_name ?? null,
             'store_id'=>$admin->store_id,
 
         ]);

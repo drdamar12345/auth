@@ -55,4 +55,10 @@ Route::post('ubah_id', [SuperAdminController::class, 'actionid']);
 
 //menambahkan produk baru
 Route::post('new_product', [ProductController::class, 'addnewproduct']);
+
+//menambahkan produk ke keranjang
+Route::post('produk_keranjang', [ProductController::class, 'addToCart']);
+
+//data keranjang
+Route::get('data_keranjang', [ProductController::class, 'keranjang']);
 });
