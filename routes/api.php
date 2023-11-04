@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\CustomerController;
 use App\Http\Controllers\API\PasswordController;
 use App\Http\Controllers\API\SuperAdminController;
 
@@ -61,4 +62,13 @@ Route::post('produk_keranjang', [ProductController::class, 'addToCart']);
 
 //data keranjang
 Route::get('data_keranjang', [ProductController::class, 'keranjang']);
+
+//menambahkan pelanngan
+Route::post('pelanggan', [CustomerController::class, 'addnewcustomer']);
+
+//data pelanggan
+Route::get('data_pelanggan', [CustomerController::class, 'daftarpelanggan']);
+
+//edit status pelanggan
+Route::post('edit_status_pelanggan', [CustomerController::class, 'actionstatuspelanggan']);
 });
