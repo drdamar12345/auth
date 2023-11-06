@@ -48,7 +48,7 @@ Route::middleware('auth')->group( function () {
     // Super Admin Add ID Admin
     Route::post('daftaradmin/{id}', [SuperController::class, 'idadmin'])->name('idadmin');
     // Show Detail Aadmin
-    Route::get('details/{id}', [SuperController::class, 'show'])->name('show');
+    Route::get('stores/{id}', [SuperController::class, 'show'])->name('show');
     Route::get('actionid', [SuperController::class, 'actionid'])->name('actionid');
 
     // Home
@@ -70,7 +70,11 @@ Route::middleware('auth')->group( function () {
     // Edit Status Customer
     Route::get('details/{id}', [CustomerController::class, 'editstatus'])->name('editstatus');
     Route::get('actionstatus', [CustomerController::class, 'actionstatus'])->name('actionstatus');
-
+    // Restock Product
+    Route::get('restock', [ProductController::class, 'restock'])->name('restock');
+    Route::post('restock', [ProductController::class, 'restockaction'])->name('restockaction');
+    // Validator Restock Product
+    Route::get('validator', [ProductController::class, 'validator'])->name('validator');
 
 
     Route::get('bayar', [ProductController::class, 'bayar'])->name('bayar');

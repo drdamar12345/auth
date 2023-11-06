@@ -215,6 +215,29 @@
             </ul>
           </li>
           <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-file-invoice	"></i>
+              <p>
+                Restock
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="restock" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Restock Barang</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="validator" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Restock Validator</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
             <a href="/addproduct" class="nav-link">
               <i class="nav-icon fas fa-ad"></i>
               <p>
@@ -222,6 +245,7 @@
               </p>
             </a>
           </li>
+          
           <li class="nav-item">
             <a href="/bayar" class="nav-link">
               <i class="nav-icon fas fa-th"></i>

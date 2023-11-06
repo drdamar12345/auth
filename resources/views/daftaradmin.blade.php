@@ -27,7 +27,7 @@
                 <td>{{$admin->store_id}}</td>
                 <td>    
                     <div class="d-flex justify-content-between">
-                        <p class="small"><a href="{{ url('details/'). '/'  .$admin->id}}" class="text-muted">EDIT</a></p>
+                        <p class="small"><a href="{{ url('stores/'). '/'  .$admin->id}}" class="text-muted">EDIT</a></p>
                     </div>                 
                 </td>
             <tr>
