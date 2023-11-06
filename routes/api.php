@@ -72,5 +72,9 @@ Route::get('data_pelanggan', [CustomerController::class, 'daftarpelanggan']);
 //edit status pelanggan
 Route::post('edit_status_pelanggan', [CustomerController::class, 'actionstatuspelanggan']);
 
+//daftar pembeli berdasarkan id
 Route::post('pembeli', [CustomerController::class, 'data_pembeli']);
+
+
+Route::post('restock', [ProductController::class, 'restockaction']);
 });

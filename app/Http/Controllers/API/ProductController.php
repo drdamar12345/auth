@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Models\Size;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Purchase;
 use App\Models\Keranjang;
 use Illuminate\Http\Request;
+use App\Models\PurchaseDetail;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\API\BaseController;
 
@@ -109,5 +111,46 @@ class ProductController extends BaseController
         
         return $this->sendResponse([$add,$size], 'Products retrieved successfully.');
 
+    }
+
+    public function restock()
+    {
+        
+        $daftar = auth()->user()->id;
+        $product = Product::where('store_id', $daftar)->get();
+        return view('restock', compact('product'));
+    }
+
+    public function restockaction(Request $request)
+    {
+        // dd($request->all());
+        $user = auth()->user()->id;
+        $store = auth()->user()->store_id;
+        // dd($store);
+        $product = Product::find($request->nama);
+        // dd($product);
+        $admin = User::where('id', $user)->first();
+        $add = Purchase::create([
+            'store_id'=>$store,
+            'user_id'=>$user,
+            'total_harga'=>$product->harga,
+            'tanggal_pemesanan'=>$request->tanggal_pemesanan,
+        ]);
+        if (isset($request->nama)) {
+            
+                // dd($value);
+        $Purchase = PurchaseDetail::create([
+                    'id_product'=>$product->id,
+                    'store_id'=>$store,
+                    'purchase_id'=>$add->id,
+                    'size'=>$request->size,
+                    'qty'=>$request->qty,
+                    'harga'=>$product->harga,
+                    'status'=>'dikirim',
+                    'nama_product'=>$product->nama_product,
+                ]);
+        }
+        
+        return $this->sendResponse([$add,$Purchase], 'Products retrieved successfully.');
     }
 }
