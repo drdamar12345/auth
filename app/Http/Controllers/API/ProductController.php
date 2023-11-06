@@ -32,7 +32,7 @@ class ProductController extends BaseController
 
         });
 
-        return $this->sendResponse([$product, $data], 'Products retrieved successfully.');
+        return $this->sendResponse($product, 'Products retrieved successfully.');
     }
 
     public function keranjang()
