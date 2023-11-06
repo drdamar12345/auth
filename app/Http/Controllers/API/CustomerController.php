@@ -40,4 +40,11 @@ class CustomerController extends BaseController
               ->update(['status' => $request->status]);
         return $this->sendResponse($pelanggan, 'Products retrieved successfully.');
     }
+
+
+    public function data_pembeli(Request $request)
+    {
+        $detail = Customer::where('id', $request->id)->get();
+        return $this->sendResponse($detail, 'Products retrieved successfully.');
+    }
 }

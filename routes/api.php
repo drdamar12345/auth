@@ -71,4 +71,6 @@ Route::get('data_pelanggan', [CustomerController::class, 'daftarpelanggan']);
 
 //edit status pelanggan
 Route::post('edit_status_pelanggan', [CustomerController::class, 'actionstatuspelanggan']);
+
+Route::post('pembeli', [CustomerController::class, 'data_pembeli']);
 });

@@ -15,8 +15,24 @@ class ProductController extends BaseController
     public function produk()
     {
         $user = auth()->user()->store_id;
-        $product = Product::where('store_id', $user)->get();
-        return $this->sendResponse($product, 'Products retrieved successfully.');
+        $data = Product::where('store_id', $user)->get();
+
+        $product = $data->map(function ($q) {
+        $stok = Size::where('id_product', $q->id)->get()->sum('stok');
+        // $size = Size::where('id_product', $q->id)->get()->sum('size');
+
+            return [
+                'id' => $q->id,
+                'nama_product' => $q->nama_product,
+                'gambar' => $q->gambar,
+                'harga' => $q->harga,
+                'stock' => $stok,
+                // 'size' => $size,
+          ];
+
+        });
+
+        return $this->sendResponse([$product, $data], 'Products retrieved successfully.');
     }
 
     public function keranjang()
