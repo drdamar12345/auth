@@ -24,14 +24,9 @@
                   <div class="form-select">
                     <label><i class="fa fa-venus-mars"></i> Ukuran</label>
                     <select class="selectpicker" name="ukuransepatu">
-                      <option type="radio" value="37" title="37">37</option>
-                      <option type="radio" value="38" title="38">38</option>
-                      <option type="radio" value="39" title="39">39</option>
-                      <option type="radio" value="40" title="40">40</option>
-                      <option type="radio" value="41" title="41">41</option>
-                      <option type="radio" value="42" title="42">42</option>
-                      <option type="radio" value="43" title="43">43</option>
-                      <option type="radio" value="44" title="44">44</option>
+                      @foreach ($item['size'] as $size)
+                      <option type="radio" value="{{$size->size}}">{{$size->size}}</option>
+                      @endforeach
                     </select>              
                 </div>
                   <div>

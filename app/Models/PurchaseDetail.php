@@ -18,5 +18,6 @@ class PurchaseDetail extends Model
         'harga',
         'status',
         'nama_product',
+        'tanggal_pemesanan',
     ];
 }

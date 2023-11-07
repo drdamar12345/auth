@@ -20,6 +20,7 @@ class ProductController extends Controller
 
         $product = $data->map(function ($q) {
             $stok = Size::where('id_product', $q->id)->get()->sum('stok');
+            $size = Size::where('id_product', $q->id)->get();
 
             return [
                 'id' => $q->id,
@@ -27,7 +28,7 @@ class ProductController extends Controller
                 'gambar' => $q->gambar,
                 'harga' => $q->harga,
                 'stock' => $stok,
-                'size' => $q->size,
+                'size' => $size,
           ];
 
         });
@@ -139,6 +140,7 @@ class ProductController extends Controller
                     'harga'=>$product->harga,
                     'status'=>'dikirim',
                     'nama_product'=>$product->nama_product,
+                    'tanggal_pemesanan'=>$request->tanggal_pemesanan,
                 ]);
 
         }
@@ -149,6 +151,38 @@ class ProductController extends Controller
 
     public function validator()
     {
-        return view('validator');
+        $daftar = auth()->user()->id;
+        $pesanan = PurchaseDetail::where('store_id', $daftar)->get();
+        return view('validator', compact('pesanan'));
+    }
+    public function validatoraccept($id)
+    {
+        $daftar = auth()->user()->id;
+        $pesanan = PurchaseDetail::where('store_id', $daftar)->get();
+        // dd($pesanan);
+        // $stokbarang = Size::where('id_product', $pesanan)->get();
+        $stock_masuk = $pesanan->qty;
+        $product_id = $pesanan->id_product;
+        $data_product = Product::find($product_id);
+
+
+        
+        UangKeluar::create([
+            'nominal'=>$pesanan->harga,
+            'tanggal_pengeluaran'=>$pesanan->tanggal_pemesanan,
+            'note'=>'restock',
+            'store_id'=>$daftar,
+
+        ]);
+        if ($data_product) {
+            $newStok = intval($data_product->stock) + intval($stock_masuk);
+    
+            $data_product->stok = $newStok;
+            $data_product->save();
+        }
+
+
+        PurchaseDetail::where('id_product', $id)->delete();
+        return redirect()->back()->with('success', 'Product added to favourite successfully!');
     }
 }

@@ -75,6 +75,7 @@ Route::middleware('auth')->group( function () {
     Route::post('restock', [ProductController::class, 'restockaction'])->name('restockaction');
     // Validator Restock Product
     Route::get('validator', [ProductController::class, 'validator'])->name('validator');
+    Route::get('validatoraccept/{id}', [ProductController::class, 'validatoraccept'])->name('validatoraccept');
 
 
     Route::get('bayar', [ProductController::class, 'bayar'])->name('bayar');
