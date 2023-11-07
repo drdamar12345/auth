@@ -84,4 +84,6 @@ Route::post('restock', [ProductController::class, 'restockaction']);
 //data restok (belom)
 Route::get('data_restock', [ProductController::class, 'restock']);
 
+
+Route::post('validator', [ProductController::class, 'validatoraccept']);
 });

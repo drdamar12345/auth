@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tb_purchase_detail', function (Blueprint $table) {
-            $table->string('tanggal_pemesanan');
-         });
-
+        Schema::create('tb_uang_keluar', function (Blueprint $table) {
+            $table->id();
+            $table->integer('nominal');
+            $table->string('tanggal_pengeluaran');
+            $table->string('note');
+            $table->integer('store_id');
+            $table->timestamps();
+        });
     }
 
     /**

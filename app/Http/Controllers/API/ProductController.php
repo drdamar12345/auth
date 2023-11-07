@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Size;
+use App\Models\UangKeluar;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Purchase;
@@ -154,5 +155,53 @@ class ProductController extends BaseController
                 ]);
         }
         return $this->sendResponse([$add,$Purchase], 'Products retrieved successfully.');
+    }
+
+    public function validator()
+    {
+        $daftar = auth()->user()->id;
+        $pesanan = PurchaseDetail::where('store_id', $daftar)->get();
+        return view('validator', compact('pesanan'));
+    }
+
+    public function validatoraccept(Request $request)
+    {
+        $daftar = auth()->user()->store_id;
+        $pesanan = PurchaseDetail::where('id', $request -> id)->first();
+        // dd($id);
+        // $stokbarang = Size::where('id_product', $pesanan)->get();
+        $stock_masuk = $pesanan->qty;
+        $product_id = $pesanan->id_product;
+        
+        $data_product = Size::where('id_product', $product_id)
+        ->where('size', $pesanan->size)->where('store_id', $daftar)->first();
+        // dd($data_product);
+        if ($data_product) {
+            $newStok = intval($data_product->stok) + intval($stock_masuk);
+            // dd($data_product);
+
+            $data_product = Size::where('id_product', $product_id)
+        ->where('size', $pesanan->size)->where('store_id', $daftar)->update([
+            'stok'=>$newStok,
+        ]);
+    
+            // $data_product->stok = $newStok;
+            // $data_product->save();
+        }
+
+
+        
+        UangKeluar::create([
+            'nominal'=>$pesanan->harga,
+            'tanggal_pengeluaran'=>$pesanan->tanggal_pemesanan,
+            'note'=>'restock',
+            'store_id'=>$daftar,
+            'qty'=>$pesanan->qty,
+
+        ]);
+
+
+        // PurchaseDetail::where('id', $id)->delete();
+        return redirect()->back()->with('success', 'Product added to favourite successfully!');
     }
 }
