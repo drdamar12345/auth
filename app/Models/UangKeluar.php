@@ -14,5 +14,6 @@ class UangKeluar extends Model
         'tanggal_pengeluaran',
         'note',
         'store_id',
+        'qty',
     ];
 }

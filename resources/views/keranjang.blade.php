@@ -105,7 +105,7 @@
       </tfoot>
       </table>
 </form>
-  {{-- <script type="text/javascript">
+<script type="text/javascript">
     $(".remove-from-keranjang").click(function (e) {
     let rowid = $(this).attr('row-id');
       e.preventDefault();
@@ -145,5 +145,5 @@
       }
 
   });
-</script> --}}
+</script>
 @endsection
