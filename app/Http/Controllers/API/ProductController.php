@@ -21,7 +21,7 @@ class ProductController extends BaseController
 
         $product = $data->map(function ($q) {
         $stok = Size::where('id_product', $q->id)->get()->sum('stok');
-        // $size = Size::where('id_product', $q->id)->get()->sum('size');
+        $size = Size::where('id_product', $q->id)->get();
 
             return [
                 'id' => $q->id,
@@ -29,7 +29,7 @@ class ProductController extends BaseController
                 'gambar' => $q->gambar,
                 'harga' => $q->harga,
                 'stock' => $stok,
-                // 'size' => $size,
+                'size' => $size,
           ];
 
         });
@@ -44,6 +44,11 @@ class ProductController extends BaseController
         $cart = Keranjang::where('store_id', $user)->get();
         // dd($cart);
         return $this->sendResponse($cart, 'Products retrieved successfully.');
+    }
+
+    public function hapus_action(Request $request){
+        Keranjang::where('id', $request->id)->delete();
+        return $this->sendResponse('succes', 'Products retrieved successfully.');
     }
 
     public function addToCart(Request $request)
@@ -116,9 +121,9 @@ class ProductController extends BaseController
     public function restock()
     {
         
-        $daftar = auth()->user()->id;
+        $daftar = auth()->user()->store_id;
         $product = Product::where('store_id', $daftar)->get();
-        return view('restock', compact('product'));
+        return $this->sendResponse($product, 'Products retrieved successfully.');
     }
 
     public function restockaction(Request $request)
@@ -126,9 +131,7 @@ class ProductController extends BaseController
         // dd($request->all());
         $user = auth()->user()->id;
         $store = auth()->user()->store_id;
-        // dd($store);
-        $product = Product::find($request->nama);
-        // dd($product);
+        $product = Product::find($request->id);
         $admin = User::where('id', $user)->first();
         $add = Purchase::create([
             'store_id'=>$store,
@@ -136,8 +139,7 @@ class ProductController extends BaseController
             'total_harga'=>$product->harga,
             'tanggal_pemesanan'=>$request->tanggal_pemesanan,
         ]);
-        if (isset($request->nama)) {
-            
+        if (isset($request->id)) {
                 // dd($value);
         $Purchase = PurchaseDetail::create([
                     'id_product'=>$product->id,
@@ -148,9 +150,9 @@ class ProductController extends BaseController
                     'harga'=>$product->harga,
                     'status'=>'dikirim',
                     'nama_product'=>$product->nama_product,
+                    'tanggal_pemesanan'=>$add->tanggal_pemesanan,
                 ]);
         }
-        
         return $this->sendResponse([$add,$Purchase], 'Products retrieved successfully.');
     }
 }

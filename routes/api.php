@@ -63,6 +63,9 @@ Route::post('produk_keranjang', [ProductController::class, 'addToCart']);
 //data keranjang
 Route::get('data_keranjang', [ProductController::class, 'keranjang']);
 
+//hapus data keranjang
+Route::post('hapus', [ProductController::class, 'hapus_action']);
+
 //menambahkan pelanngan
 Route::post('pelanggan', [CustomerController::class, 'addnewcustomer']);
 
@@ -75,6 +78,10 @@ Route::post('edit_status_pelanggan', [CustomerController::class, 'actionstatuspe
 //daftar pembeli berdasarkan id
 Route::post('pembeli', [CustomerController::class, 'data_pembeli']);
 
-
+//menambahkan restok
 Route::post('restock', [ProductController::class, 'restockaction']);
+
+//data restok (belom)
+Route::get('data_restock', [ProductController::class, 'restock']);
+
 });
