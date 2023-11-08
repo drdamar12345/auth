@@ -60,6 +60,13 @@ Route::middleware('auth')->group( function () {
     Route::get('keranjang', [KeranjangController::class, 'keranjang'])->name('keranjang');
     Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
     Route::post('remove-from-keranjang/{id}', [ProductController::class, 'removekeranjang'])->name('remove.from.keranjang');
+    // Fitur Pesan
+    Route::get('prosespesan', [ProductController::class, 'pesananction'])->name('prosespesan');
+    Route::get('pesananction/{id}', [ProductController::class, 'pesananction'])->name('pesananction');
+    Route::post('actionpesan', [ProductController::class, 'pesananction'])->name('actionpesan');
+
+
+
     // Add Product
     Route::get('addproduct', [ProductController::class, 'addproduct'])->name('addproduct');
     Route::post('addproduct', [ProductController::class, 'addnewproduct'])->name('addnewproduct');
@@ -76,6 +83,8 @@ Route::middleware('auth')->group( function () {
     // Validator Restock Product
     Route::get('validator', [ProductController::class, 'validator'])->name('validator');
     Route::get('validatoraccept/{id}', [ProductController::class, 'validatoraccept'])->name('validatoraccept');
+    Route::post('remove-from-validator/{id}', [ProductController::class, 'removevalidator'])->name('remove.from.validator');
+
 
 
     Route::get('bayar', [ProductController::class, 'bayar'])->name('bayar');

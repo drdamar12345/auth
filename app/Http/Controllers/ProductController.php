@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Size;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Keranjang;
 use App\Models\UangKeluar;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use App\Models\PurchaseDetail;
 use App\Http\Controllers\Controller;
@@ -193,7 +195,66 @@ class ProductController extends Controller
         ]);
 
 
-        // PurchaseDetail::where('id', $id)->delete();
+        PurchaseDetail::where('id', $id)->delete();
         return redirect()->back()->with('success', 'Product added to favourite successfully!');
+    }
+    public function removevalidator($id, Request $request)
+
+    {
+        $productId = $request->input('id');
+    
+    // Logic to remove the product from the cart
+    PurchaseDetail::where('id', $id)->delete();
+    
+    // Redirect back to the cart page or any other appropriate page
+    return redirect()->route('validator');
+
+    }
+    public function pesananction(Request $request)
+    {
+        $user = auth()->user()->id;
+        $store = auth()->user()->store_id;
+        $pesanan = Keranjang::where('store_id', $store)->get();
+        // dd($pesanan);
+        // $uangkeluar=UangKeluar::create([
+        //     'nominal'=>$request->subtotal,
+        //     'tanggal_pengeluaran'=>$request->date,
+        //     'note'=>'penjualan',
+        //     'store_id'=>$store,
+        //     'qty'=>1,
+        // ]);
+        $order=Order::create([
+            'user_id'=>$user,
+            'store_id'=>$store,
+            'name_customer'=>$request->nama,
+            'total'=>$request->subtotal,
+            'qty'=>1,
+
+        ]);
+        if (isset($request->product_id)) {
+
+            foreach ($request->product_id as $key => $value) {
+                // dd($request->product_id);
+
+                $produk = Size::where('id_product', $value)->where('id_product', $value)->first();
+                // dd($value);
+                OrderDetail::create([
+                    'user_id'=>$user,
+                    'order_id'=>$order->id,
+                    'product_id'=>$value,
+                    'store_id'=>$store,
+                    'size'=>$produk->size,
+                    'harga'=>$request->price[$key],
+                    'status'=>'belum lunas',
+                    'name_customer'=>$request->nama,
+                    'tanggal_pemesanan'=>$request->date,
+                    'qty'=>1,
+                ]);
+            }
+        }
+        
+         Keranjang::whereIn('id', $request->id)->delete();
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
+
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.sidebar')
 
 @section('content')
-<form  >
+<form action="{{route('actionpesan')}}" method="POST">
     @csrf
     <table id="cart" class="table table-hover table-condensed">
 
@@ -43,6 +43,8 @@
                                   <h4 class="nomargin">{{ $details->nama_product }}</h4>
 
                                   <input type="hidden" name="product_id[]" value="{{$details->id_product}}">
+                                  <input type="hidden" name="id[]" value="{{$details->id}}">
+
 
                               </div>
   
@@ -56,7 +58,7 @@
   
                       <td class="actions" data-th="">
                         
-                          <button class="btn btn-danger btn-sm remove-from-cart"row-id='{{$details->id}}'>BATAL</button>
+                          <button type="button" class="btn btn-danger btn-sm remove-from-keranjang"row-id='{{$details->id}}'>BATAL</button>
                         
                       </td>
                       <td class="actions" data-th="">
@@ -76,15 +78,17 @@
             <label><i class="fa fa-venus-mars"></i> Customer</label>
             <select class="selectpicker" name="nama">
                 @foreach ($customer as $item)
-                <option type="radio" value="{{$item->id}}" title="">{{$item->nama}}</option>
+                <option type="radio" value="{{$item->nama}}" title="">{{$item->nama}}</option>
                 @endforeach
             </select>
             </div>
           </tr>
-          <tr>
             <input type="hidden" name="subtotal" value="{{$total}}">
               <td colspan="5" class="text-right"><h3><strong>Total Rp{{ $total }}</strong></h3></td>
   
+          <tr>
+            <input name="date" id="date" class="form-control" style="width: 100%; display: inline;" onchange="invoicedue(event);" required="" value="2018-05-10 00:00:00" type="date">
+
           </tr>
   
           <tr>

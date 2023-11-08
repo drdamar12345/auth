@@ -33,10 +33,53 @@
                 <a  href="{{ route('validatoraccept', $item->id) }}"> <button class="btn btn-success">accept</button> </a>                        
             </td>
             <td class="actions" data-th="">
-                <a  href=""> <button class="btn btn-danger">cancel</button> </a>                        
+                        
+                <button type="button" class="btn btn-danger btn-sm remove-from-validator"row-id='{{$item->id}}'>cancel</button>
+              
             </td>
         <tr>
         @endforeach
     </tbody>
 </table>
+<script type="text/javascript">
+    $(".remove-from-validator").click(function (e) {
+    let rowid = $(this).attr('row-id');
+      e.preventDefault();
+
+
+
+      var ele = $(this);
+
+
+
+      if(confirm("Are you sure want to remove?")) {
+
+          $.ajax({
+
+              url: '{{ url('remove-from-validator') }}' + '/' + rowid,
+
+
+              method: "post",
+
+              data: {
+
+                  _token: '{{ csrf_token() }}', 
+
+                  id: rowid
+                  
+
+              },
+
+              success: function (response) {
+
+                  window.location.reload();
+
+              }
+
+          });
+
+      }
+
+  });
+</script>
 @endsection;
