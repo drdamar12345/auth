@@ -105,10 +105,6 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Add New Product');
 
     }
-    public function bayar()
-    {
-        return view('bayar');
-    }
     public function restock()
     {
         
@@ -162,15 +158,28 @@ class ProductController extends Controller
     {
         $daftar = auth()->user()->store_id;
         $pesanan = PurchaseDetail::where('id', $id)->first();
+        // dd($pesanan);
         // dd($id);
         // $stokbarang = Size::where('id_product', $pesanan)->get();
         $stock_masuk = $pesanan->qty;
+        // dd($stock_masuk);
         $product_id = $pesanan->id_product;
         
         $data_product = Size::where('id_product', $product_id)
         ->where('size', $pesanan->size)->where('store_id', $daftar)->first();
         // dd($data_product);
-        if ($data_product) {
+        if ($data_product === null) {
+            $admin = Size::create([
+                'id_product'=>$pesanan->id_product,
+                'size'=>$pesanan->size,
+                'stok'=>$pesanan->qty,
+                'status'=>'tersedia',
+                'store_id'=>$daftar,
+            ]);
+    
+            // $data_product->stok = $newStok;
+            // $data_product->save();
+        }else {
             $newStok = intval($data_product->stok) + intval($stock_masuk);
             // dd($data_product);
 
@@ -178,9 +187,6 @@ class ProductController extends Controller
         ->where('size', $pesanan->size)->where('store_id', $daftar)->update([
             'stok'=>$newStok,
         ]);
-    
-            // $data_product->stok = $newStok;
-            // $data_product->save();
         }
 
 

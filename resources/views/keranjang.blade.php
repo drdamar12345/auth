@@ -85,10 +85,18 @@
           </tr>
             <input type="hidden" name="subtotal" value="{{$total}}">
               <td colspan="5" class="text-right"><h3><strong>Total Rp{{ $total }}</strong></h3></td>
+              {{-- <td>    
+                <div class="text-left">
+                    <p class="small"><a href="{{ url('bayars/'). '/'  .$item->id}}" class="text-muted">CETAK STRUK</a></p>
+                </div>                 
+            </td> --}}
+              
   
           <tr>
-            <input name="date" id="date" class="form-control" style="width: 100%; display: inline;" onchange="invoicedue(event);" required="" value="2018-05-10 00:00:00" type="date">
-
+            <div class="form-group">
+                <label for="date">Tanggal Pemesanan</label>
+                <input name="date" type="date" class="form-control"  placeholder="tanggal pemesanan">
+            </div>    
           </tr>
   
           <tr>
@@ -101,7 +109,7 @@
                   <a  href="{{ route('addtocheckout', $details->id) }}"> <button class="btn btn-success">Checkout</button> </a>
                   @endif
                    --}}
-                   <button type="submit" button class="btn btn-success" >Checkout</button>
+                   <button type="submit" button class="btn btn-success" >Pesan</button>
   
               </td>
   

@@ -18,6 +18,16 @@ class KeranjangController extends Controller
         // dd($cart);
         return view('keranjang', compact('cart', 'customer'));
     }
+    public function bayar()
+    {
+        return view('bayar');
+    }
+    public function getstruk($id)
+    {
+        $bayar = Keranjang::find($id);
+        dd($bayar);
+        return view('bayar', compact('bayar'));
+    }
     
 }
 

@@ -84,10 +84,10 @@ Route::middleware('auth')->group( function () {
     Route::get('validator', [ProductController::class, 'validator'])->name('validator');
     Route::get('validatoraccept/{id}', [ProductController::class, 'validatoraccept'])->name('validatoraccept');
     Route::post('remove-from-validator/{id}', [ProductController::class, 'removevalidator'])->name('remove.from.validator');
+    // Cetak Struk Pembayaran
+    Route::get('bayars/{id}', [KeranjangController::class, 'getstruk'])->name('getstruk');
 
 
-
-    Route::get('bayar', [ProductController::class, 'bayar'])->name('bayar');
 
     // LogOut
     Route::get('/Logout', [UserController::class, 'Logout'])->name('Logout');
