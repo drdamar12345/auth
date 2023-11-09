@@ -174,7 +174,20 @@ class ProductController extends BaseController
         $product_id = $pesanan->id_product;
         $data_product = Size::where('id_product', $product_id)
         ->where('size', $pesanan->size)->where('store_id', $daftar)->first();
-        if ($data_product) {
+        if ($data_product === null) {
+            $admin = Size::create([
+                'id_product'=>$pesanan->id_product,
+                'size'=>$pesanan->size,
+                'stok'=>$pesanan->qty,
+                'status'=>'tersedia',
+                'store_id'=>$daftar,
+            ]);
+            
+    
+            // $data_product->stok = $newStok;
+            // $data_product->save();
+             
+        }else{
             $newStok = intval($data_product->stok) + intval($stock_masuk);
             $data_product = Size::where('id_product', $product_id)
         ->where('size', $pesanan->size)->where('store_id', $daftar)->update([
@@ -189,6 +202,6 @@ class ProductController extends BaseController
                     'qty'=>$request->qty,
         ]);
         // PurchaseDetail::where('id', $id)->delete();
-        return $this->sendResponse([$pesanan, $data_product, $product_id], 'Products retrieved successfully.');
+        // return $this->sendResponse([$pesanan, $data_product, $product_id, $admin, $uangkeluar], 'Products retrieved successfully.');
     }
 }
