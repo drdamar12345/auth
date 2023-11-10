@@ -54,7 +54,7 @@
   
                       <td data-th="Price">Rp{{ $details->harga }}</td>
   
-                        <input data-th="Subtotal" name="price[]" type="hidden" class="text-center" value="{{ intval($details->harga) * intval($details->qty) }}">{{ intval($details->harga) * intval($details->qty) }}</td>
+                        <input data-th="Subtotal" name="price[]" type="hidden" class="text-center" value="{{ intval($details->harga) * intval($details->qty) }}"></td>
   
                       <td class="actions" data-th="">
                         

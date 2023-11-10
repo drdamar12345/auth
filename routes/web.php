@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SuperController;
+use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\KeranjangController;
@@ -84,8 +85,10 @@ Route::middleware('auth')->group( function () {
     Route::get('validator', [ProductController::class, 'validator'])->name('validator');
     Route::get('validatoraccept/{id}', [ProductController::class, 'validatoraccept'])->name('validatoraccept');
     Route::post('remove-from-validator/{id}', [ProductController::class, 'removevalidator'])->name('remove.from.validator');
+    // Produk Belum Lunas
+    Route::get('belumlunas', [PesananController::class, 'belumlunas'])->name('belumlunas');
     // Cetak Struk Pembayaran
-    Route::get('bayars/{id}', [KeranjangController::class, 'getstruk'])->name('getstruk');
+    Route::get('bayars/{order_id}', [PesananController::class, 'getstruk'])->name('getstruk');
 
 
 
