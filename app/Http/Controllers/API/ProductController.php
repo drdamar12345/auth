@@ -5,10 +5,13 @@ namespace App\Http\Controllers\API;
 
 use App\Models\Size;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\Customer;
 use App\Models\Purchase;
 use App\Models\Keranjang;
 use App\Models\UangKeluar;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use App\Models\PurchaseDetail;
 use App\Http\Controllers\Controller;
@@ -39,13 +42,28 @@ class ProductController extends BaseController
         return $this->sendResponse($product, 'Products retrieved successfully.');
     }
 
+    // public function datanya_size_aja()
+    // {
+    //     $user = auth()->user()->store_id;
+    //     $data = Size::where('store_id', $user)->get();
+    
+        
+
+   
+     
+
+    //     return $this->sendResponse($data, 'Products retrieved successfully.');
+    // }
+
     public function keranjang()
     {
         // return view('keranjang');
+        $daftar = auth()->user()->store_id;
         $user = auth()->user()->store_id;
         $cart = Keranjang::where('store_id', $user)->get();
+        $customer = Customer::where('store_id', $daftar)->get();
         // dd($cart);
-        return $this->sendResponse($cart, 'Products retrieved successfully.');
+        return $this->sendResponse([$cart, $customer], 'Products retrieved successfully.');
     }
 
     public function hapus_action(Request $request){
@@ -158,11 +176,12 @@ class ProductController extends BaseController
         return $this->sendResponse([$add,$Purchase], 'Products retrieved successfully.');
     }
 
-    public function validator()
+    public function data_validator()
     {
-        $daftar = auth()->user()->id;
-        $pesanan = PurchaseDetail::where('store_id', $daftar)->get();
-        return view('validator', compact('pesanan'));
+        
+        $daftar = auth()->user()->store_id;
+        $product = PurchaseDetail::where('store_id', $daftar)->get();
+        return $this->sendResponse($product, 'Products retrieved successfully.');
     }
 
     public function validatoraccept(Request $request)
@@ -201,7 +220,53 @@ class ProductController extends BaseController
                     'store_id'=>$daftar,
                     'qty'=>$request->qty,
         ]);
-        // PurchaseDetail::where('id', $id)->delete();
-        // return $this->sendResponse([$pesanan, $data_product, $product_id, $admin, $uangkeluar], 'Products retrieved successfully.');
+        // PurchaseDetail::where('id' $request->id)->delete();
+        return $this->sendResponse([$pesanan, $data_product, $product_id, $admin, $uangkeluar], 'Products retrieved successfully.');
+    }
+
+    public function pesananction(Request $request)
+    {
+        $user = auth()->user()->id;
+        $store = auth()->user()->store_id;
+        $pesanan = Keranjang::whereIn('id', $request -> keranjang_id)->get();
+        $total = 0;
+        foreach ($pesanan as $key => $value) {
+                $total += $value->harga;
+                    }
+        $order=Order::create([
+            'user_id'=>$user,
+            'store_id'=>$store,
+            'name_customer'=>$request->nama,
+            'total'=>$total,
+            'qty'=>1,
+        ]);
+        // return $this->sendResponse($user, 'Products retrieved successfully.');
+        
+        if (isset($pesanan)) {
+            foreach ($pesanan as $key => $value) {
+
+                $product = Keranjang::where('id_product', $value)->where('id_product', $value)->first();
+               
+                // $produk = Size::where('id_product', $value)->where('id_product', $value)->first();
+                // dd($value);
+                $orderdetail = OrderDetail::create([
+                    'user_id'=>$user,
+                    'order_id'=>$order -> id,
+                    'product_id'=>$value -> id_product ,
+                    'store_id'=>$store,
+                    'size'=>$value->ukuransepatu,
+                    'harga'=>$value->price,
+                    'status'=>'belum lunas',
+                    'name_customer'=>$order,
+                    'tanggal_pemesanan'=>$request->tanggal_pemesanan,
+                    'qty'=>1,
+                ]);
+
+            }
+        }
+        return $this->sendResponse([$order, $orderdetail], 'Products retrieved successfully.');
+        
+        //  Keranjang::whereIn('id', $request->id)->delete();
+        // return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 }

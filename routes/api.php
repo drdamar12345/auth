@@ -39,6 +39,9 @@ Route::get('data', [UserController::class, 'profil']);
 // data produk
 Route::get('data_produk', [ProductController::class, 'produk']);
 
+//gatau
+Route::get('datanya_cuyy', [ProductController::class, 'datanya_size_aja']);
+
 //log out
 Route::post('keluar', [UserController::class, 'logout_action']);
 
@@ -81,9 +84,16 @@ Route::post('pembeli', [CustomerController::class, 'data_pembeli']);
 //menambahkan restok
 Route::post('restock', [ProductController::class, 'restockaction']);
 
-//data restok (belom)
+//data restok 
 Route::get('data_restock', [ProductController::class, 'restock']);
 
-
+//setuju atau tidakk
 Route::post('validator', [ProductController::class, 'validatoraccept']);
+
+//data validator lur
+Route::get('dav', [ProductController::class, 'data_validator']);
+
+
+Route::post('cek', [ProductController::class, 'pesananction']);
+
 });
