@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use App\Models\PurchaseDetail;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\API\BaseController;
+use GrahamCampbell\ResultType\Success;
 
 class ProductController extends BaseController
 {
@@ -42,28 +43,13 @@ class ProductController extends BaseController
         return $this->sendResponse($product, 'Products retrieved successfully.');
     }
 
-    // public function datanya_size_aja()
-    // {
-    //     $user = auth()->user()->store_id;
-    //     $data = Size::where('store_id', $user)->get();
-    
-        
-
-   
-     
-
-    //     return $this->sendResponse($data, 'Products retrieved successfully.');
-    // }
-
     public function keranjang()
     {
-        // return view('keranjang');
         $daftar = auth()->user()->store_id;
         $user = auth()->user()->store_id;
         $cart = Keranjang::where('store_id', $user)->get();
         $customer = Customer::where('store_id', $daftar)->get();
-        // dd($cart);
-        return $this->sendResponse([$cart, $customer], 'Products retrieved successfully.');
+        return $this->sendResponse($cart, 'Products retrieved successfully.');
     }
 
     public function hapus_action(Request $request){
@@ -74,8 +60,6 @@ class ProductController extends BaseController
     public function addToCart(Request $request)
 
     {
-        // return $this->sendResponse($request->all(), 'Products retrieved successfully.');
-        // dd($request->all()); 
         $user = auth()->user()->id;
         $product = Product::findOrFail($request->id_product);
         $id = User::where('id', $user)->first();
@@ -90,23 +74,17 @@ class ProductController extends BaseController
             'store_id'=>$id->store_id,
         ]);
         return $this->sendResponse($keranjang, 'Products retrieved successfully.');
-
     }
 
     public function addnewproduct(Request $request)
     {
-        // dd($request->all());
-        // return $this->sendResponse($request->all(), 'Products retrieved successfully.');
+ 
         $user = auth()->user()->id;
         $admin = User::where('id', $user)->first();
-        // dd($admin);
         $size = Size::whereIn('id', $request->size)->get();
-        // $foto = round(microtime(true) * 1000).'-'.str_replace(' ','-',$request->file('foto')->getClientOriginalName());
-        // $request->file('foto')->move(public_path('foto'), $foto);
         if ($request->hasFile('gambar')) {
 
-            // add new image
-            $destination_path = public_path('/gambar'); // image public path
+            $destination_path = public_path('/gambar'); 
             $attachment = $request->file('gambar');
             $attachment_name =  $attachment->getClientOriginalName();
             $attachment->move($destination_path, $attachment_name);
@@ -123,7 +101,6 @@ class ProductController extends BaseController
         ]);
         if (isset($request->size)) {
             foreach ($request->size as $key => $value) {
-                // dd($value);
             $size = Size::create([
                     'id_product'=>$add->id,
                     'size'=>$request->size[$key],
@@ -148,7 +125,6 @@ class ProductController extends BaseController
 
     public function restockaction(Request $request)
     {
-        // dd($request->all());
         $user = auth()->user()->id;
         $store = auth()->user()->store_id;
         $product = Product::find($request->id);
@@ -156,13 +132,12 @@ class ProductController extends BaseController
         $add = Purchase::create([
             'store_id'=>$store,
             'user_id'=>$user,
-            'total_harga'=>$product->harga,
+            'total_harga'=>$product->harga,//ini eror saat di ganti memanggil dengan nama bukan id
             'tanggal_pemesanan'=>$request->tanggal_pemesanan,
         ]);
         if (isset($request->id)) {
-                // dd($value);
         $Purchase = PurchaseDetail::create([
-                    'id_product'=>$product->id,
+                    'id_product'=>$product->id, // ini juga
                     'store_id'=>$store,
                     'purchase_id'=>$add->id,
                     'size'=>$request->size,
@@ -173,7 +148,7 @@ class ProductController extends BaseController
                     'tanggal_pemesanan'=>$add->tanggal_pemesanan,
                 ]);
         }
-        return $this->sendResponse([$add,$Purchase], 'Products retrieved successfully.');
+         return $this->sendResponse([$Purchase, $add], 'Products retrieved successfully.');
     }
 
     public function data_validator()
@@ -201,10 +176,6 @@ class ProductController extends BaseController
                 'status'=>'tersedia',
                 'store_id'=>$daftar,
             ]);
-            
-    
-            // $data_product->stok = $newStok;
-            // $data_product->save();
              
         }else{
             $newStok = intval($data_product->stok) + intval($stock_masuk);
@@ -240,24 +211,20 @@ class ProductController extends BaseController
             'total'=>$total,
             'qty'=>1,
         ]);
-        // return $this->sendResponse($user, 'Products retrieved successfully.');
         
         if (isset($pesanan)) {
             foreach ($pesanan as $key => $value) {
 
                 $product = Keranjang::where('id_product', $value)->where('id_product', $value)->first();
-               
-                // $produk = Size::where('id_product', $value)->where('id_product', $value)->first();
-                // dd($value);
                 $orderdetail = OrderDetail::create([
                     'user_id'=>$user,
                     'order_id'=>$order -> id,
                     'product_id'=>$value -> id_product ,
                     'store_id'=>$store,
                     'size'=>$value->ukuransepatu,
-                    'harga'=>$value->price,
+                    'harga'=>$value->harga,
                     'status'=>'belum lunas',
-                    'name_customer'=>$order,
+                    'name_customer'=>$request->nama,
                     'tanggal_pemesanan'=>$request->tanggal_pemesanan,
                     'qty'=>1,
                 ]);
