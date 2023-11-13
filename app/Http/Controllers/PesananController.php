@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Size;
+use App\Models\Lunas;
 use App\Models\Order;
+use App\Models\UangMasuk;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -79,6 +82,48 @@ class PesananController extends Controller
         // dd($bayar);
         // return view('bayar', ['bayar' => $post]);
         return view('bayar', compact('bayar', 'detail'));
+
+    }
+    public function pesananlunas($order_id)
+    {
+        // dd($order_id);
+        $user = auth()->user()->id;
+        $store = auth()->user()->store_id;
+        $product = OrderDetail::where('order_id', $order_id)->get();
+        dd($product);
+        $stock_keluar = $product->qty;
+        // dd($stock_keluar);
+        $order = UangMasuk::create([
+            'nominal'=>$product->harga,
+            'tanggal_pemasukan'=>$product->tanggal_pemesanan,
+            'store_id'=>$store,
+            'qty'=>1,
+
+        ]);
+        dd($order);
+        $lunas = Lunas::create([
+            'user_id'=>$user,
+            'order_id'=>$product->order_id,
+            'product_id'=>$product->product_id,
+            'store_id'=>$store,
+            'size'=>$product->size,
+            'harga'=>$product->harga,
+            'status'=>'lunas',
+            'name_customer'=>$product->name_customer,
+            'tanggal_pemesanan'=>$product->tanggal_pemesanan,
+            'qty'=>1,
+        ]);
+        $stock_tersedia = Size::where('product_id', $product)->where('size', $product->size)->where('store_id', $store)->first();
+
+        if (isset($product->product_id)) {
+            foreach ($product->product_id as $key => $value) {
+                $newStok = intval($stock_tersedia->stok) - intval($stock_keluar);
+
+                $data_product = Size::where('id_product', $product_id)->where('size', $pesanan->size)->where('store_id', $daftar)->update(['stok'=>$newStok,]);
+        }
+        }
+        OrderDetail::whereIn('order_id', $product->order_id)->delete();
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
 
     }
 }

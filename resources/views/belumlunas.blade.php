@@ -26,7 +26,7 @@
                 <h5 class="text-dark mb-0">Order ID :{{$item->order_id}}</h5>
               </div>
             {{-- {{-- <p class="btn-holder"><a href="{{ route('add.to.cart', $item->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p> --}}
-            <p class="btn-holder"><a href="" class="btn btn-info btn-block text-center" role="button">Lunas</a> </p> 
+            <p class="btn-holder"><a href="{{ route('pesananlunas', $item->order_id) }}" class="btn btn-info btn-block text-center" role="button">Lunas</a> </p> 
           </div>
         </div>
       </div>

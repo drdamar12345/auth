@@ -62,9 +62,11 @@ Route::middleware('auth')->group( function () {
     Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
     Route::post('remove-from-keranjang/{id}', [ProductController::class, 'removekeranjang'])->name('remove.from.keranjang');
     // Fitur Pesan
-    Route::get('prosespesan', [ProductController::class, 'pesananction'])->name('prosespesan');
-    Route::get('pesananction/{id}', [ProductController::class, 'pesananction'])->name('pesananction');
-    Route::post('actionpesan', [ProductController::class, 'pesananction'])->name('actionpesan');
+    Route::get('prosespesan', [ProductController::class, 'pesananaction'])->name('prosespesan');
+    Route::get('pesananaction/{id}', [ProductController::class, 'pesananaction'])->name('pesananaction');
+    Route::post('actionpesan', [ProductController::class, 'pesananaction'])->name('actionpesan');
+ 
+
 
 
 
@@ -89,6 +91,8 @@ Route::middleware('auth')->group( function () {
     Route::get('belumlunas', [PesananController::class, 'belumlunas'])->name('belumlunas');
     // Cetak Struk Pembayaran
     Route::get('bayars/{order_id}', [PesananController::class, 'getstruk'])->name('getstruk');
+    // Produk Lunas
+    Route::get('pesananlunas/{order_id}', [PesananController::class, 'pesananlunas'])->name('pesananlunas');
 
 
 

@@ -216,7 +216,7 @@ class ProductController extends Controller
     return redirect()->route('validator');
 
     }
-    public function pesananction(Request $request)
+    public function pesananaction(Request $request)
     {
         $user = auth()->user()->id;
         $store = auth()->user()->store_id;
