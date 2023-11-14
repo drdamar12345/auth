@@ -1,0 +1,95 @@
+@extends('layouts.sidebar')
+@section('content')
+<div class="wrapper">
+    <!-- Main content -->
+    <section class="invoice">
+      <!-- title row -->
+      <div class="row">
+        <div class="col-12">
+          <h2 class="page-header">
+            <i class="fas fa-globe"></i> Bit wallet.
+            <small class="float-right">Date: 2/10/2014</small>
+          </h2>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- info row -->
+      <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+          Nama: {{$nameadmin->name}}
+          <address>
+            <strong>Bit Wallet.</strong><br>
+            JL.LETJEND S.PARMAN X NO:84<br>
+            Jember, Jawa Timur, 68124<br>
+            Phone: 08527009211<br>
+            Email: {{$nameadmin->email}}
+          </address>
+        </div>
+        <!-- /.col -->
+        <!-- /.col -->
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+  
+      <!-- Table row -->
+      <div class="row">
+        <div class="col-12 table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama_Product</th>
+              <th>Tanggal_pemasukan</th>
+              <th>Descripsi</th>
+              <th>Nama_Customer</th>
+              <th>qty</th>
+              <th>Nominal</th>
+            </tr>
+            </thead>
+            <tbody>
+              @php $i=1 @endphp
+              @foreach ($products as $product)
+              <tr>
+                <td>{{ $i++ }}</td>
+                <td>{{$product->name_product}}</td>
+                <td>{{$product->tanggal_pemasukan}}</td>
+                <td>{{$product->note}}</td>
+                <td>{{$product->name_customer}}</td>
+                <td>{{$product->qty}}</td>
+                <td>Rp.{{$product->nominal}}</td>
+              </tr>
+              
+                  
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+  
+      <div class="row">
+        <div class="col-6">
+          <p class="lead">Amount Due 2/22/2014</p>
+  
+          <div class="table-responsive">
+            <table class="table">
+              <tr>
+                <th>Total:</th>
+                <td>$265.24</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- ./wrapper -->
+  <!-- Page specific script -->
+  <script>
+    window.addEventListener("load", window.print());
+  </script>
+@endsection

@@ -14,5 +14,8 @@ class UangMasuk extends Model
         'tanggal_pemasukan',
         'store_id',
         'qty',
+        'note',
+        'name_customer',
+        'name_product',
     ];
 }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SuperController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
@@ -93,6 +94,11 @@ Route::middleware('auth')->group( function () {
     Route::get('bayars/{order_id}', [PesananController::class, 'getstruk'])->name('getstruk');
     // Produk Lunas
     Route::get('pesananlunas/{order_id}', [PesananController::class, 'pesananlunas'])->name('pesananlunas');
+    Route::get('produklunas', [PesananController::class, 'produklunas'])->name('produklunas');
+
+    // Invoice Penasukkan
+    Route::get('rekappemasukan', [InvoiceController::class, 'rekappemasukan'])->name('rekappemasukan');
+
 
 
 

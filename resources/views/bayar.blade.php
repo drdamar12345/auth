@@ -32,13 +32,13 @@
             <!-- info row -->
             <div class="row invoice-info">
               <div class="col-sm-4 invoice-col">
-                From
+                From : {{$nameadmin->name}}
                 <address>
-                  <strong>Bit Wallet</strong><br>
+                  <strong>Name Store: {{$store->name_store}}</strong><br>
                   JL.LETJEND S.PARMAN X NO:84<br>
                   Jember, Jawa Timur, 68124<br>
                   Phone: 085270092112<br>
-                  Email: info@almasaeedstudio.com
+                  Email: {{$nameadmin->email}}
                 </address>
               </div>
               <!-- /.col -->
@@ -51,7 +51,7 @@
               </div>
               <!-- /.col -->
               <div class="col-sm-4 invoice-col">
-                <b>Order ID:</b> {{$bayar->order_id}}<br>
+                <b>Order ID:</b> {{$bayar->id}}<br>
               </div>
               <!-- /.col -->
             </div>
