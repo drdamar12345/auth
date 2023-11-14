@@ -22,6 +22,7 @@ class ProductController extends BaseController
 {
     public function produk()
     {
+        //join
         $user = auth()->user()->store_id;
         $data = Product::where('store_id', $user)->get();
 
@@ -45,10 +46,11 @@ class ProductController extends BaseController
 
     public function keranjang()
     {
+        //r1 aja
         $daftar = auth()->user()->store_id;
         $user = auth()->user()->store_id;
         $cart = Keranjang::where('store_id', $user)->get();
-        $customer = Customer::where('store_id', $daftar)->get();
+        // $customer = Customer::where('store_id', $daftar)->get();
         return $this->sendResponse($cart, 'Products retrieved successfully.');
     }
 
@@ -120,7 +122,10 @@ class ProductController extends BaseController
         
         $daftar = auth()->user()->store_id;
         $product = Product::where('store_id', $daftar)->get();
-        return $this->sendResponse($product, 'Products retrieved successfully.');
+        $size = PurchaseDetail::where('store_id', $daftar)->get();
+
+
+        return $this->sendResponse( $size, 'Products retrieved successfully.');
     }
 
     public function restockaction(Request $request)
@@ -128,7 +133,9 @@ class ProductController extends BaseController
         $user = auth()->user()->id;
         $store = auth()->user()->store_id;
         $product = Product::find($request->id);
-        $admin = User::where('id', $user)->first();
+        $product_name = Product::where('nama_product','LIKE','%'.$request->name_product.'%')->first();
+        // return $this->sendResponse($product_name, 'Products retrieved successfully.');
+        // $admin = User::where('id', $user)->first();
         $add = Purchase::create([
             'store_id'=>$store,
             'user_id'=>$user,
@@ -137,7 +144,7 @@ class ProductController extends BaseController
         ]);
         if (isset($request->id)) {
         $Purchase = PurchaseDetail::create([
-                    'id_product'=>$product->id, // ini juga
+                    'id_product'=>$product->id ?? $product_name->id, // ini juga
                     'store_id'=>$store,
                     'purchase_id'=>$add->id,
                     'size'=>$request->size,
@@ -191,8 +198,8 @@ class ProductController extends BaseController
                     'store_id'=>$daftar,
                     'qty'=>$request->qty,
         ]);
-        // PurchaseDetail::where('id' $request->id)->delete();
-        return $this->sendResponse([$pesanan, $data_product, $product_id, $admin, $uangkeluar], 'Products retrieved successfully.');
+        PurchaseDetail::where('id' ,$daftar)->delete();
+        return $this->sendResponse([$uangkeluar], 'Products retrieved successfully.');
     }
 
     public function pesananction(Request $request)

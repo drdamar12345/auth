@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\LoginController;
+use App\Http\Controllers\API\PesananController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\CustomerController;
 use App\Http\Controllers\API\PasswordController;
@@ -93,7 +94,13 @@ Route::post('validator', [ProductController::class, 'validatoraccept']);
 //data validator lur
 Route::get('dav', [ProductController::class, 'data_validator']);
 
-
+// chekout barang
 Route::post('cek', [ProductController::class, 'pesananction']);
+
+// datanya ga lunas
+Route::get('data_belum_lunas', [PesananController::class, 'belumlunas']);
+
+// struk
+Route::get('struk', [PesananController::class, 'getstruk']);
 
 });
