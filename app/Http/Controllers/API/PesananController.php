@@ -47,7 +47,7 @@ class PesananController extends BaseController
         //buat satu satu
         $detail = OrderDetail::
         leftJoin('tb_product_utama', 'tb_product_utama.id', 'tb_order_detail.product_id')
-        ->leftJoin('users', 'users.id', 'tb_order_detail.product_id')
+        ->leftJoin('users', 'users.id', 'tb_order_detail.store_id')
         ->leftJoin('tb_store', 'tb_store.id', 'tb_order_detail.product_id')
         ->leftJoin('tb_order', 'tb_order.id', 'tb_order_detail.product_id')
         ->select(
