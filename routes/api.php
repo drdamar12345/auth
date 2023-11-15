@@ -40,8 +40,6 @@ Route::get('data', [UserController::class, 'profil']);
 // data produk
 Route::get('data_produk', [ProductController::class, 'produk']);
 
-//gatau
-Route::get('datanya_cuyy', [ProductController::class, 'datanya_size_aja']);
 
 //log out
 Route::post('keluar', [UserController::class, 'logout_action']);
@@ -106,4 +104,6 @@ Route::get('data_belum_lunas', [PesananController::class, 'belumlunas']);
 // struk
 Route::get('struk', [PesananController::class, 'getstruk']);
 
+//pesnan lunas
+Route::post('pesan_lunas', [PesananController::class, 'pesananlunas']);
 });

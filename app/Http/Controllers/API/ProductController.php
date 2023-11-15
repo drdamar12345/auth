@@ -173,6 +173,8 @@ class ProductController extends BaseController
 
     public function validatoraccept(Request $request)
     {
+        $admin = auth()->user()->id;
+        $nameadmin = User::where('id', $admin)->first();
         $daftar = auth()->user()->store_id;
         $pesanan = PurchaseDetail::where('id', $request -> id)->first();
         $stock_masuk = $request->qty;
@@ -200,6 +202,8 @@ class ProductController extends BaseController
                     'tanggal_pengeluaran'=>$pesanan->tanggal_pemesanan,
                     'note'=>'restock',
                     'store_id'=>$daftar,
+                    'nama_admin'=>$nameadmin->name,
+                    'nama_product'=>$pesanan->nama_product,
                     'qty'=>$request->qty,
         ]);
         PurchaseDetail::where('id', $request -> id)->delete();

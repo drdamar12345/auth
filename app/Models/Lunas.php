@@ -5,17 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UangKeluar extends Model
+class Lunas extends Model
 {
-    protected $table = 'tb_uang_keluar';
+    protected $table = 'tb_lunas';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nominal',
-        'tanggal_pengeluaran',
-        'note',
+        'user_id',
+        'order_id',
+        'product_id',
         'store_id',
-        'nama_admin',
-        'nama_product',
+        'size',
+        'harga',
+        'status',
+        'name_customer',
+        'tanggal_pemesanan',
         'qty',
     ];
 }
