@@ -1,6 +1,12 @@
-@extends('layouts.sidebar')
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{{ asset('admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('admin/dist/css/adminlte.min.css') }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-@section('content')
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
 
@@ -101,13 +107,12 @@
               <!-- accepted payments column -->
               <!-- /.col -->
               <div class="col-6">
-                <p class="lead">Amount Due 2/22/2014</p>
 
                 <div class="table-responsive">
                   <table class="table">
                     <tr>
                       <th style="width:50%">Subtotal:</th>
-                      <td>{{$bayar->total}}</td>
+                      <td>Rp.{{$bayar->total}}</td>
                     </tr>
                   </table>
                 </div>
@@ -119,13 +124,13 @@
             <!-- this row will not appear when printing -->
             <div class="row no-print">
               <div class="col-12">
-                <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                {{-- <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a> --}}
                 <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
                   Payment
                 </button>
-                <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                  <i class="fas fa-download"></i> Generate PDF
-                </button>
+                <a href="/belumlunas"  type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                  <i class="fas fa-download"></i> BACK
+                </a>
               </div>
             </div>
           </div>
@@ -137,4 +142,4 @@
   </section>
   <!-- /.content -->
 </div>
-@endsection
+

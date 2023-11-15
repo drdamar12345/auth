@@ -11,7 +11,7 @@
             <small class="float-right">Date: 2/10/2014</small>
             <div>
               <h6 class="float_right">
-                <form action="{{ route('generateuangmasuk') }}" method="post">
+                <form action="{{ route('generateuangkeluar') }}" method="post">
                   @csrf
                   <label for="start_date">Tanggal Awal:</label>
                   <input type="date" name="start_date" required>
@@ -65,10 +65,10 @@
               @foreach ($products as $product)
               <tr>
                 <td>{{ $i++ }}</td>
-                <td>{{$product->name_product}}</td>
-                <td>{{$product->tanggal_pemasukan}}</td>
+                <td>{{$product->nama_product}}</td>
+                <td>{{$product->tanggal_pengeluaran}}</td>
                 <td>{{$product->note}}</td>
-                <td>{{$product->name_customer}}</td>
+                <td>{{$product->nama_admin}}</td>
                 <td>{{$product->qty}}</td>
                 <td>Rp.{{$product->nominal}}</td>
               </tr>
@@ -89,7 +89,7 @@
             <table class="table">
               <tr>
                 <th>Total:</th>
-                <td>Rp.{{$total}}</td>
+                <td>$265.24</td>
               </tr>
             </table>
           </div>
@@ -100,9 +100,7 @@
     </section>
     <!-- /.content -->
 </div>
-  <!-- ./wrapper -->
-  <!-- Page specific script -->
-  <script>
+<script>
     window.addEventListener("load", window.print());
   </script>
 @endsection

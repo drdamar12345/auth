@@ -96,8 +96,15 @@ Route::middleware('auth')->group( function () {
     Route::get('pesananlunas/{order_id}', [PesananController::class, 'pesananlunas'])->name('pesananlunas');
     Route::get('produklunas', [PesananController::class, 'produklunas'])->name('produklunas');
 
-    // Invoice Penasukkan
+    // Invoice Pemasukkan
     Route::get('rekappemasukan', [InvoiceController::class, 'rekappemasukan'])->name('rekappemasukan');
+    Route::post('rekappemasukan', [InvoiceController::class, 'generateuangmasuk'])->name('generateuangmasuk');
+
+    // Invoice Pengeluaran
+    Route::get('rekappengeluaran', [InvoiceController::class, 'rekappengeluaran'])->name('rekappengeluaran');
+    Route::post('rekappengeluaran', [InvoiceController::class, 'generateuangkeluar'])->name('generateuangkeluar');
+
+
 
 
 

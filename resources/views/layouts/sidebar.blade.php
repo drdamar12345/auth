@@ -172,15 +172,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../UI/icons.html" class="nav-link">
+                <a href="/rekappengeluaran" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Rekap Pengeluaran</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../UI/buttons.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Rekap Stok Barang</p>
                 </a>
               </li>
             </ul>
@@ -239,15 +233,6 @@
               </p>
             </a>
           </li>
-          
-          <li class="nav-item">
-            <a href="/bayar" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                bayar
-              </p>
-            </a>
-          </li>
           <li class="nav-item">
             <a href="{{route('Logout')}}" class="nav-link">
               <p>
@@ -269,7 +254,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <!-- /.content-wrapper -->
-  kkkkkkkk
+  
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">

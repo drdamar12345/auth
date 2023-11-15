@@ -156,6 +156,8 @@ class ProductController extends Controller
     }
     public function validatoraccept($id)
     {
+        $admin = auth()->user()->id;
+        $nameadmin = User::where('id', $admin)->first();
         $daftar = auth()->user()->store_id;
         $pesanan = PurchaseDetail::where('id', $id)->first();
         // dd($pesanan);
@@ -197,7 +199,8 @@ class ProductController extends Controller
             'note'=>'restock',
             'store_id'=>$daftar,
             'qty'=>$pesanan->qty,
-
+            'nama_admin'=>$nameadmin->name,
+            'nama_product'=>$pesanan->nama_product,
         ]);
 
 
