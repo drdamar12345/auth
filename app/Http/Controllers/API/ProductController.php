@@ -134,17 +134,15 @@ class ProductController extends BaseController
         $store = auth()->user()->store_id;
         $product = Product::find($request->id);
         $product_name = Product::where('nama_product','LIKE','%'.$request->name_product.'%')->first();
-        // return $this->sendResponse($product_name, 'Products retrieved successfully.');
-        // $admin = User::where('id', $user)->first();
         $add = Purchase::create([
             'store_id'=>$store,
             'user_id'=>$user,
-            'total_harga'=>$product->harga,//ini eror saat di ganti memanggil dengan nama bukan id
+            'total_harga'=>$product->harga,
             'tanggal_pemesanan'=>$request->tanggal_pemesanan,
         ]);
         if (isset($request->id)) {
         $Purchase = PurchaseDetail::create([
-                    'id_product'=>$product->id ?? $product_name->id, // ini juga
+                    'id_product'=>$product->id ?? $product_name->id,
                     'store_id'=>$store,
                     'purchase_id'=>$add->id,
                     'size'=>$request->size,
@@ -166,11 +164,17 @@ class ProductController extends BaseController
         return $this->sendResponse($product, 'Products retrieved successfully.');
     }
 
+    public function removevalidator(Request $request)
+    {
+    $produk = PurchaseDetail::where('id', $request->id)->delete();
+    return $this->sendResponse($produk, 'Products retrieved successfully.');
+
+    }
+
     public function validatoraccept(Request $request)
     {
         $daftar = auth()->user()->store_id;
         $pesanan = PurchaseDetail::where('id', $request -> id)->first();
-        // return $this->sendResponse($request->all(), 'Products retrieved successfully.');
         $stock_masuk = $request->qty;
         $product_id = $pesanan->id_product;
         $data_product = Size::where('id_product', $product_id)
@@ -198,8 +202,8 @@ class ProductController extends BaseController
                     'store_id'=>$daftar,
                     'qty'=>$request->qty,
         ]);
-        PurchaseDetail::where('id' ,$daftar)->delete();
-        return $this->sendResponse([$uangkeluar], 'Products retrieved successfully.');
+        PurchaseDetail::where('id', $request -> id)->delete();
+        return $this->sendResponse($uangkeluar, 'Products retrieved successfully.');
     }
 
     public function pesananction(Request $request)
@@ -238,9 +242,7 @@ class ProductController extends BaseController
 
             }
         }
+           Keranjang::where('user_id', $user)->delete();
         return $this->sendResponse([$order, $orderdetail], 'Products retrieved successfully.');
-        
-        //  Keranjang::whereIn('id', $request->id)->delete();
-        // return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 }

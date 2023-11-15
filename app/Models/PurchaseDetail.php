@@ -13,6 +13,7 @@ class PurchaseDetail extends Model
         'id_product',
         'store_id',
         'purchase_id',
+        'user_id',
         'size',
         'qty',
         'harga',

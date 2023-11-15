@@ -39,12 +39,13 @@ class PesananController extends BaseController
     {
         $daftar = auth()->user()->store_id;
         // $total = auth()->user()->total;
-        $bayar = OrderDetail::where('store_id', $daftar)->first();
         // $satu = Order::where('total', $total)->get();
         //buat satu satu
         $detail = OrderDetail::
         leftJoin('tb_product_utama', 'tb_product_utama.id', 'tb_order_detail.product_id')
-            ('Users', 'Users.id', 'tb_order_detail.product_id')
+        ->leftJoin('Users', 'Users.id', 'tb_order_detail.product_id')
+        ->leftJoin('tb_store', 'tb_store.id', 'tb_order_detail.product_id')
+        ->leftJoin('tb_order', 'tb_order.id', 'tb_order_detail.product_id')
         ->select(
             'tb_order_detail.user_id',
             'tb_order_detail.order_id',
@@ -55,9 +56,9 @@ class PesananController extends BaseController
             'tb_order_detail.tanggal_pemesanan',
             'tb_order_detail.qty', 
             'tb_product_utama.nama_product',
-            'tb_order.total',
             'Users.name',
             'tb_store.name_store',
+            'tb_order.total'
         ) 
         ->where('tb_order_detail.store_id', $daftar)->get();
         return $this->sendResponse($detail, 'Products retrieved successfully.');

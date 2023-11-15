@@ -91,6 +91,9 @@ Route::get('data_restock', [ProductController::class, 'restock']);
 //setuju atau tidakk
 Route::post('validator', [ProductController::class, 'validatoraccept']);
 
+//hapus validator
+Route::post('hapus_validator', [ProductController::class, 'removevalidator']);
+
 //data validator lur
 Route::get('dav', [ProductController::class, 'data_validator']);
 
