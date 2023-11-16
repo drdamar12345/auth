@@ -82,7 +82,7 @@
   
                       <td>{{ $item->nama_product }}</td>
   
-                      <td data-th="Harga">Rp{{ $item->harga }}</td>
+                      <td data-th="Harga">Rp{{ number_format($item->harga, 2, ',', '.') }}</td>
   
                         <input  name="price[]" type="hidden" class="text-center" value="{{ intval($item->harga) * intval($item->qty) }}"></td>
   
@@ -112,7 +112,7 @@
                   <table class="table">
                     <tr>
                       <th style="width:50%">Subtotal:</th>
-                      <td>Rp.{{$bayar->total}}</td>
+                      <td>Rp.{{ number_format($bayar->total, 2, ',', '.') }}</td>
                     </tr>
                   </table>
                 </div>

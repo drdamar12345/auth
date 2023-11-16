@@ -70,7 +70,7 @@
                 <td>{{$product->note}}</td>
                 <td>{{$product->name_customer}}</td>
                 <td>{{$product->qty}}</td>
-                <td>Rp.{{$product->nominal}}</td>
+                <td>Rp.{{ number_format($product->nominal, 2, ',', '.') }}</td>
               </tr>
               
                   
@@ -88,10 +88,12 @@
           <div class="table-responsive">
             <table class="table">
               <tr>
+                
                 <th>Total:</th>
-                <td>Rp.{{$total}}</td>
+                <td>Rp.{{ number_format($total, 2, ',', '.') }}<td>
               </tr>
             </table>
+            <button id="printButton">Cetak Laporan</button>
           </div>
         </div>
         <!-- /.col -->
@@ -102,7 +104,9 @@
 </div>
   <!-- ./wrapper -->
   <!-- Page specific script -->
-  <script>
-    window.addEventListener("load", window.print());
+  <script type = 'text/javascript'>  
+    document.getElementById('printButton').addEventListener('click', function() {
+      window.print();
+});
   </script>
 @endsection

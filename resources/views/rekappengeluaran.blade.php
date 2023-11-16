@@ -58,6 +58,7 @@
               <th>Nama_Customer</th>
               <th>qty</th>
               <th>Nominal</th>
+              <th>Subtotal</th>
             </tr>
             </thead>
             <tbody>
@@ -71,6 +72,7 @@
                 <td>{{$product->nama_admin}}</td>
                 <td>{{$product->qty}}</td>
                 <td>Rp.{{$product->nominal}}</td>
+                <td>{{$product->total}}</td>
               </tr>
               
                   
@@ -89,7 +91,7 @@
             <table class="table">
               <tr>
                 <th>Total:</th>
-                <td>$265.24</td>
+                <td>{{$total}}</td>
               </tr>
             </table>
           </div>
@@ -101,6 +103,6 @@
     <!-- /.content -->
 </div>
 <script>
-    window.addEventListener("load", window.print());
+    // window.addEventListener("load", window.print());
   </script>
 @endsection

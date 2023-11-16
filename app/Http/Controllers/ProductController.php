@@ -201,6 +201,7 @@ class ProductController extends Controller
             'qty'=>$pesanan->qty,
             'nama_admin'=>$nameadmin->name,
             'nama_product'=>$pesanan->nama_product,
+            'total'=> $pesanan->harga * $pesanan->qty,
         ]);
 
 

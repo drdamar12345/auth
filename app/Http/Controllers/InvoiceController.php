@@ -14,7 +14,7 @@ class InvoiceController extends Controller
     {
         $admin = auth()->user()->id;
         $store = auth()->user()->store_id;
-        $total = UangMasuk::sum('nominal');
+        $total = UangMasuk::where('store_id', $store)->get()->sum('nominal');
         $nameadmin = User::where('id', $admin)->first();
         $products = UangMasuk::where('store_id', $store)->get();
         return view('rekappemasukan', compact('products', 'nameadmin', 'total'));
@@ -23,10 +23,10 @@ class InvoiceController extends Controller
     {
         $admin = auth()->user()->id;
         $nameadmin = User::where('id', $admin)->first();
-        $total = UangMasuk::sum('nominal');
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
         $products = UangMasuk::whereBetween('tanggal_pemasukan', [$startDate, $endDate])->get();
+        $total = UangMasuk::whereBetween('tanggal_pemasukan', [$startDate, $endDate])->get()->sum('nominal');
         return view('rekappemasukan', compact('products','nameadmin', 'total'));
     }
     public function rekappengeluaran()
@@ -35,7 +35,8 @@ class InvoiceController extends Controller
         $store = auth()->user()->store_id;
         $nameadmin = User::where('id', $admin)->first();
         $products = UangKeluar::where('store_id', $store)->get();
-        return view('rekappengeluaran', compact('products', 'nameadmin'));
+        $total = UangKeluar::where('store_id', $store)->get()->sum('total');
+        return view('rekappengeluaran', compact('products', 'nameadmin', 'total'));
     }
     public function generateuangkeluar(Request $request)
     {
@@ -44,6 +45,7 @@ class InvoiceController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
         $products = UangKeluar::whereBetween('tanggal_pengeluaran', [$startDate, $endDate])->get();
-        return view('rekappengeluaran', compact('products','nameadmin'));
+        $total = UangKeluar::whereBetween('tanggal_pengeluaran', [$startDate, $endDate])->get()->sum('total');
+        return view('rekappengeluaran', compact('products', 'nameadmin', 'total'));
     }
 }
