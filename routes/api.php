@@ -106,4 +106,16 @@ Route::get('struk', [PesananController::class, 'getstruk']);
 
 //pesnan lunas
 Route::post('pesan_lunas', [PesananController::class, 'pesananlunas']);
+
+//rekappemasukan
+Route::get('data_uang_masuk', [PesananController::class, 'rekappemasukan']);
+
+//rekapp masuk
+Route::post('rekapp_masuk', [PesananController::class, 'generateuangmasuk']);
+
+//rekappengeluaran
+Route::get('data_uang_keluar', [PesananController::class, 'rekappengeluaran']);
+
+//data
+Route::post('rekapp_keluar', [PesananController::class, 'generateuangkeluar']);
 });
