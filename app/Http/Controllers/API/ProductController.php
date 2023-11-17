@@ -205,6 +205,7 @@ class ProductController extends BaseController
                     'nama_admin'=>$nameadmin->name,
                     'nama_product'=>$pesanan->nama_product,
                     'qty'=>$request->qty,
+                    'total'=> $pesanan->harga * $pesanan->qty,
         ]);
         PurchaseDetail::where('id', $request -> id)->delete();
         return $this->sendResponse($uangkeluar, 'Products retrieved successfully.');

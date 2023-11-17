@@ -66,16 +66,14 @@ class PesananController extends BaseController
         ->where('tb_order_detail.store_id', $daftar)->get();
         return $this->sendResponse($detail, 'Products retrieved successfully.');
     }
-//belum
+
     public function pesananlunas(Request $request)
     {
         $user = auth()->user()->id;
         $store = auth()->user()->store_id;
         $product = OrderDetail::where('order_id', $request -> order_id)->get();
-        // return $this->sendResponse($product, 'Products retrieved successfully.');
         foreach ($product as $key => $value) {
             $nameproduct = Product::where('id', $value->product_id)->where('store_id', $store)->first();
-            // return $this->sendResponse($nameproduct, 'Products retrieved successfully.');
             $order = UangMasuk::create([
                 'nominal'=>$value->harga,
                 'tanggal_pemasukan'=>$value->tanggal_pemesanan,
@@ -123,12 +121,10 @@ class PesananController extends BaseController
         $admin = auth()->user()->id;
         $store = auth()->user()->store_id;
         $nameadmin = User::where('id', $admin)->first();
-        // $id = UangMasuk::where('store_id', $store)->get();
         $total = UangMasuk::sum('nominal');
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
         $products = UangMasuk::whereBetween('tanggal_pemasukan', [$startDate, $endDate])->where('store_id', $store)->get();
-        // $id = UangMasuk::where('store_id', $store)->get();
 
         return $this->sendResponse([$nameadmin, $products, $total], 'Products retrieved successfully.');
   
@@ -137,7 +133,7 @@ class PesananController extends BaseController
     public function rekappengeluaran()
     {
         $admin = auth()->user()->id;
-        $total = UangMasuk::sum('nominal');
+        $total = UangKeluar::sum('total');
         $store = auth()->user()->store_id;
         $nameadmin = User::where('id', $admin)->first();
         $products = UangKeluar::where('store_id', $store)->get();
@@ -147,10 +143,13 @@ class PesananController extends BaseController
     public function generateuangkeluar(Request $request)
     {
         $admin = auth()->user()->id;
+        $store = auth()->user()->store_id;
+        $total = UangKeluar::sum('total');
         $nameadmin = User::where('id', $admin)->first();
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
-        $products = UangKeluar::whereBetween('tanggal_pengeluaran', [$startDate, $endDate])->get();
-        return $this->sendResponse([$nameadmin, $products], 'Products retrieved successfully.');
+        $products = UangKeluar::whereBetween('tanggal_pengeluaran', [$startDate, $endDate])->where('store_id', $store)->get();
+        // $total = UangKeluar::whereBetween('tanggal_pengeluaran', [$startDate, $endDate])->get()->sum('total');
+        return $this->sendResponse([$nameadmin, $products, $total], 'Products retrieved successfully.');
     }
 }
