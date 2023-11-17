@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SuperController;
 use App\Http\Controllers\InvoiceController;
@@ -97,12 +98,23 @@ Route::middleware('auth')->group( function () {
     Route::get('produklunas', [PesananController::class, 'produklunas'])->name('produklunas');
 
     // Invoice Pemasukkan
-    Route::get('rekappemasukan', [InvoiceController::class, 'rekappemasukan'])->name('rekappemasukan');
-    Route::post('rekappemasukan', [InvoiceController::class, 'generateuangmasuk'])->name('generateuangmasuk');
+    Route::get('rekappemasukan_pdf', [InvoiceController::class, 'rekappemasukan_pdf'])->name('rekappemasukan_pdf');
+    Route::post('rekappemasukan_pdf', [InvoiceController::class, 'generateuangmasuk'])->name('generateuangmasuk');
 
     // Invoice Pengeluaran
-    Route::get('rekappengeluaran', [InvoiceController::class, 'rekappengeluaran'])->name('rekappengeluaran');
-    Route::post('rekappengeluaran', [InvoiceController::class, 'generateuangkeluar'])->name('generateuangkeluar');
+    Route::get('rekappengeluaran_pdf', [InvoiceController::class, 'rekappengeluaran_pdf'])->name('rekappengeluaran_pdf');
+    Route::post('rekappengeluaran_pdf', [InvoiceController::class, 'generateuangkeluar'])->name('generateuangkeluar');
+
+    // Cetak PDF Uang Masuk
+    Route::get('cetakPDF', [PDFController::class, 'cetakPDF'])->name('cetakPDF');
+    Route::get('uangmasuk', [PDFController::class, 'uangmasuk'])->name('uangmasuk');
+    // Cetak PDF Uang Keluar
+    Route::get('cetakPDFkeluar', [PDFController::class, 'cetakPDFkeluar'])->name('cetakPDFkeluar');
+    Route::get('uangkeluar', [PDFController::class, 'uangkeluar'])->name('uangkeluar');
+
+    
+
+
 
 
 

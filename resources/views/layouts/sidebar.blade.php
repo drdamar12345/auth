@@ -166,13 +166,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/rekappemasukan" class="nav-link">
+                <a href="/rekappemasukan_pdf" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Rekap Pemasukan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/rekappengeluaran" class="nav-link">
+                <a href="/rekappengeluaran_pdf" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Rekap Pengeluaran</p>
                 </a>

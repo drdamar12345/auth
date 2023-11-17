@@ -94,6 +94,7 @@
                 <td>{{$total}}</td>
               </tr>
             </table>
+            <a href="cetakPDFkeluar" class="btn btn-primary" target="_blank">CETAK PDF</a>
           </div>
         </div>
         <!-- /.col -->

@@ -1,5 +1,13 @@
-@extends('layouts.sidebar')
-@section('content')
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{{ asset('admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('admin/dist/css/adminlte.min.css') }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <div class="wrapper">
     <!-- Main content -->
     <section class="invoice">
@@ -8,21 +16,7 @@
         <div class="col-12">
           <h2 class="page-header">
             <i class="fas fa-globe"></i> Bit wallet.
-            <small class="float-right">Date: 2/10/2014</small>
-            <div>
-              <h6 class="float_right">
-                <form action="{{ route('generateuangmasuk') }}" method="post">
-                  @csrf
-                  <label for="start_date">Tanggal Awal:</label>
-                  <input type="date" name="start_date" required>
-
-                  <label for="end_date">Tanggal Akhir:</label>
-                  <input type="date" name="end_date" required>
-
-                  <button class="btn btn-success text-center" type="submit">Generate Laporan</button>
-                </form>
-              </h6>
-            </div>    
+            <small class="float-right">Date: 2/10/2014</small> 
           </h2>
         </div>
         <!-- /.col -->
@@ -102,11 +96,3 @@
     </section>
     <!-- /.content -->
 </div>
-  <!-- ./wrapper -->
-  <!-- Page specific script -->
-  <script type = 'text/javascript'>  
-    document.getElementById('printButton').addEventListener('click', function() {
-      window.print();
-});
-  </script>
-@endsection
