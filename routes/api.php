@@ -101,6 +101,9 @@ Route::post('cek', [ProductController::class, 'pesananction']);
 // datanya ga lunas
 Route::get('data_belum_lunas', [PesananController::class, 'belumlunas']);
 
+//data lunas
+Route::get('data_lunas', [PesananController::class, 'produklunas']);
+
 // struk
 Route::get('struk', [PesananController::class, 'getstruk']);
 

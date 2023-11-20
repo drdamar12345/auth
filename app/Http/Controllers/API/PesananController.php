@@ -41,6 +41,32 @@ class PesananController extends BaseController
         return $this->sendResponse($post, 'Products retrieved successfully.');
     }
 
+    public function produklunas()
+    {
+        $daftar = auth()->user()->store_id;
+        // dd($daftar);
+        $product = lunas::where('store_id', $daftar)->get();
+        $post = Lunas::leftJoin('tb_product_utama', 'tb_product_utama.id', 'tb_lunas.product_id') // leftJoin('nama_tabel_join', 'nama_tabel_join.store_id', 'nama_tabel_utama.foreign_key')
+        ->select(
+            'tb_lunas.user_id',
+            'tb_lunas.order_id',
+            'tb_lunas.product_id',
+            'tb_lunas.store_id',
+            'tb_lunas.size',
+            'tb_lunas.harga',
+            'tb_lunas.status',
+            'tb_lunas.name_customer',
+            'tb_lunas.tanggal_pemesanan',
+            'tb_lunas.qty', // 'nama_tabel.nama_kolom'
+            'tb_product_utama.nama_product',
+            'tb_product_utama.gambar',
+            'tb_product_utama.merk',// 'nama_tabel.nama_kolom'
+            // lanjutkan kebawah untuk ambil data yang dibutuhkan
+        )->where('tb_lunas.store_id', $daftar)->where('status', 'lunas')->get();
+        // dd($post);
+        return $this->sendResponse($post, 'Products retrieved successfully.');
+    }
+
     public function getstruk()
     {
         $daftar = auth()->user()->store_id;
