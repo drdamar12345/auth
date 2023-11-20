@@ -16,7 +16,6 @@
         <div class="col-12">
           <h2 class="page-header">
             <i class="fas fa-globe"></i> Bit wallet.
-            <small class="float-right">Date: 2/10/2014</small> 
           </h2>
         </div>
         <!-- /.col -->
@@ -66,7 +65,7 @@
                 <td>{{$product->nama_admin}}</td>
                 <td>{{$product->qty}}</td>
                 <td>Rp.{{ number_format($product->nominal, 2, ',', '.') }}</td>
-                <td>{{$product->total}}</td>
+                <td>{{ number_format($product->total, 2, ',', '.') }}</td>
               </tr>
               
                   
@@ -89,7 +88,6 @@
                 <td>Rp.{{ number_format($total, 2, ',', '.') }}<td>
               </tr>
             </table>
-            <button id="printButton">Cetak Laporan</button>
           </div>
         </div>
         <!-- /.col -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UangMasuk;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $total = UangMasuk::where('store_id', $store)->get()->sum('nominal');
+        $products = UangMasuk::where('store_id', $store)->get();
+        return view('home', compact('products', 'total'));
     }
 }

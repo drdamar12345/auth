@@ -23,7 +23,7 @@ class ProductController extends Controller
 
         $product = $data->map(function ($q) {
             $stok = Size::where('id_product', $q->id)->get()->sum('stok');
-            $size = Size::where('id_product', $q->id)->get();
+            $size = Size::where('id_product', $q->id)->where('stok', '>', 1)->get();
 
             return [
                 'id' => $q->id,

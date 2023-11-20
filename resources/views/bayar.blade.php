@@ -129,8 +129,11 @@
                   Payment
                 </button>
                 <a href="/belumlunas"  type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                  <i class="fas fa-download"></i> BACK
+                  <i ></i> BACK
                 </a>
+                <button type="button" id="printButton" class="btn btn-primary float-right" style="margin-right: 5px;">
+                  <i class="fas fa-download"></i> Generate PDF
+                </button>
               </div>
             </div>
           </div>
@@ -142,4 +145,8 @@
   </section>
   <!-- /.content -->
 </div>
+<script type = 'text/javascript'>  
+    document.getElementById('printButton').addEventListener('click', function() {
+      window.print(); });
+</script>
 

@@ -16,7 +16,6 @@
         <div class="col-12">
           <h2 class="page-header">
             <i class="fas fa-globe"></i> Bit wallet.
-            <small class="float-right">Date: 2/10/2014</small> 
           </h2>
         </div>
         <!-- /.col -->
@@ -45,13 +44,14 @@
           <table class="table table-striped">
             <thead>
             <tr>
-              <th>No</th>
-              <th>Nama_Product</th>
-              <th>Tanggal_pemasukan</th>
-              <th>Descripsi</th>
-              <th>Nama_Customer</th>
-              <th>qty</th>
-              <th>Nominal</th>
+              <th  style="width:5%" >No</th>
+              <th  style="width:15%">Nama_Product</th>
+              <th  style="width:10%">Tanggal_pemasukan</th>
+              <th  style="width:10%">Deskripsi</th>
+              <th  style="width:15%">Nama_Customer</th>
+              <th  style="width:10%">qty</th>
+              <th  style="width:20%">Nominal</th>
+              <th  style="width:20%">Subtotal</th>
             </tr>
             </thead>
             <tbody>
@@ -64,6 +64,7 @@
                 <td>{{$product->note}}</td>
                 <td>{{$product->name_customer}}</td>
                 <td>{{$product->qty}}</td>
+                <td>Rp.{{ number_format($product->nominal, 2, ',', '.') }}</td>
                 <td>Rp.{{ number_format($product->nominal, 2, ',', '.') }}</td>
               </tr>
               
@@ -87,7 +88,6 @@
                 <td>Rp.{{ number_format($total, 2, ',', '.') }}<td>
               </tr>
             </table>
-            <button id="printButton">Cetak Laporan</button>
           </div>
         </div>
         <!-- /.col -->

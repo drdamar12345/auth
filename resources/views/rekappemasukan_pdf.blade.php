@@ -48,6 +48,18 @@
       <!-- Table row -->
       <div class="row">
         <div class="col-12 table-responsive">
+          <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+        
+            th, td {
+                border: 1px solid black; /* Mengatur garis untuk sel dan header */
+                padding: 8px; /* Padding untuk sel */
+                text-align: left; /* Penataan teks di dalam sel */
+            }
+        </style>
           <table class="table table-striped">
             <thead>
             <tr>
@@ -58,6 +70,7 @@
               <th>Nama_Customer</th>
               <th>qty</th>
               <th>Nominal</th>
+              <th>Subtotal</th>
             </tr>
             </thead>
             <tbody>
@@ -70,6 +83,7 @@
                 <td>{{$product->note}}</td>
                 <td>{{$product->name_customer}}</td>
                 <td>{{$product->qty}}</td>
+                <td>Rp.{{ number_format($product->nominal, 2, ',', '.') }}</td>
                 <td>Rp.{{ number_format($product->nominal, 2, ',', '.') }}</td>
               </tr>
               
