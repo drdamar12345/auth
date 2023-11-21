@@ -1,0 +1,83 @@
+<div class="row mb-3">
+
+    <div class="form-group col-sm-12">
+        <hr style="border: none; height: 2px; background-color: #858585; font-weight: bold;">
+        <h5> Data item</h5>
+        <p>Anda dapat mengisi lebih dari 1 item.</p>
+    </div>
+
+    <div class="col-sm-12">
+        <button class="btn btn-success mb-2" id="addButton" type="button">Tambah</button>
+        <div class="table-responsive">
+            <table id="itemTable" class="table table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Harga Unit</th>
+                        <th scope="col">Jenis Satuan</th>
+                        {{-- <th scope="col">Tipe Diskon</th>
+                        <th scope="col">Jumlah Diskon</th> --}}
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider" id="tableBody">
+                    <tr class="row1">
+                        <th><input style="min-width: 150px;" required name="item[]" class="form-control" type="text" placeholder="Masukan Nama Item"></th>
+                        <td><input style="min-width: 150px;" required name="qty[]" class="form-control qty isNumber" type="number" placeholder="Masukan Jumlah Item"></td>
+                        <td><input style="min-width: 150px;" required name="unit_price[]" class="form-control unit_price isNumber" type="number" placeholder="Masukan Harga Item"></td>
+                        <td><input style="min-width: 150px;" required name="unit[]" class="form-control" type="text" placeholder="Masukan Unit Item"></td>
+                        
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row justify-content-end" style="text-align: right;">
+    <div class="col-md-3">
+        <b>Jumlah Harga:</b>
+    </div>
+    <div class="col-md-3">
+        <p class="total_price_text">Rp. </p>
+    </div>
+</div>
+<div class="row justify-content-end" style="text-align: right;">
+    <div class="col-md-3">
+        <b>Jumlah Setelah Pajak:</b>
+    </div>
+    <div class="col-md-3">
+        <p class="total_after_tax_text">Rp. </p>
+    </div>
+</div>
+
+@section('scripts')
+
+<script>
+    $(document).ready(function() {
+        var addButton = $("#addButton");
+        var elementContainer = $("#tableBody");
+        var count = 2;
+
+        addButton.on("click", function() {
+            var newElement = $("<tr>")
+                .addClass(`row${count}`)
+                .html(`
+                        <th><input style="min-width: 150px;" required name="item[]" class="form-control" type="text" placeholder="Masukan Nama Item"></th>
+                        <td><input style="min-width: 150px;" required name="qty[]" class="form-control qty isNumber" type="number" placeholder="Masukan Jumlah Item"></td>
+                        <td><input style="min-width: 150px;" required name="unit_price[]" class="form-control unit_price isNumber" type="number" placeholder="Masukan Harga Item"></td>
+                        <td><input style="min-width: 150px;" required name="unit[]" class="form-control" type="text" placeholder="Masukan Unit Item"></td>
+                        <td><button type="button" onclick="deleteElement(${count})" class="btn-delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button></td>
+                    `);
+            elementContainer.append(newElement);
+
+            count++;
+        });
+    });
+</script>
+
+@endsection

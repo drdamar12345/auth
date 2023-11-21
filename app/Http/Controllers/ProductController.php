@@ -117,30 +117,35 @@ class ProductController extends Controller
         // dd($request->all());
         $user = auth()->user()->id;
         $store = auth()->user()->store_id;
-        // dd($store);
-        $product = Product::find($request->nama);
+        $product = Product::where('id', $request->nama)->get();
         // dd($product);
         $admin = User::where('id', $user)->first();
-        $add=Purchase::create([
-            'store_id'=>$store,
-            'user_id'=>$user,
-            'total_harga'=>$product->harga,
-            'tanggal_pemesanan'=>$request->tanggal_pemesanan,
-        ]);
-        if (isset($request->nama)) {
-            
-                // dd($value);
-                PurchaseDetail::create([
-                    'id_product'=>$product->id,
+        if (isset($request->size)) {
+            // foreach ($request->size as $key => $value) {
+                // dd($request);
+                $add=Purchase::create([
                     'store_id'=>$store,
-                    'purchase_id'=>$add->id,
-                    'size'=>$request->size,
-                    'qty'=>$request->qty,
-                    'harga'=>$product->harga,
-                    'status'=>'dikirim',
-                    'nama_product'=>$product->nama_product,
+                    'user_id'=>$user,
+                    'total_harga'=>(int)$request->price[0] * (int)$request->qty[0],
                     'tanggal_pemesanan'=>$request->tanggal_pemesanan,
                 ]);
+            // }
+        }
+        if (isset($request->nama)) {
+            foreach ($request->size as $key => $value) {
+                // dd($value);
+                PurchaseDetail::create([
+                    'id_product'=>$product[$key]->id,
+                    'store_id'=>$store,
+                    'purchase_id'=>$add->id,
+                    'size'=>$request->size[$key],
+                    'qty'=>$request->qty[$key],
+                    'harga'=>$request->price[$key],
+                    'status'=>'dikirim',
+                    'nama_product'=>$product[$key]->nama_product,
+                    'tanggal_pemesanan'=>$request->tanggal_pemesanan[$key],
+                ]);
+            }
 
         }
         
