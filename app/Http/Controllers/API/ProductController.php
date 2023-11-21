@@ -83,6 +83,11 @@ class ProductController extends BaseController
  
         $user = auth()->user()->id;
         $admin = User::where('id', $user)->first();
+        //setiap harus ada di atas proses
+        // $total = 0;
+        // foreach ($pesanan as $key => $value) {
+        //         $total += $value->harga;
+                    // }
         $size = Size::whereIn('id', $request->size)->get();
         if ($request->hasFile('gambar')) {
 
@@ -112,6 +117,20 @@ class ProductController extends BaseController
                 ]);
             }
         }
+
+        // if (isset($request->id)) {
+        // $log = AktivityMasuk::create([
+        //     'store_id' =>$admin->store_id,
+        //     // 'name_customer'
+        //     'name_product' =>$add->nama_product,
+        //     'name_admin' =>$admin->name,
+        //     // 'jam'
+        //     // 'tanggal'
+        //     // 'total' =>$total
+        //     // 'nominal'
+        // ]);
+
+        // }
         
         return $this->sendResponse([$add,$size], 'Products retrieved successfully.');
 

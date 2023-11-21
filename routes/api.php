@@ -9,6 +9,7 @@ use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\CustomerController;
 use App\Http\Controllers\API\PasswordController;
 use App\Http\Controllers\API\SuperAdminController;
+use App\Http\Controllers\API\LogAktivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,6 @@ Route::get('data', [UserController::class, 'profil']);
 
 // data produk
 Route::get('data_produk', [ProductController::class, 'produk']);
-
 
 //log out
 Route::post('keluar', [UserController::class, 'logout_action']);
@@ -121,4 +121,7 @@ Route::get('data_uang_keluar', [PesananController::class, 'rekappengeluaran']);
 
 //data
 Route::post('rekapp_keluar', [PesananController::class, 'generateuangkeluar']);
+
+//logAktivity
+Route::get('aktivity_uang_masuk', [LogAktivityController::class, 'aktivitymasuk']);
 });
