@@ -97,6 +97,7 @@ class PesananController extends BaseController
     {
         $user = auth()->user()->id;
         $store = auth()->user()->store_id;
+        $formattedDate = now()->format('Y-m-d');
         $product = OrderDetail::where('order_id', $request -> order_id)->get();
         foreach ($product as $key => $value) {
             $nameproduct = Product::where('id', $value->product_id)->where('store_id', $store)->first();
@@ -121,6 +122,15 @@ class PesananController extends BaseController
                 'tanggal_pemesanan'=>$value->tanggal_pemesanan,
                 'qty'=>$value->qty,
             ]);
+
+            $log = UangMasuk::create([
+                'store_id' =>$store,
+                'name_customer' =>$order->name_customer,
+                'tanggal' =>$formattedDate,
+                'nominal' => $lunas->harga,
+                'qty' => $lunas,
+            ]);
+
             $stock_tersedia = Size::where('id_product', $value->product_id)->where('size', $value->size)->where('store_id', $store)->first();
             if (isset ($stock_tersedia)) { 
                 $newStok = intval($stock_tersedia->stok) - intval($value->qty);

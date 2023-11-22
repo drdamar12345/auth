@@ -13,10 +13,14 @@ use App\Models\Keranjang;
 use App\Models\UangKeluar;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+use App\Models\AktivityMasuk;
 use App\Models\PurchaseDetail;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\API\BaseController;
 use GrahamCampbell\ResultType\Success;
+use App\Http\Controllers\API\BaseController;
+use App\Models\LogProduct;
+use App\Models\UangMasuk;
+use Carbon\Carbon;
 
 class ProductController extends BaseController
 {
@@ -83,14 +87,11 @@ class ProductController extends BaseController
  
         $user = auth()->user()->id;
         $admin = User::where('id', $user)->first();
-        //setiap harus ada di atas proses
-        // $total = 0;
-        // foreach ($pesanan as $key => $value) {
-        //         $total += $value->harga;
-                    // }
+        //jam
+        $tomorrow = now()->format('H:i:s');
+        $formattedDate = now()->format('Y-m-d');
         $size = Size::whereIn('id', $request->size)->get();
         if ($request->hasFile('gambar')) {
-
             $destination_path = public_path('/gambar'); 
             $attachment = $request->file('gambar');
             $attachment_name =  $attachment->getClientOriginalName();
@@ -117,22 +118,20 @@ class ProductController extends BaseController
                 ]);
             }
         }
+             $log = LogProduct::create([
+                     'store_id' =>$admin->store_id,
+                     'name_product' =>$add->nama_product,
+                     'name_admin' =>$admin->name,
+                     'time' => $tomorrow,
+                     'date' =>$formattedDate,
+                     'price' => $add->harga,
+                     'qty' => $size->stok,
+        ]);
+    
 
-        // if (isset($request->id)) {
-        // $log = AktivityMasuk::create([
-        //     'store_id' =>$admin->store_id,
-        //     // 'name_customer'
-        //     'name_product' =>$add->nama_product,
-        //     'name_admin' =>$admin->name,
-        //     // 'jam'
-        //     // 'tanggal'
-        //     // 'total' =>$total
-        //     // 'nominal'
-        // ]);
-
-        // }
         
-        return $this->sendResponse([$add,$size], 'Products retrieved successfully.');
+        
+        return $this->sendResponse([$log, $size, $add], 'Products retrieved successfully.');
 
     }
 
@@ -234,6 +233,8 @@ class ProductController extends BaseController
     {
         $user = auth()->user()->id;
         $store = auth()->user()->store_id;
+        // $admin = auth()->user()->name;
+        // $formattedDate = now()->format('Y-m-d');
         $pesanan = Keranjang::whereIn('id', $request -> keranjang_id)->get();
         $total = 0;
         foreach ($pesanan as $key => $value) {
@@ -266,6 +267,15 @@ class ProductController extends BaseController
 
             }
         }
+
+//         $log = UangMasuk::create([
+//                 'store_id' =>$store,
+//                 'name_customer' =>$order->name_customer,
+//                 'tanggal' =>$formattedDate,
+//                 'nominal' => $orderdetail->harga,
+//                 'qty' => $orderdetail,
+// ]);
+
            Keranjang::where('user_id', $user)->delete();
         return $this->sendResponse([$order, $orderdetail], 'Products retrieved successfully.');
     }
