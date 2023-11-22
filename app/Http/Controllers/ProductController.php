@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Keranjang;
+use App\Models\LogProduct;
 use App\Models\UangKeluar;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
@@ -84,7 +85,6 @@ class ProductController extends Controller
             'nama_product'=>$request->nama_product,
             'merk'=>$request->merk,
             'warna'=>$request->warna,
-            'harga'=>$request->harga,
             'gambar'=>$request->gambar,
             'store_id'=>$admin->store_id,
 
@@ -98,9 +98,18 @@ class ProductController extends Controller
                     'stok'=>$request->stok,
                     'status'=>'tersedia',
                     'store_id'=>$admin->store_id,
+                    'price'=>$request->price,
                 ]);
             }
         }
+        $log = LogProduct::create([
+            'name_product'=>$request->nama_product,
+            'name_admin'=>$admin->name,
+            'time',
+            'date',
+            'qty',
+            'price',
+        ]);
         
         return redirect()->back()->with('success', 'Add New Product');
 
@@ -143,7 +152,7 @@ class ProductController extends Controller
                     'harga'=>$request->price[$key],
                     'status'=>'dikirim',
                     'nama_product'=>$product[$key]->nama_product,
-                    'tanggal_pemesanan'=>$request->tanggal_pemesanan[$key],
+                    'tanggal_pemesanan'=>$request->tanggal_pemesanan,
                 ]);
             }
 
@@ -166,8 +175,6 @@ class ProductController extends Controller
         $daftar = auth()->user()->store_id;
         $pesanan = PurchaseDetail::where('id', $id)->first();
         // dd($pesanan);
-        // dd($id);
-        // $stokbarang = Size::where('id_product', $pesanan)->get();
         $stock_masuk = $pesanan->qty;
         // dd($stock_masuk);
         $product_id = $pesanan->id_product;
@@ -182,18 +189,20 @@ class ProductController extends Controller
                 'stok'=>$pesanan->qty,
                 'status'=>'tersedia',
                 'store_id'=>$daftar,
+                'price'=>$pesanan->harga,
             ]);
     
             // $data_product->stok = $newStok;
             // $data_product->save();
         }else {
             $newStok = intval($data_product->stok) + intval($stock_masuk);
+            $newPrice = $pesanan->harga;
+            // dd($newPrice);
             // dd($data_product);
 
             $data_product = Size::where('id_product', $product_id)
-        ->where('size', $pesanan->size)->where('store_id', $daftar)->update([
-            'stok'=>$newStok,
-        ]);
+        ->where('size', $pesanan->size)->where('store_id', $daftar)->update(['stok'=>$newStok,]);
+        $new_data_price = Size::where('id_product', $product_id)->where('price', $pesanan->harga)->where('store_id', $daftar)->update(['price'=>$newPrice]);
         }
 
 

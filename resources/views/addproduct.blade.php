@@ -1,13 +1,12 @@
 @extends('layouts.sidebar')
 
 @section('content')
-<div class="content-wrapper">
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-6">
+          <div class="col-md-12">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
@@ -31,56 +30,32 @@
                     <input name="warna" type="text" class="form-control"  placeholder="warna product">
                   </div>
                   <div class="form-group">
-                    <label for="stok">Quantity</label>
-                    <input name="stok" type="number" class="form-control"  placeholder="stok product">
-                  </div>
-                  {{-- <div class="form-group">
-                    <label for="exampleSelectRounded0">Flat <code>.rounded-0</code></label>
-                    <select class="custom-select rounded-0" id="exampleSelectRounded0">
-                      <option>Value 1</option>
-                      <option>Value 2</option>
-                      <option>Value 3</option>
-                    </select>
-                  </div> --}}
-                  <div class="form-group">
-                    <label for="harga">Price</label>
-                    <input  name="harga" type="text" class="form-control"  placeholder="harga product">
-                  </div>
-                  <div class="form-group">
-                    <label for="name" class="col-md-4 col-form-label text-md-right">Gambar</label>
+                    <label for="name" class="col- col-form-label text-md-right">Gambar</label>
                     <div class="col-md-6">
                         <input type="file" class="form-control" name="gambar" required>
                     </div>
                 </div>
-                  <div class="form-group">
-                    <label><i class="fa fa-venus-mars"></i> Ukuran</label>
-                    <div class="row" >
-                      <br>
-                      <input class="form-input" type="checkbox" id="37" name="size[]" value="37" >
-                      <label class="form-check-label">37</label>
-                      <br>
-                      <input class="form-input" type="checkbox" id="38" name="size[]" value="38" >
-                      <label class="form-check-label">38</label>
-                      <br>
-                      <input class="form-input" type="checkbox" id="39" name="size[]" value="39" >
-                      <label class="form-check-label">39</label>
-                      <br>
-                      <input class="form-input" type="checkbox" id="40" name="size[]" value="40" >
-                      <label class="form-check-label">40</label>
-                      <br>
-                      <input class="form-input" type="checkbox" id="41" name="size[]" value="41" >
-                      <label class="form-check-label">41</label>
-                      <br>
-                      <input class="form-input" type="checkbox" id="42" name="size[]" value="42" >
-                      <label class="form-check-label">42</label>
-                      <br>
-                      <input class="form-input" type="checkbox" id="43" name="size[]" value="43" >
-                      <label class="form-check-label">43</label>
-                      <br>
-                      <input class="form-input" type="checkbox" id="44" name="size[]" value="44" >
-                      <label class="form-check-label">44</label>
-                    </div>
+                <div class="col-sm-12">
+                  <button class="btn btn-success mb-2" id="addButton" type="button">Tambah</button>
+                  <div class="table-responsive">
+                      <table id="itemTable" class="table table-light">
+                          <thead>
+                              <tr>
+                                  <th scope="col">Size</th>
+                                  <th scope="col">Harga</th>
+                                  <th scope="col">Stok</th>
+                              </tr>
+                          </thead>
+                          <tbody class="table-group-divider" id="tableBody">
+                              <tr class="row1">
+                                  <th><input style="min-width: 150px;" required name="size[]" class="form-control" type="number" placeholder="Masukan Size Item"></th>
+                                  <th><input style="min-width: 150px;" required name="price[]" class="form-control" type="text" placeholder="Masukan Harga Item"></th>
+                                  <td><input style="min-width: 150px;" required name="stok[]" class="form-control qty isNumber" type="number" placeholder="Masukan Jumlah Item"></td>
+                              </tr>
+                          </tbody>
+                      </table>
                   </div>
+              </div>
                   
                   
                       
@@ -99,6 +74,23 @@
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
+    <script>
+      $(document).ready(function() {
+          var addButton = $("#addButton");
+          var elementContainer = $("#tableBody");
+          var count = 2;
+          addButton.on("click", function() {
+              var newElement = $("<tr>")
+                  .addClass(`row${count}`)
+                  .html(`
+                  <th><input style="min-width: 150px;" required name="size[]" class="form-control" type="number" placeholder="Masukan Size Item"></th>
+                              <th><input style="min-width: 150px;" required name="price[]" class="form-control" type="text" placeholder="Masukan Harga Item"></th>
+                              <td><input style="min-width: 150px;" required name="qty[]" class="form-control qty isNumber" type="number" placeholder="Masukan Jumlah Item"></td>
+                      `);
+              elementContainer.append(newElement);
+              count++;
+          });
+      });
+  </script>
     <!-- /.content -->
-  </div>
 @endsection

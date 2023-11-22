@@ -24,7 +24,6 @@
             <input name="tanggal_pemesanan" type="date" class="form-control"  placeholder="tanggal pemesanan">
           </div>
           <div class="col-sm-12">
-            <button class="btn btn-success mb-2" id="addButton" type="button">Tambah</button>
             <div class="table-responsive">
                 <table id="itemTable" class="table table-light">
                     <thead>
@@ -37,7 +36,7 @@
                     <tbody class="table-group-divider" id="tableBody">
                         <tr class="row1">
                             <th><input style="min-width: 150px;" required name="size[]" class="form-control" type="number" placeholder="Masukan Size Item"></th>
-                            <th><input style="min-width: 150px;" required name="price[]" class="form-control" type="text" placeholder="Masukan Harga Item"></th>
+                            <th><input style="min-width: 150px;" required name="price[]" class="form-control" type="number" placeholder="Masukan Harga Item"></th>
                             <td><input style="min-width: 150px;" required name="qty[]" class="form-control qty isNumber" type="number" placeholder="Masukan Jumlah Item"></td>
                         </tr>
                     </tbody>
@@ -52,7 +51,8 @@
     </form>
 </div>
 
-<script>
+{{-- <script>
+    let sizeIndex = 1;
     $(document).ready(function() {
         var addButton = $("#addButton");
         var elementContainer = $("#tableBody");
@@ -62,15 +62,15 @@
             var newElement = $("<tr>")
                 .addClass(`row${count}`)
                 .html(`
-                <th><input style="min-width: 150px;" required name="size[]" class="form-control" type="number" placeholder="Masukan Size Item"></th>
-                            <th><input style="min-width: 150px;" required name="price[]" class="form-control" type="text" placeholder="Masukan Harga Item"></th>
-                            <td><input style="min-width: 150px;" required name="qty[]" class="form-control qty isNumber" type="number" placeholder="Masukan Jumlah Item"></td>
+                    <th><input style="min-width: 150px;" required name="size[${sizeIndex}][]" class="form-control" type="number" placeholder="Masukan Size Item"></th>
+                    <th><input style="min-width: 150px;" required name="price[${sizeIndex}][]" class="form-control" type="text" placeholder="Masukan Harga Item"></th>
+                    <td><input style="min-width: 150px;" required  name="qty[${sizeIndex}][]" class="form-control qty isNumber" type="number" placeholder="Masukan Jumlah Item"></td>
                     `);
             elementContainer.append(newElement);
 
             count++;
         });
     });
-</script>
+</script> --}}
 
 @endsection;
