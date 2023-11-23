@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Size;
 use App\Models\User;
 use App\Models\Order;
@@ -13,6 +14,7 @@ use App\Models\UangKeluar;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use App\Models\PurchaseDetail;
+use App\Models\LogProductDetail;
 use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
@@ -77,10 +79,24 @@ class ProductController extends Controller
     }
     public function addnewproduct(Request $request)
     {
-        // dd($request->all());
-        $user = auth()->user()->id;
-        $admin = User::where('id', $user)->first();
-        // dd($admin);
+        $store = auth()->user()->store_id;
+        $user = auth()->user();
+        $admin = User::where('id', $user->id)->first();
+        if (isset($request->size)) {
+            foreach ($request->size as $key => $value) {
+                LogProductDetail::create([
+                    'name_product'=>$request->nama_product,
+                    'size'=>$value,
+                    'price'=>$request->price[$key],
+                    'store_id'=>$admin->store_id,
+                    'qty'=>$request->stok[$key],
+                    'time'=>Carbon::now()->format('H:i'),
+                    'date'=>Carbon::now()->format('Y-m-d'),
+                    'name_admin'=>$user->name,
+                    'note'=>'+ add product',
+                ]);
+            }
+        }
         $add=Product::create([
             'nama_product'=>$request->nama_product,
             'merk'=>$request->merk,
@@ -95,21 +111,13 @@ class ProductController extends Controller
                 Size::create([
                     'id_product'=>$add->id,
                     'size'=>$value,
-                    'stok'=>$request->stok,
+                    'stok'=>$request->stok[$key],
                     'status'=>'tersedia',
                     'store_id'=>$admin->store_id,
-                    'price'=>$request->price,
+                    'price'=>$request->price[$key],
                 ]);
             }
         }
-        $log = LogProduct::create([
-            'name_product'=>$request->nama_product,
-            'name_admin'=>$admin->name,
-            'time',
-            'date',
-            'qty',
-            'price',
-        ]);
         
         return redirect()->back()->with('success', 'Add New Product');
 
@@ -181,6 +189,9 @@ class ProductController extends Controller
         
         $data_product = Size::where('id_product', $product_id)
         ->where('size', $pesanan->size)->where('store_id', $daftar)->first();
+
+        $data_product_price = Size::where('id_product', $product_id)
+        ->where('size', $pesanan->size)->where('store_id', $daftar)->first();
         // dd($data_product);
         if ($data_product === null) {
             $admin = Size::create([
@@ -202,7 +213,8 @@ class ProductController extends Controller
 
             $data_product = Size::where('id_product', $product_id)
         ->where('size', $pesanan->size)->where('store_id', $daftar)->update(['stok'=>$newStok,]);
-        $new_data_price = Size::where('id_product', $product_id)->where('price', $pesanan->harga)->where('store_id', $daftar)->update(['price'=>$newPrice]);
+        $new_data_price = Size::where('id_product', $product_id)->where('size', $pesanan->size)->where('store_id', $daftar)->update(['price'=>$pesanan->harga]);
+        // dd($new_data_price);
         }
 
 
@@ -216,6 +228,7 @@ class ProductController extends Controller
             'nama_admin'=>$nameadmin->name,
             'nama_product'=>$pesanan->nama_product,
             'total'=> $pesanan->harga * $pesanan->qty,
+            'time'=>Carbon::now()->format('H:i'),
         ]);
 
 

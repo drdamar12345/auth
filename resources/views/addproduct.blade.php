@@ -85,7 +85,8 @@
                   .html(`
                   <th><input style="min-width: 150px;" required name="size[]" class="form-control" type="number" placeholder="Masukan Size Item"></th>
                               <th><input style="min-width: 150px;" required name="price[]" class="form-control" type="text" placeholder="Masukan Harga Item"></th>
-                              <td><input style="min-width: 150px;" required name="qty[]" class="form-control qty isNumber" type="number" placeholder="Masukan Jumlah Item"></td>
+                              <td><input style="min-width: 150px;" required name="stok[]" class="form-control qty isNumber" type="number" placeholder="Masukan Jumlah Item"></td>
+                              <td><button type="button" onclick="deleteElement(${count})" class="btn-delete btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i></button></td>
                       `);
               elementContainer.append(newElement);
               count++;

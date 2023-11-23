@@ -15,5 +15,6 @@ class Size extends Model
         'stok',
         'status',
         'store_id',
+        'price',
     ];
 }

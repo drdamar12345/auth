@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tb_log_product', function (Blueprint $table) {
-            $table->id();
-            $table->string('name_admin');
+        Schema::table('tb_log_product_detail', function (Blueprint $table) {
             $table->integer('time');
             $table->integer('date');
-            $table->integer('qty');
-            $table->integer('total_price');
-            $table->integer('store_id');
+            $table->string('name_admin');
             $table->string('note');
-            $table->timestamps();
         });
     }
 
@@ -29,6 +24,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tb_log_product');
+        Schema::table('tb_log_product_detail', function (Blueprint $table) {
+            //
+        });
     }
 };

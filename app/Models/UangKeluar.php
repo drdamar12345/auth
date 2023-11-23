@@ -18,5 +18,6 @@ class UangKeluar extends Model
         'nama_admin',
         'nama_product',
         'total',
+        'time',
     ];
 }

@@ -17,5 +17,6 @@ class UangMasuk extends Model
         'note',
         'name_customer',
         'name_product',
+        'time',
     ];
 }
