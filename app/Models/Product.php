@@ -13,7 +13,7 @@ class Product extends Model
         'nama_product',
         'merk',
         'warna',
-        'harga',
+        // 'harga',
         'gambar',
         'keterangan',
         'store_id',

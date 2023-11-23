@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 
+use Carbon\Carbon;
 use App\Models\Size;
 use App\Models\User;
 use App\Models\Order;
@@ -10,17 +11,17 @@ use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Purchase;
 use App\Models\Keranjang;
+use App\Models\UangMasuk;
+use App\Models\LogProduct;
 use App\Models\UangKeluar;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use App\Models\AktivityMasuk;
 use App\Models\PurchaseDetail;
+use App\Models\LogProductDetail;
 use App\Http\Controllers\Controller;
 use GrahamCampbell\ResultType\Success;
 use App\Http\Controllers\API\BaseController;
-use App\Models\LogProduct;
-use App\Models\UangMasuk;
-use Carbon\Carbon;
 
 class ProductController extends BaseController
 {
@@ -86,9 +87,10 @@ class ProductController extends BaseController
     {
  
         $user = auth()->user()->id;
+        $name = auth()->user()->name;
         $admin = User::where('id', $user)->first();
         //jam
-        $tomorrow = now()->format('H:i:s');
+        $tomorrow = now()->format('H:i');
         $formattedDate = now()->format('Y-m-d');
         $size = Size::whereIn('id', $request->size)->get();
         if ($request->hasFile('gambar')) {
@@ -102,7 +104,7 @@ class ProductController extends BaseController
             'nama_product'=>$request->nama_product,
             'merk'=>$request->merk,
             'warna'=>$request->warna,
-            'harga'=>$request->harga,
+            // 'harga'=>$request->harga,
             'gambar'=>$attachment_name ?? null,
             'store_id'=>$admin->store_id,
 
@@ -112,23 +114,28 @@ class ProductController extends BaseController
             $size = Size::create([
                     'id_product'=>$add->id,
                     'size'=>$request->size[$key],
-                    'stok'=>$request->stok,
+                    'stok'=>$request->stok[$key],
                     'status'=>'tersedia',
                     'store_id'=>$admin->store_id,
+                    'price'=>$request->price[$key],
                 ]);
             }
         }
-             $log = LogProduct::create([
+        if (isset($request->size)) {
+            foreach ($request->size as $key => $value) {
+             $log = LogProductDetail::create([
                      'store_id' =>$admin->store_id,
                      'name_product' =>$add->nama_product,
-                     'name_admin' =>$admin->name,
-                     'time' => $tomorrow,
-                     'date' =>$formattedDate,
-                     'price' => $add->harga,
-                     'qty' => $size->stok,
-        ]);
-    
-
+                     'name_admin' =>$name,
+                     'time'=>$tomorrow,
+                     'date'=>$formattedDate,
+                     'log_id'=>$add->id,
+                     'size'=>$request->size[$key],
+                     'price' => $request->price[$key],
+                     'qty' => $request->stok[$key],
+            ]);
+        }
+    }
         
         
         return $this->sendResponse([$log, $size, $add], 'Products retrieved successfully.');

@@ -97,7 +97,7 @@ class PesananController extends BaseController
     {
         $user = auth()->user()->id;
         $store = auth()->user()->store_id;
-        $formattedDate = now()->format('Y-m-d');
+        $tomorrow = now()->format('H:i');
         $product = OrderDetail::where('order_id', $request -> order_id)->get();
         foreach ($product as $key => $value) {
             $nameproduct = Product::where('id', $value->product_id)->where('store_id', $store)->first();
@@ -109,6 +109,7 @@ class PesananController extends BaseController
                 'note'=>'penjualan',
                 'name_customer'=>$value->name_customer,
                 'name_product'=>$nameproduct->nama_product ?? null,
+                'time' => $tomorrow,
             ]);
             $lunas = Lunas::create([
                 'user_id'=>$user,
@@ -123,13 +124,13 @@ class PesananController extends BaseController
                 'qty'=>$value->qty,
             ]);
 
-            $log = UangMasuk::create([
-                'store_id' =>$store,
-                'name_customer' =>$order->name_customer,
-                'tanggal' =>$formattedDate,
-                'nominal' => $lunas->harga,
-                'qty' => $lunas,
-            ]);
+            // $log = UangMasuk::create([
+            //     'store_id' =>$store,
+            //     'name_customer' =>$order->name_customer,
+            //     'tanggal' =>$formattedDate,
+            //     'nominal' => $lunas->harga,
+            //     'qty' => $lunas,
+            // ]);
 
             $stock_tersedia = Size::where('id_product', $value->product_id)->where('size', $value->size)->where('store_id', $store)->first();
             if (isset ($stock_tersedia)) { 

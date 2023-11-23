@@ -11,11 +11,11 @@ class LogProduct extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'store_id',
-        'name_product',
         'name_admin',
         'time',
         'date',
-        'price',
+        'total_price',
         'qty',
+        'note',
     ];
 }
