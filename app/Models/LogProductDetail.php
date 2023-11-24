@@ -19,5 +19,6 @@ class LogProductDetail extends Model
         'date',
         'time',
         'note',
+        'total',
     ];
 }

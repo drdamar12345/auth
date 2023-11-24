@@ -19,5 +19,6 @@ class UangKeluar extends Model
         'nama_product',
         'total',
         'time',
+        'size',
     ];
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Size;
 use App\Models\User;
 use App\Models\Lunas;
@@ -109,6 +110,7 @@ class PesananController extends Controller
                 'name_customer'=>$value->name_customer,
                 'name_product'=>$nameproduct->nama_product,
                 'time'=>Carbon::now()->format('H:i'),
+                'size'=>$value->size,
     
             ]);
             // dd($order);

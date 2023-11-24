@@ -20,12 +20,12 @@
                   {{-- <div class="d-flex justify-content-between">
                     <p class="small"><a href="{{ url('products/'). '/'  .$item->id}}" class="text-muted">FOOD</a></p>
                   </div> --}}
-                  <input type="hidden" class="text-dark mb-0" name="id" value="{{$item['id']}}">
+                  <input for="id_productName" type="hidden" class="text-dark mb-0" name="id" value="{{$item['id']}}">
                   <div class="form-select">
-                    <label><i class="fa fa-venus-mars"></i> Ukuran</label>
-                    <select class="selectpicker" name="ukuransepatu">
+                    <label><i for="productSize" class="fa fa-venus-mars"></i> Ukuran</label>
+                    <select class="selectpicker" name="ukuransepatu" id="productSize">
                       @foreach ($item['size'] as $size)
-                      <option type="radio" value="{{$size->size}}">{{$size->size}}</option>
+                      <option type="radio" value="{{$size->id}}">{{$size->size}}</option>
                       @endforeach
                     </select>              
                 </div>
@@ -36,7 +36,7 @@
                   <div class="d-flex justify-content-between mb-3">
                     <h5 class="mb-0">{{$item['nama_product']}}</h5>
       
-                    <input type="hidden" class="text-dark mb-0" name="harga" value="{{$item['harga']}}">Rp.{{$item['harga']}}</h5>
+                    <input type="hidden" class="text-dark mb-0" name="harga" value="{{$item['harga']}}">Rp.<span id="priceDisplay"></span></h5>
                   </div>
                   <button type="submit" button class="btn btn-info btn-block text-center" >Add To Cart</button>
                   {{-- <p class="btn-holder"><a href="{{ route('add.to.cart', $item->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to Keranjang</a> </p> --}}
@@ -103,5 +103,33 @@
         }
 
     });
+</script>
+<script>
+  $(document).ready(function() {
+      $('#productSize').change(function() {
+          var id_productName = $('#id_productName').val();
+          var productSize = $('#productSize').val();
+          console.log(productSize) 
+          var url = "{{ url('product-price') }}" + '/' + productSize;
+          console.log(url)
+
+          $.ajax({
+              type: 'GET',
+              url: "{{ url('product-price') }}" + '/' + productSize,
+              data: {
+                  '_token': '{{ csrf_token() }}',
+                  'id': id_productName,
+                  'ukuransepatu': productSize
+              },
+              success: function(response) {
+                console.log(response)
+                  $('#priceDisplay').text( + response.price.price);
+              },
+              error: function(response) {
+                  $('#priceDisplay').text('Produk tidak ditemukan');
+              }
+          });
+      });
+  });
 </script>
 @endsection

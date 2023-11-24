@@ -48,18 +48,32 @@ class ProductController extends Controller
         $user = auth()->user()->id;
         $product = Product::findOrFail($request->id);
         $id = User::where('id', $user)->first();
+        $size = Size::where('id', $request->ukuransepatu)->first();
+        // dd($size);        
         $admin = Keranjang::create([
             'id_product'=>$product->id,
             'nama_product'=>$product->nama_product,
             'gambar'=>$product->gambar,
-            'harga'=>$product->harga,
+            'harga'=>$size->price,
             'user_id'=>$user,
             'qty'=>1,
-            'ukuransepatu'=>$request->ukuransepatu,
+            'ukuransepatu'=>$size->size,
             'store_id'=>$id->store_id,
         ]);
         return redirect()->back()->with('success', 'Product added to cart successfully!');
 
+    }
+    public function getPrice($id, Request $request)
+    {
+        // dd($id);
+        $product = Size::where('id', $id)
+                            ->first();
+
+        if ($product) {
+            return response()->json(['price' => $product]);
+        }
+
+        return response()->json(['price' => 'Product not found']);
     }
     public function removekeranjang($id, Request $request)
 
@@ -94,6 +108,7 @@ class ProductController extends Controller
                     'date'=>Carbon::now()->format('Y-m-d'),
                     'name_admin'=>$user->name,
                     'note'=>'+ add product',
+                    'total'=>$request->price[$key] * $request->stok[$key], 
                 ]);
             }
         }
@@ -229,6 +244,7 @@ class ProductController extends Controller
             'nama_product'=>$pesanan->nama_product,
             'total'=> $pesanan->harga * $pesanan->qty,
             'time'=>Carbon::now()->format('H:i'),
+            'size'=>$pesanan->size,
         ]);
 
 

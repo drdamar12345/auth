@@ -59,6 +59,7 @@ Route::middleware('auth')->group( function () {
     // daftar produk
     Route::get('produk', [ProductController::class, 'produk'])->name('produk');
     Route::post('proseschart', [ProductController::class, 'addToCart'])->name('proseschart');
+    Route::get('/product-price/{id}', [ProductController::class, 'getPrice'])->name('product.price');
     // keranjang
     Route::get('keranjang', [KeranjangController::class, 'keranjang'])->name('keranjang');
     Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
