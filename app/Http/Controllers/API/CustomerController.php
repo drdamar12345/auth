@@ -11,10 +11,8 @@ class CustomerController extends BaseController
 {
     public function addnewcustomer(Request $request)
     {
-        // dd($request->all());
         $user = auth()->user()->id;
         $admin = User::where('id', $user)->first();
-        // dd($admin);
         $add = Customer::create([
             'nama'=>$request->nama,
             'umur'=>$request->umur,
@@ -30,8 +28,6 @@ class CustomerController extends BaseController
     public function daftarpelanggan()
     {
         $user = auth()->user()->store_id;
-        // $startDate = $request->input('start_date');
-        // $endDate = $request->input('end_date');
         $stores = Customer::select( 
             'tb_customer.nama',
             'tb_customer.gender',
@@ -39,9 +35,6 @@ class CustomerController extends BaseController
 
          )
          ->where('tb_customer.store_id', $user)->get();
-
-        // $pelanggan =  $detail = Customer ->select()
-        
         return $this->sendResponse($stores, 'Products retrieved successfully.');
     }
 

@@ -55,8 +55,8 @@ class ProductController extends BaseController
         $daftar = auth()->user()->store_id;
         $user = auth()->user()->store_id;
         $cart = Keranjang::where('store_id', $user)->get();
-        // $customer = Customer::where('store_id', $daftar)->get();
-        return $this->sendResponse($cart, 'Products retrieved successfully.');
+        $customer = Customer::where('store_id', $daftar)->get();
+        return $this->sendResponse([$cart, $customer], 'Products retrieved successfully.');
     }
 
     public function hapus_action(Request $request){
