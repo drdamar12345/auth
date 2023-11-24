@@ -133,6 +133,7 @@ class ProductController extends BaseController
                      'size'=>$request->size[$key],
                      'price' => $request->price[$key],
                      'qty' => $request->stok[$key],
+                     'total'=>$request->price[$key] * $request->stok[$key],
             ]);
         }
     }

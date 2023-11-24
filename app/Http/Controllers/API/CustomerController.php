@@ -30,7 +30,18 @@ class CustomerController extends BaseController
     public function daftarpelanggan()
     {
         $user = auth()->user()->store_id;
-        $stores = Customer::where('store_id', $user)->get();;
+        // $startDate = $request->input('start_date');
+        // $endDate = $request->input('end_date');
+        $stores = Customer::select( 
+            'tb_customer.nama',
+            'tb_customer.gender',
+            'tb_customer.alamat'
+
+         )
+         ->where('tb_customer.store_id', $user)->get();
+
+        // $pelanggan =  $detail = Customer ->select()
+        
         return $this->sendResponse($stores, 'Products retrieved successfully.');
     }
 
