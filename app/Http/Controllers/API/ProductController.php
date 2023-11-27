@@ -68,13 +68,15 @@ class ProductController extends BaseController
 
     {
         $user = auth()->user()->id;
+        $tb = auth()->user()->store_id;
         $product = Product::findOrFail($request->id_product);
         $id = User::where('id', $user)->first();
+        $size = Size::where('price', $tb)->first();
         $keranjang = Keranjang::create([
             'id_product'=>$request->id_product,
             'nama'=>$product->nama_product,
             'gambar'=>$product->gambar,
-            'harga'=>$product->harga,
+            'harga'=>$size->price,
             'user_id'=>$user,
             'qty'=>1,
             'ukuransepatu'=>$request->ukuransepatu,
