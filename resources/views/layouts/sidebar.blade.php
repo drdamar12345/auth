@@ -181,6 +181,35 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-file-invoice	"></i>
+              <p>
+                Log Aktivitas
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="logproduct" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Log Product</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="logkasmasuk" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Log Kas Masuk</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="logkaskeluar" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Log Kas Keluar</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon far fa-address-card"></i>
               <p>
                 CUSTOMER

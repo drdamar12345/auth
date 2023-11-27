@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SuperController;
@@ -112,6 +113,19 @@ Route::middleware('auth')->group( function () {
     // Cetak PDF Uang Keluar
     Route::get('cetakPDFkeluar', [PDFController::class, 'cetakPDFkeluar'])->name('cetakPDFkeluar');
     Route::get('uangkeluar', [PDFController::class, 'uangkeluar'])->name('uangkeluar');
+
+    // Log Product
+    Route::get('logproduct', [LogController::class, 'logproduct'])->name('logproduct');
+    Route::post('logproduct', [LogController::class, 'generatelogproduct'])->name('generatelogproduct');
+    // Log Kas Masuk
+    Route::get('logkasmasuk', [LogController::class, 'logkasmasuk'])->name('logkasmasuk');
+    Route::post('logkasmasuk', [LogController::class, 'generatelogkasmasuk'])->name('generatelogkasmasuk');
+    // Log Kas Keluar
+    Route::get('logkaskeluar', [LogController::class, 'logkaskeluar'])->name('logkaskeluar');
+    Route::post('logkaskeluar', [LogController::class, 'generatelogkaskeluar'])->name('generatelogkaskeluar');
+
+
+
 
     
 
