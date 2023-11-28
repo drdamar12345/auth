@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Lunas;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -67,4 +68,28 @@ class SuperController extends Controller
         return redirect('/daftaradmin');
 
     }
+    public function salesStatistics($id)
+    {
+        $products = Lunas::find($id)->select(Lunas::raw("COUNT(*) as count"), Lunas::raw("MONTHNAME(tanggal_pemesanan) as month_name"))
+
+        ->whereYear('tanggal_pemesanan', date('Y'))
+
+        ->groupBy(Lunas::raw("Month(tanggal_pemesanan)"))
+
+        ->pluck('count', 'month_name');
+
+
+
+        $labels = $products->keys();
+
+        $data = $products->values();
+
+  
+
+
+        // dd($id);
+
+        return view('statistics', compact('labels', 'data'));
+    }
+
 }

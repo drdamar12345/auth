@@ -123,6 +123,9 @@ Route::middleware('auth')->group( function () {
     // Log Kas Keluar
     Route::get('logkaskeluar', [LogController::class, 'logkaskeluar'])->name('logkaskeluar');
     Route::post('logkaskeluar', [LogController::class, 'generatelogkaskeluar'])->name('generatelogkaskeluar');
+    // Statistik Penjulan Product
+    Route::get('statistics/{id}', [SuperController::class, 'salesStatistics'])->name('salesStatistics');
+
 
 
 
