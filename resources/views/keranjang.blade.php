@@ -75,7 +75,7 @@
           <tr>
             <div class="form-select">
                 {{-- {{$customer->nama}} --}}
-            <label><i class="fa fa-venus-mars"></i> Customer</label>
+            <label><i class=""></i> Customer</label>
             <select class="selectpicker" name="nama">
                 @foreach ($customer as $item)
                 <option type="radio" value="{{$item->nama}}" title="">{{$item->nama}}</option>

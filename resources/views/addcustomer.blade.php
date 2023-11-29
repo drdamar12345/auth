@@ -39,14 +39,14 @@
                     <label for="tanggal_lahir">Date of Birth</label>
                     <input name="tanggal_lahir" type="date" class="form-control"  placeholder="tanggal lahir">
                   </div>
-                  <div class="form-select">
+                  {{-- <div class="form-select">
                     <label><i class="fa fa-venus-mars"></i> Status</label>
                     <select class="selectpicker" name="status">
                       <option type="radio" value="silver" title="silver">silver</option>
                       <option type="radio" value="platinum" title="platinum">platinum</option>
                       <option type="radio" value="gold" title="gold">gold</option>
                     </select>              
-                </div>
+                </div> --}}
                   
                   
                       

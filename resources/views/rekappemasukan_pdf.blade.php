@@ -8,7 +8,6 @@
         <div class="col-12">
           <h2 class="page-header">
             <i class="fas fa-globe"></i> Bit wallet.
-            <small class="float-right">Date: 2/10/2014</small>
             <div>
               <h6 class="float_right">
                 <form action="{{ route('generateuangmasuk') }}" method="post">

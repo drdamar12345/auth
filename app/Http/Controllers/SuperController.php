@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Lunas;
 use App\Models\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
@@ -70,15 +71,25 @@ class SuperController extends Controller
     }
     public function salesStatistics($id)
     {
-        $products = Lunas::find($id)->select(Lunas::raw("COUNT(*) as count"), Lunas::raw("MONTHNAME(tanggal_pemesanan) as month_name"))
+                // dd($id);
+        $products = Lunas::select(DB::raw("COUNT(id) as count"),DB::raw("MONTHNAME(tanggal_pemesanan) as month_name"))
 
         ->whereYear('tanggal_pemesanan', date('Y'))
 
-        ->groupBy(Lunas::raw("Month(tanggal_pemesanan)"))
+        ->where('store_id', $id)
+
+
+        ->groupBy("tanggal_pemesanan")
 
         ->pluck('count', 'month_name');
 
+        // ->whereDate('tanggal_pemesanan', date('d'))
 
+        // ->groupBy('tanggal_pemesanan')
+
+        // ->pluck('count', 'tanggal_pemesanan')->where($id)->first();
+
+        // dd($products);
 
         $labels = $products->keys();
 
@@ -87,7 +98,6 @@ class SuperController extends Controller
   
 
 
-        // dd($id);
 
         return view('statistics', compact('labels', 'data'));
     }
