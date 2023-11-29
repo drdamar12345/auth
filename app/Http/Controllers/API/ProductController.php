@@ -52,11 +52,11 @@ class ProductController extends BaseController
     public function keranjang()
     {
         //r1 aja
-        $daftar = auth()->user()->store_id;
+        // $daftar = auth()->user()->store_id;
         $user = auth()->user()->store_id;
         $cart = Keranjang::where('store_id', $user)->get();
-        $customer = Customer::where('store_id', $daftar)->get();
-        return $this->sendResponse([$cart, $customer], 'Products retrieved successfully.');
+        // $customer = Customer::where('store_id', $daftar)->get();
+        return $this->sendResponse($cart, 'Products retrieved successfully.');
     }
 
     public function hapus_action(Request $request){
@@ -156,6 +156,7 @@ class ProductController extends BaseController
         return $this->sendResponse( $size, 'Products retrieved successfully.');
     }
 
+    //belummm
     public function restockaction(Request $request)
     {
         $user = auth()->user()->id;
@@ -199,10 +200,12 @@ class ProductController extends BaseController
 
     }
 
+    //belum
     public function validatoraccept(Request $request)
     {
         $admin = auth()->user()->id;
         $nameadmin = User::where('id', $admin)->first();
+        $tomorrow = now()->format('H:i');
         $daftar = auth()->user()->store_id;
         $pesanan = PurchaseDetail::where('id', $request -> id)->first();
         $stock_masuk = $request->qty;
@@ -234,8 +237,10 @@ class ProductController extends BaseController
                     'nama_product'=>$pesanan->nama_product,
                     'qty'=>$request->qty,
                     'total'=> $pesanan->harga * $pesanan->qty,
+                    'time'=>$tomorrow,
+                    'size'=> $pesanan->size,
         ]);
-        PurchaseDetail::where('id', $request -> id)->delete();
+        // PurchaseDetail::where('id', $request -> id)->delete();
         return $this->sendResponse($uangkeluar, 'Products retrieved successfully.');
     }
 
