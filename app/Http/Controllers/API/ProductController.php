@@ -166,7 +166,7 @@ class ProductController extends BaseController
         $add = Purchase::create([
             'store_id'=>$store,
             'user_id'=>$user,
-            'total_harga'=>$product->harga,
+            'total_harga'=>$request->harga * $request->qty,
             'tanggal_pemesanan'=>$request->tanggal_pemesanan,
         ]);
         if (isset($request->id)) {
@@ -176,7 +176,7 @@ class ProductController extends BaseController
                     'purchase_id'=>$add->id,
                     'size'=>$request->size,
                     'qty'=>$request->qty,
-                    'harga'=>$product->harga,
+                    'harga'=>$request->harga,
                     'status'=>'dikirim',
                     'nama_product'=>$product->nama_product,
                     'tanggal_pemesanan'=>$add->tanggal_pemesanan,
@@ -240,7 +240,7 @@ class ProductController extends BaseController
                     'time'=>$tomorrow,
                     'size'=> $pesanan->size,
         ]);
-        // PurchaseDetail::where('id', $request -> id)->delete();
+        PurchaseDetail::where('id', $request -> id)->delete();
         return $this->sendResponse($uangkeluar, 'Products retrieved successfully.');
     }
 
