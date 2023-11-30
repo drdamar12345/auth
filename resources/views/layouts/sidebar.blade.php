@@ -197,13 +197,13 @@
               <li class="nav-item">
                 <a href="logkasmasuk" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Log Kas Masuk</p>
+                  <p>Log Uang Masuk</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="logkaskeluar" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Log Kas Keluar</p>
+                  <p>Log Uang Keluar</p>
                 </a>
               </li>
             </ul>

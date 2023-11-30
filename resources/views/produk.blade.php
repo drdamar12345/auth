@@ -36,7 +36,7 @@
                   <div class="d-flex justify-content-between mb-3">
                     <h5 class="mb-0">{{$item['nama_product']}}</h5>
       
-                    <input type="hidden" class="text-dark mb-0" name="harga" value="{{$item['harga']}}">Rp.<span id="priceDisplay"></span></h5>
+                    {{-- <input type="hidden" class="text-dark mb-0" name="harga" value="{{$item['harga']}}">Rp.<span id="priceDisplay"></span></h5> --}}
                   </div>
                   <button type="submit" button class="btn btn-info btn-block text-center" >Add To Cart</button>
                   {{-- <p class="btn-holder"><a href="{{ route('add.to.cart', $item->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to Keranjang</a> </p> --}}

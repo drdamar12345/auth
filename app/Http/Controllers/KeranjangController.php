@@ -14,7 +14,9 @@ class KeranjangController extends Controller
     {
         $daftar = auth()->user()->id;
         $user = auth()->user()->store_id;
-        $customer = Customer::where('store_id', $daftar)->get();
+        $customer = Customer::where('store_id', $user)->get();
+        // dd($customer);
+
         $cart = Keranjang::where('store_id', $user)->get();
         // dd($cart);
         return view('keranjang', compact('cart', 'customer'));

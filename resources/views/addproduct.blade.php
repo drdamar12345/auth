@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="col-sm-12">
-                  <button class="btn btn-success mb-2" id="addButton" type="button">Tambah</button>
+                  <button class="btn btn-primary mb-2" id="addButton" type="button">Tambah</button>
                   <div class="table-responsive">
                       <table id="itemTable" class="table table-light">
                           <thead>

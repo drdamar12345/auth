@@ -141,7 +141,8 @@ class ProductController extends Controller
     {
         
         $daftar = auth()->user()->id;
-        $product = Product::where('store_id', $daftar)->get();
+        $store = auth()->user()->store_id;
+        $product = Product::where('store_id', $store)->get();
         return view('restock', compact('product'));
     }
     public function restockaction(Request $request)
@@ -188,7 +189,8 @@ class ProductController extends Controller
     public function validator()
     {
         $daftar = auth()->user()->id;
-        $pesanan = PurchaseDetail::where('store_id', $daftar)->get();
+        $store = auth()->user()->store_id;
+        $pesanan = PurchaseDetail::where('store_id', $store)->get();
         return view('validator', compact('pesanan'));
     }
     public function validatoraccept($id)

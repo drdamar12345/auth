@@ -15,27 +15,35 @@
 
   
 
-  var labels =  {{ Js::from($labels) }};
+  var label =  [
+    'Minggu',
+    'Senin',
+    'Selasa',
+    'Rabu',
+    'Kamis',
+    'Jumat',
+    'Sabtu',
+];
 
-  var users =  {{ Js::from($data) }};
+  var users =  {{ Js::from($value) }};
 
-  console.log(labels, users);
+  console.log(label, users);
 
 
 
-  const data = {
+  const value = {
 
-    labels: labels,
+    label: label,
 
-    datasets: [{
+    valuesets: [{
 
-      label: 'My First dataset',
+      label: 'My First valueset',
 
       backgroundColor: 'rgb(255, 99, 132)',
 
       borderColor: 'rgb(255, 99, 132)',
 
-      data: users,
+      value: users,
 
     }]
 
@@ -47,7 +55,7 @@
 
     type: 'line',
 
-    data: data,
+    value: value,
 
     options: {}
 
