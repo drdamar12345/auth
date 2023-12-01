@@ -15,19 +15,11 @@
 
   
 
-  var label =  [
-    'Minggu',
-    'Senin',
-    'Selasa',
-    'Rabu',
-    'Kamis',
-    'Jumat',
-    'Sabtu',
-];
+  var label =  {{ Js::from($label) }};
 
-  var users =  {{ Js::from($value) }};
+  var value =  {{ Js::from($value) }};
 
-  console.log(label, users);
+  console.log(label, value);
 
 
 
@@ -43,7 +35,7 @@
 
       borderColor: 'rgb(255, 99, 132)',
 
-      value: users,
+      value: value,
 
     }]
 

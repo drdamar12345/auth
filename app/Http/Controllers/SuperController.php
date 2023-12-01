@@ -139,9 +139,11 @@ class SuperController extends Controller
                     }
                   
                 $label[] = '('.$day.') '.$val->format('d M Y');
-                dd($label);
+                // dd($s);
                 $value[] = $company;
+                // dd($value);
             }
+            dd($company);
 
         
 

@@ -23,7 +23,7 @@ use App\Http\Controllers\KeranjangController;
 */
 
 Route::get('/', function () {
-    return view('login1');
+    return view('welcome');
 });
 //register 
 Route::post('register1', [UserController::class, 'actionregister'])->name('actionregister');

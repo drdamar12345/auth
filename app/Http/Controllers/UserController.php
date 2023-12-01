@@ -26,7 +26,7 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login1');
+        return redirect('/login');
     }
     public function home()
     {

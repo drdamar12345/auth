@@ -13,7 +13,8 @@ class LogController extends Controller
     public function logproduct()
     {
         $daftar = auth()->user()->id;
-        $products = LogProductDetail::where('store_id', $daftar)->get();
+        $store = auth()->user()->store_id;
+        $products = LogProductDetail::where('store_id', $store)->get();
         return view('logproduct', compact('products'));
     }
     public function generatelogproduct(Request $request)
@@ -40,7 +41,7 @@ class LogController extends Controller
         $products = UangMasuk::whereBetween('tanggal_pemasukan', [$startDate, $endDate])->get();
         $total = UangMasuk::whereBetween('tanggal_pemasukan', [$startDate, $endDate])->get()->sum('nominal');
 
-        return view('logproduct', compact('products', 'total'));
+        return view('logkasmasuk', compact('products', 'total'));
     }
     public function logkaskeluar()
     {

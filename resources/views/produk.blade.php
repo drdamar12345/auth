@@ -22,7 +22,7 @@
                   </div> --}}
                   <input for="id_productName" type="hidden" class="text-dark mb-0" name="id" value="{{$item['id']}}">
                   <div class="form-select">
-                    <label><i for="productSize" class="fa fa-venus-mars"></i> Ukuran</label>
+                    <label><i for="productSize" class=""></i> Ukuran</label>
                     <select class="selectpicker" name="ukuransepatu" id="productSize">
                       @foreach ($item['size'] as $size)
                       <option type="radio" value="{{$size->id}}">{{$size->size}}</option>
@@ -30,7 +30,7 @@
                     </select>              
                 </div>
                   <div>
-                      <h6>stock : {{$item['stock']}}</h6>
+                      <h6>Total stock : {{$item['stock']}}</h6>
                   </div>
       
                   <div class="d-flex justify-content-between mb-3">
