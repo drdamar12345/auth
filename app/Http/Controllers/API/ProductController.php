@@ -248,8 +248,7 @@ class ProductController extends BaseController
     {
         $user = auth()->user()->id;
         $store = auth()->user()->store_id;
-        // $admin = auth()->user()->name;
-        // $formattedDate = now()->format('Y-m-d');
+        $formattedDate = now()->format('Y-m-d');
         $pesanan = Keranjang::whereIn('id', $request -> keranjang_id)->get();
         $total = 0;
         foreach ($pesanan as $key => $value) {
@@ -276,22 +275,14 @@ class ProductController extends BaseController
                     'harga'=>$value->harga,
                     'status'=>'belum lunas',
                     'name_customer'=>$request->nama,
-                    'tanggal_pemesanan'=>$request->tanggal_pemesanan,
+                    'tanggal_pemesanan'=>$formattedDate,
                     'qty'=>1,
                 ]);
 
             }
         }
 
-//         $log = UangMasuk::create([
-//                 'store_id' =>$store,
-//                 'name_customer' =>$order->name_customer,
-//                 'tanggal' =>$formattedDate,
-//                 'nominal' => $orderdetail->harga,
-//                 'qty' => $orderdetail,
-// ]);
-
-           Keranjang::where('user_id', $user)->delete();
+        //    Keranjang::where('user_id', $user)->delete();
         return $this->sendResponse([$order, $orderdetail], 'Products retrieved successfully.');
     }
 }
