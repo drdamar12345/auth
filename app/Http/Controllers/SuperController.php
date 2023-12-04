@@ -11,6 +11,7 @@ use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class SuperController extends Controller
@@ -67,8 +68,13 @@ class SuperController extends Controller
     }
     public function actionid(Request $request)
     {
+        // dd($request->all());
         User::where('id', $request->id)
-              ->update(['store_id' => $request->store_id]);
+              ->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'store_id' => $request->store_id]);
         return redirect('/daftaradmin');
 
     }

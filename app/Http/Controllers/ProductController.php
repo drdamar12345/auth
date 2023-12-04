@@ -267,23 +267,17 @@ class ProductController extends Controller
     }
     public function pesananaction(Request $request)
     {
+        // dd($request->all);
+
         $user = auth()->user()->id;
         $store = auth()->user()->store_id;
         $pesanan = Keranjang::where('store_id', $store)->get();
-        // dd($pesanan);
-        // $uangkeluar=UangKeluar::create([
-        //     'nominal'=>$request->subtotal,
-        //     'tanggal_pengeluaran'=>$request->date,
-        //     'note'=>'penjualan',
-        //     'store_id'=>$store,
-        //     'qty'=>1,
-        // ]);
         $order=Order::create([
             'user_id'=>$user,
             'store_id'=>$store,
             'name_customer'=>$request->nama,
             'total'=>$request->subtotal,
-            'qty'=>1,
+            'qty'=>$request->total_qty,
 
         ]);
         if (isset($request->product_id)) {
@@ -302,7 +296,7 @@ class ProductController extends Controller
                     'harga'=>$request->price[$key],
                     'status'=>'belum lunas',
                     'name_customer'=>$request->nama,
-                    'tanggal_pemesanan'=>$request->date,
+                    'tanggal_pemesanan'=>Carbon::now()->format('Y-m-d'),
                     'qty'=>1,
                 ]);
             }

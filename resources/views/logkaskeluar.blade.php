@@ -69,8 +69,8 @@
                 <td>{{$product->nama_admin}}</td>
                 <td>{{$product->qty}}</td>
                 <td>{{$product->size}}</td>
-                <td>Rp.{{ number_format($product->nominal, 2, ',', '.') }}</td>
-                <td>Rp.{{ number_format($product->total, 2, ',', '.') }}</td>
+                <td>Rp.{{ number_format($product->nominal, 0, ',', '.') }}</td>
+                <td>Rp.{{ number_format($product->total, 0, ',', '.') }}</td>
               </tr>
               
                   

@@ -17,5 +17,7 @@ class Customer extends Model
         'tanggal_lahir',
         'status',
         'store_id',
+        'email',
+        'phone_number',
     ];
 }

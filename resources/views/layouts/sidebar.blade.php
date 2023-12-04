@@ -57,6 +57,11 @@
           </form>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link"  href="/keranjang" role="button">
+          <i class="nav-icon fa fa-shopping-cart"></i>
+        </a>
+      </li>
 
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -129,19 +134,13 @@
           </li>
           <li class="nav-item">
             <a href="" class="nav-link">
-              <i class="nav-icon fa fa-shopping-cart"></i>
+              <i class="nav-icon fas fa-dolly-flatbed	"></i>
               <p>
-                Keranjang
+                Product
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/keranjang" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Produk Chart</p>
-                </a>
-              </li>
               <li class="nav-item">
                 <a href="/belumlunas" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

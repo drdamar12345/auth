@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-6">
+          <div class="col-md-8">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
@@ -38,6 +38,14 @@
                   <div class="form-group">
                     <label for="tanggal_lahir">Date of Birth</label>
                     <input name="tanggal_lahir" type="date" class="form-control"  placeholder="tanggal lahir">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input name="email" type="email" class="form-control"  placeholder="customer@gmail.com">
+                  </div>
+                  <div class="form-group">
+                    <label for="phone_number">Nomor Telepon</label>
+                    <input name="phone_number" type="number" class="form-control"  placeholder="nomor telepon">
                   </div>
                   {{-- <div class="form-select">
                     <label><i class="fa fa-venus-mars"></i> Status</label>

@@ -84,7 +84,8 @@
             </div>
           </tr>
             <input type="hidden" name="subtotal" value="{{$total}}">
-              <td colspan="5" class="text-right"><h3><strong>Total Rp{{ $total }}</strong></h3></td>
+              <td colspan="5" class="text-right"><h3><strong>Total Rp{{ number_format($total, 0, ',', '.') }}</strong></h3></td>
+            <input type="hidden" name="total_qty" value="{{$total_qty}}">
               {{-- <td>    
                 <div class="text-left">
                     <p class="small"><a href="{{ url('bayars/'). '/'  .$item->id}}" class="text-muted">CETAK STRUK</a></p>
@@ -92,12 +93,6 @@
             </td> --}}
               
   
-          <tr>
-            <div class="form-group">
-                <label for="date">Tanggal Pemesanan</label>
-                <input name="date" type="date" class="form-control"  placeholder="tanggal pemesanan">
-            </div>    
-          </tr>
   
           <tr>
   
