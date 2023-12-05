@@ -21,6 +21,8 @@ class CustomerController extends BaseController
             'tanggal_lahir'=>$request->tanggal_lahir,
             'status'=>$request->status,
             'store_id'=>$admin->store_id,
+            'email'=>$request->email,
+            'phone_number'=>$request->phone_number,
         ]);
         return $this->sendResponse($add, 'Products retrieved successfully.');
     }
