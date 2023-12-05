@@ -21,6 +21,7 @@ class UangMasuk extends Model
         'updated_at',
         'created_at',
         'time',
+        'size',
     ];
 }
 
