@@ -40,7 +40,8 @@
               <td>Rp.{{ number_format($product->total, 0, ',', '.') }}</td>
               <td>{{$product->created_at}}</td>
               <td class="actions" data-th="">
-                <button type="button" class="btn btn-success btn-sm pesananlunas"row-id='{{$product->id}}'>Lunas</button>
+
+                <a  href="{{ route('pesananlunas', $product->id) }}"> <button class="btn btn-success">LUNAS</button> </a>                        
               </td>
               <td class="actions" data-th="">
                 <p class="small"><a href="{{ url('bayars/'). '/'  .$product->id}}" class="text-muted">Cestak Struk</a></p>
