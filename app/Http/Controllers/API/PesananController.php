@@ -124,14 +124,6 @@ class PesananController extends BaseController
                 'qty'=>$value->qty,
             ]);
 
-            // $log = UangMasuk::create([
-            //     'store_id' =>$store,
-            //     'name_customer' =>$order->name_customer,
-            //     'tanggal' =>$formattedDate,
-            //     'nominal' => $lunas->harga,
-            //     'qty' => $lunas,
-            // ]);
-
             $stock_tersedia = Size::where('id_product', $value->product_id)->where('size', $value->size)->where('store_id', $store)->first();
             if (isset ($stock_tersedia)) { 
                 $newStok = intval($stock_tersedia->stok) - intval($value->qty);

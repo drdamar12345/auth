@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class SuperAdminController extends BaseController
 {
@@ -37,7 +38,11 @@ class SuperAdminController extends BaseController
     public function actionid(Request $request)
     {
        $user = User::where('id', $request->id)
-              ->update(['store_id' => $request->store_id]);
+              ->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'store_id' => $request->store_id]);
         return $this->sendResponse($user, 'Products retrieved successfully.');
     }
 }
