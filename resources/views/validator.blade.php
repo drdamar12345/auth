@@ -30,7 +30,7 @@
             <td>{{$item->tanggal_pemesanan}}</td>
             <td>Rp.{{$item->harga}}</td>
             <td class="actions" data-th="">
-                <a  href="{{ route('validatoraccept', $item->id) }}"> <button class="btn btn-success">accept</button> </a>                        
+                <a  href="{{ route('validatoraccept', $item->id) }}"> <button class="btn btn-success btn-sm">accept</button> </a>                        
             </td>
             <td class="actions" data-th="">
                         

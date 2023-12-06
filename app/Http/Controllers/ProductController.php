@@ -243,7 +243,7 @@ class ProductController extends Controller
             'store_id'=>$daftar,
             'qty'=>$pesanan->qty,
             'nama_admin'=>$nameadmin->name,
-            'nama_product'=>$pesanan->nama_product,
+            'name_product'=>$pesanan->nama_product,
             'total'=> $pesanan->harga * $pesanan->qty,
             'time'=>Carbon::now()->format('H:i'),
             'size'=>$pesanan->size,

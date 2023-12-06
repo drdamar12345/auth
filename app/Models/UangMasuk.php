@@ -19,5 +19,6 @@ class UangMasuk extends Model
         'name_product',
         'time',
         'size',
+        'order_id',
     ];
 }

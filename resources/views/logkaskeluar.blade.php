@@ -63,7 +63,7 @@
               @foreach ($products as $product)
               <tr>
                 <td>{{ $i++ }}</td>
-                <td>{{$product->nama_product}}</td>
+                <td>{{$product->name_product}}</td>
                 <td>{{$product->tanggal_pengeluaran}}</td>
                 <td>{{$product->note}}</td>
                 <td>{{$product->nama_admin}}</td>
@@ -90,7 +90,7 @@
               <tr>
                 
                 <th>Total:</th>
-                <td>Rp.{{ number_format($total, 2, ',', '.') }}<td>
+                <td>Rp.{{ number_format($total, 0, ',', '.') }}<td>
               </tr>
             </table>
           </div>

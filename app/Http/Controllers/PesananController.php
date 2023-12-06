@@ -131,6 +131,7 @@ class PesananController extends Controller
                 'note'=>'penjualan',
                 'name_customer'=>$value->name_customer,
                 'time'=>Carbon::now()->format('H:i'),
+                'order_id'=>$id,
     
             ]);
         }

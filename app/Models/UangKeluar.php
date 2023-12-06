@@ -16,7 +16,7 @@ class UangKeluar extends Model
         'store_id',
         'qty',
         'nama_admin',
-        'nama_product',
+        'name_product',
         'total',
         'time',
         'size',

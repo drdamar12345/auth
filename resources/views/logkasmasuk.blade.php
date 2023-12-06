@@ -48,12 +48,11 @@
             <thead>
             <tr>
               <th>No</th>
-              <th>Nama_Product</th>
               <th>Tanggal_pemasukan</th>
               <th>Descripsi</th>
               <th>Nama_Customer</th>
               <th>qty</th>
-              <th>size</th>
+              <th>Order_id</th>
               <th>Nominal</th>
               <th>Subtotal</th>
             </tr>
@@ -63,14 +62,16 @@
               @foreach ($products as $product)
               <tr>
                 <td>{{ $i++ }}</td>
-                <td>{{$product->name_product}}</td>
                 <td>{{$product->tanggal_pemasukan}}</td>
                 <td>{{$product->note}}</td>
                 <td>{{$product->name_customer}}</td>
                 <td>{{$product->qty}}</td>
-                <td>{{$product->size}}</td>
+                <td>{{$product->order_id}}</td>
                 <td>Rp.{{ number_format($product->nominal, 0, ',', '.') }}</td>
                 <td>Rp.{{ number_format($product->nominal, 0, ',', '.') }}</td>
+                <td class="actions" data-th="">
+                  <p class="small"><a href="{{ url('previews/'). '/'  .$product->order_id}}" class="text-muted">Detail</a></p>
+                </td>
               </tr>
               
                   
@@ -87,11 +88,8 @@
   
           <div class="table-responsive">
             <table class="table">
-              <tr>
-                
                 <th>Total:</th>
-                <td>Rp.{{ number_format($total, 2, ',', '.') }}<td>
-              </tr>
+                <td>Rp.{{ number_format($total, 0, ',', '.') }}<td>
             </table>
           </div>
         </div>
