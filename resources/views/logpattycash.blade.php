@@ -10,7 +10,7 @@
           <h2 class="page-header">
             <div>
               <h6 class="float_right">
-                <form action="{{ route('generatelogkasmasuk') }}" method="post">
+                <form action="" method="post">
                   @csrf
                   <label for="start_date">Tanggal Awal:</label>
                   <input type="date" name="start_date" required>
@@ -48,36 +48,19 @@
             <thead>
             <tr>
               <th>No</th>
-              <th>Tanggal_pemasukan</th>
-              <th>Descripsi</th>
-              <th>Nama_Customer</th>
-              <th>qty</th>
-              <th>Order_id</th>
+              <th>Name_Admin</th>
               <th>Nominal</th>
-              <th>Subtotal</th>
-              <th>Detail</th>
-              <th>Edit</th>
+              <th>Date</th>
             </tr>
             </thead>
             <tbody>
               @php $i=1 @endphp
-              @foreach ($products as $product)
-              <tr data-id="{{$product->id}}">
+              @foreach ($historys as $history)
               <tr>
                 <td>{{ $i++ }}</td>
-                <td>{{$product->tanggal_pemasukan}}</td>
-                <td>{{$product->note}}</td>
-                <td>{{$product->name_customer}}</td>
-                <td>{{$product->qty}}</td>
-                <td>{{$product->order_id}}</td>
-                <td>Rp.{{ number_format($product->nominal, 0, ',', '.') }}</td>
-                <td>Rp.{{ number_format($product->nominal, 0, ',', '.') }}</td>
-                <td class="actions" data-th="">
-                  <p class="small"><a href="{{ url('previews/'). '/'  .$product->order_id}}" class="text-muted">Detail</a></p>
-                </td>
-                <td>    
-                  <p class="small"><a href="{{ url('incomes/'). '/'  .$product->id}}" class="text-muted">EDIT</a></p>
-                </td>
+                <td>{{$history->name_admin}}</td>
+                <td>{{ number_format($history->nominal, 0, ',', '.') }}</td>
+                <td>{{$history->date}}</td>
               </tr>
               
                   
@@ -88,17 +71,6 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
-  
-      <div class="row">
-        <div class="col-6">
-  
-          <div class="table-responsive">
-            <table class="table">
-                <th>Total:</th>
-                <td>Rp.{{ number_format($total, 0, ',', '.') }}<td>
-            </table>
-          </div>
-        </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->

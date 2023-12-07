@@ -57,6 +57,8 @@ Route::middleware('auth')->group( function () {
 
     // Home
     Route::get('home', [UserController::class, 'home'])->name('home');
+    Route::get('home', [ProductController::class, 'pettycash'])->name('home');
+    Route::post('home', [ProductController::class, 'addpettycash'])->name('addpettycash');
     // daftar produk
     Route::get('produk', [ProductController::class, 'produk'])->name('produk');
     Route::post('proseschart', [ProductController::class, 'addToCart'])->name('proseschart');
@@ -121,9 +123,13 @@ Route::middleware('auth')->group( function () {
     // Log Kas Masuk
     Route::get('logkasmasuk', [LogController::class, 'logkasmasuk'])->name('logkasmasuk');
     Route::post('logkasmasuk', [LogController::class, 'generatelogkasmasuk'])->name('generatelogkasmasuk');
+    Route::get('incomes/{id}', [LogController::class, 'income'])->name('income');
+    Route::get('actionincome', [LogController::class, 'actionincome'])->name('actionincome');
     // Log Kas Keluar
     Route::get('logkaskeluar', [LogController::class, 'logkaskeluar'])->name('logkaskeluar');
     Route::post('logkaskeluar', [LogController::class, 'generatelogkaskeluar'])->name('generatelogkaskeluar');
+    // Log Patty Cash
+    Route::get('logpattycash', [LogController::class, 'logpattycash'])->name('logpattycash');
     // Statistik Penjulan Product
     Route::get('statistics/{id}', [SuperController::class, 'salesStatistics'])->name('salesStatistics');
 

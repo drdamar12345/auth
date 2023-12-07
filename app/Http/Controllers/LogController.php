@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PattyCash;
 use App\Models\UangMasuk;
 use App\Models\UangKeluar;
 use Illuminate\Http\Request;
@@ -43,6 +44,23 @@ class LogController extends Controller
 
         return view('logkasmasuk', compact('products', 'total'));
     }
+    public function income($id)
+    {
+        $detail = UangMasuk::find($id);
+        return view('income', compact('detail'));
+    }
+    public function actionincome(Request $request)
+    {
+        // dd($request->all());
+        UangMasuk::where('id', $request->id)
+              ->update([
+                'nominal' => $request->nominal,
+                'qty' => $request->qty,
+                'name_customer' => $request->name_customer,
+                'tanggal_pemasukan' => $request->tanggal_pemasukan]);
+        return redirect('/logkasmasuk');
+
+    }
     public function logkaskeluar()
     {
         $store = auth()->user()->store_id;
@@ -59,5 +77,11 @@ class LogController extends Controller
         $total = UangKeluar::whereBetween('tanggal_pengeluaran', [$startDate, $endDate])->get()->sum('total');
 
         return view('logkaskeluar', compact('products', 'total'));
+    }
+    public function logpattycash()
+    {
+        $store = auth()->user()->store_id;
+        $historys = PattyCash::where('store_id', $store)->get();
+        return view('logpattycash', compact('historys'));
     }
 }

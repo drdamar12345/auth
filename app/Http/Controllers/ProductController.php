@@ -6,9 +6,11 @@ use Carbon\Carbon;
 use App\Models\Size;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Store;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Keranjang;
+use App\Models\PattyCash;
 use App\Models\LogProduct;
 use App\Models\UangKeluar;
 use App\Models\OrderDetail;
@@ -199,6 +201,8 @@ class ProductController extends Controller
         $nameadmin = User::where('id', $admin)->first();
         $daftar = auth()->user()->store_id;
         $pesanan = PurchaseDetail::where('id', $id)->first();
+        $cash = Store::where('id', $pesanan->store_id)->first();
+        // dd($cash);
         // dd($pesanan);
         $stock_masuk = $pesanan->qty;
         // dd($stock_masuk);
@@ -225,12 +229,18 @@ class ProductController extends Controller
         }else {
             $newStok = intval($data_product->stok) + intval($stock_masuk);
             $newPrice = $pesanan->harga;
-            // dd($newPrice);
+            $prices = $pesanan->harga * $pesanan->qty;
+            $newCash = intval($cash->patty_cash) - intval($prices);
+
+            // dd($newCash);
             // dd($data_product);
 
             $data_product = Size::where('id_product', $product_id)
         ->where('size', $pesanan->size)->where('store_id', $daftar)->update(['stok'=>$newStok,]);
         $new_data_price = Size::where('id_product', $product_id)->where('size', $pesanan->size)->where('store_id', $daftar)->update(['price'=>$pesanan->harga]);
+        Store::where('id', $pesanan->store_id)
+              ->update([
+                'patty_cash' => $newCash]);
         // dd($new_data_price);
         }
 
@@ -305,5 +315,32 @@ class ProductController extends Controller
          Keranjang::whereIn('id', $request->id)->delete();
         return redirect()->back()->with('success', 'Product added to cart successfully!');
 
+    }
+    public function pettycash()
+    {
+        $daftar = auth()->user()->id;
+        $store = auth()->user()->store_id;
+        $cash = Store::where('id', $store)->get();
+        return view('home', compact('cash'));
+    }
+    public function addpettycash(Request $request)
+    {
+        // dd($request->all);
+
+        $daftar = auth()->user()->id;
+        $store = auth()->user()->store_id;
+        $name = auth()->user()->name;
+
+        $cash = Store::where('id', $store)->get();
+        Store::where('id', $request->store_id)
+              ->update([
+                'patty_cash' => $request->patty_cash]);
+        $add= PattyCash::create([
+            'name_admin' => $name,
+            'nominal' => $request->patty_cash,
+            'date' => Carbon::now()->format('Y-m-d'),
+            'store_id' => $store,
+        ]);
+        return view('home', compact('cash'));
     }
 }

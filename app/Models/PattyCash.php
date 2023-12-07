@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Store extends Model
+class PattyCash extends Model
 {
-    protected $table = 'tb_store';
+    protected $table = 'tb_log_patty_cash';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'name_store',
-        'address',
-        'name_owner',
-        'product_store',
-        'patty_cash',
+        'name_admin',
+        'nominal',
+        'date',
+        'store_id',
     ];
 }

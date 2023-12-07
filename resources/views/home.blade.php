@@ -5,14 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Patty Cash : Rp.</div>
-                <form>
+              @foreach ($cash as $item)
+              <div class="card-header">Patty Cash : Rp.{{ number_format($item->patty_cash, 0, ',', '.') }}</div>
+              @endforeach
+                <form action="{{route('addpettycash')}}" method="POST">
+                  {{ csrf_field() }}
                   <div class="card-body">
                     <div class="form-group">
                       <label for="patty_cash">Cash Today</label>
                       <input name="patty_cash" type="number" class="form-control"  placeholder="cash hari ini">
                     </div>
                   </div>
+                  <input type="hidden" name="store_id" value="{{ Auth::user()->store_id }}">
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </div>
