@@ -18,27 +18,27 @@ class PesananController extends BaseController
     public function belumlunas()
     {
         $daftar = auth()->user()->store_id;
-        // dd($daftar);
-        $product = OrderDetail::where('store_id', $daftar)->get();
-        $post = OrderDetail::leftJoin('tb_product_utama', 'tb_product_utama.id', 'tb_order_detail.product_id') // leftJoin('nama_tabel_join', 'nama_tabel_join.store_id', 'nama_tabel_utama.foreign_key')
-        ->select(
-            'tb_order_detail.user_id',
-            'tb_order_detail.order_id',
-            'tb_order_detail.product_id',
-            'tb_order_detail.store_id',
-            'tb_order_detail.size',
-            'tb_order_detail.harga',
-            'tb_order_detail.status',
-            'tb_order_detail.name_customer',
-            'tb_order_detail.tanggal_pemesanan',
-            'tb_order_detail.qty', // 'nama_tabel.nama_kolom'
-            'tb_product_utama.nama_product',
-            'tb_product_utama.gambar',
-            'tb_product_utama.merk', // 'nama_tabel.nama_kolom'
-            // lanjutkan kebawah untuk ambil data yang dibutuhkan
-        )->where('tb_order_detail.store_id', $daftar)->where('status', 'belum lunas')->get();
+        $products = Order::where('store_id', $daftar)->get();
+        // $product = OrderDetail::where('store_id', $daftar)->get();
+        // $post = OrderDetail::leftJoin('tb_product_utama', 'tb_product_utama.id', 'tb_order_detail.product_id') // leftJoin('nama_tabel_join', 'nama_tabel_join.store_id', 'nama_tabel_utama.foreign_key')
+        // ->select(
+        //     'tb_order_detail.user_id',
+        //     'tb_order_detail.order_id',
+        //     'tb_order_detail.product_id',
+        //     'tb_order_detail.store_id',
+        //     'tb_order_detail.size',
+        //     'tb_order_detail.harga',
+        //     'tb_order_detail.status',
+        //     'tb_order_detail.name_customer',
+        //     'tb_order_detail.tanggal_pemesanan',
+        //     'tb_order_detail.qty', // 'nama_tabel.nama_kolom'
+        //     'tb_product_utama.nama_product',
+        //     'tb_product_utama.gambar',
+        //     'tb_product_utama.merk', // 'nama_tabel.nama_kolom'
+        //     // lanjutkan kebawah untuk ambil data yang dibutuhkan
+        // )->where('tb_order_detail.store_id', $daftar)->where('status', 'belum lunas')->get();
         // dd($post);
-        return $this->sendResponse($post, 'Products retrieved successfully.');
+        return $this->sendResponse($products, 'Products retrieved successfully.');
     }
 
     public function produklunas()
@@ -80,11 +80,15 @@ class PesananController extends BaseController
             'tb_order_detail.order_id',
             'tb_order_detail.product_id',
             'tb_order_detail.store_id',
+            'tb_order_detail.size',
             'tb_order_detail.harga',
+            'tb_order_detail.status',
             'tb_order_detail.name_customer',
             'tb_order_detail.tanggal_pemesanan',
             'tb_order_detail.qty', 
             'tb_product_utama.nama_product',
+            'tb_product_utama.gambar',
+            'tb_product_utama.merk',
             'users.name',
             'tb_store.name_store',
             'tb_order.total'
