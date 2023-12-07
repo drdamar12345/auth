@@ -122,7 +122,7 @@ class PesananController extends BaseController
                 'name_customer'=>$value->name_customer,
                 'tanggal_pemesanan'=>$value->tanggal_pemesanan,
                 'qty'=>$value->qty,
-            ]);
+            ]);                                                                                                 
 
             $stock_tersedia = Size::where('id_product', $value->product_id)->where('size', $value->size)->where('store_id', $store)->first();
             if (isset ($stock_tersedia)) { 
