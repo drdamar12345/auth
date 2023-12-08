@@ -10,7 +10,7 @@
       <label for="end_date">Tanggal Akhir:</label>
       <input type="date" name="end_date" required>
 
-      <button class="btn btn-success text-center" type="submit">Generate Laporan</button>
+      <button class="btn btn-success text-center" type="submit">Cari</button>
     </form>
 </h6>
 <table id="cart" class="table table-hover table-condensed">
@@ -21,7 +21,7 @@
         }
     
         th, td {
-            border: 1px solid black; /* Mengatur garis untuk sel dan header */
+            border: 3px solid green; /* Mengatur garis untuk sel dan header */
             padding: 8px; /* Padding untuk sel */
             text-align: left; /* Penataan teks di dalam sel */
         }

@@ -40,6 +40,7 @@ class LogController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
         $products = UangMasuk::whereBetween('tanggal_pemasukan', [$startDate, $endDate])->get();
+        // dd($products);
         $total = UangMasuk::whereBetween('tanggal_pemasukan', [$startDate, $endDate])->get()->sum('nominal');
 
         return view('logkasmasuk', compact('products', 'total'));

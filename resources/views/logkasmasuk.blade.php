@@ -18,7 +18,7 @@
                   <label for="end_date">Tanggal Akhir:</label>
                   <input type="date" name="end_date" required>
 
-                  <button class="btn btn-success text-center" type="submit">Generate Laporan</button>
+                  <button class="btn btn-success text-center" type="submit">Cari</button>
                 </form>
               </h6>
             </div>    

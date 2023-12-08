@@ -288,7 +288,7 @@ class ProductController extends Controller
             'name_customer'=>$request->nama,
             'total'=>$request->subtotal,
             'qty'=>$request->total_qty,
-
+            'date'=>Carbon::now()->format('Y-m-d'),
         ]);
         if (isset($request->product_id)) {
 

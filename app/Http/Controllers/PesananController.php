@@ -119,13 +119,13 @@ class PesananController extends Controller
                 'store_id'=>$store,
                 'harga'=>$value->total,
                 'status'=>'lunas',
-                'tanggal_pemesanan'=>$value->created_at,
+                'tanggal_pemesanan'=>$value->date,
                 'qty'=>$value->qty,
                 'name_customer'=>$value->name_customer,
             ]);
             $order = UangMasuk::create([
                 'nominal'=>$value->total,
-                'tanggal_pemasukan'=>$value->created_at,
+                'tanggal_pemasukan'=>$value->date,
                 'store_id'=>$store,
                 'qty'=>$value->qty,
                 'note'=>'penjualan',

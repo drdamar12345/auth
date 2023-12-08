@@ -15,5 +15,6 @@ class Order extends Model
         'name_customer',
         'total',
         'qty',
+        'date',
     ];
 }

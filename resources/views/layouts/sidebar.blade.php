@@ -159,29 +159,6 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-invoice	"></i>
               <p>
-                INVOICE
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/rekappemasukan_pdf" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Rekap Pemasukan</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/rekappengeluaran_pdf" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Rekap Pengeluaran</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-file-invoice	"></i>
-              <p>
                 Log Aktivitas
                 <i class="fas fa-angle-left right"></i>
               </p>

@@ -38,7 +38,7 @@
               <td>{{$product->name_customer}}</td>
               <td>{{$product->qty}}</td>
               <td>Rp.{{ number_format($product->total, 0, ',', '.') }}</td>
-              <td>{{$product->created_at}}</td>
+              <td>{{$product->date}}</td>
               <td class="actions" data-th="">
 
                 <a  href="{{ route('pesananlunas', $product->id) }}"> <button class="btn btn-success">LUNAS</button> </a>                        
