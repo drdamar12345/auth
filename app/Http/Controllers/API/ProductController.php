@@ -51,12 +51,12 @@ class ProductController extends BaseController
 
     public function keranjang()
     {
-        //r1 aja
-        // $daftar = auth()->user()->store_id;
+        $daftar = auth()->user()->store_id;
         $user = auth()->user()->store_id;
         $cart = Keranjang::where('store_id', $user)->get();
         // $customer = Customer::where('store_id', $daftar)->get();
-        return $this->sendResponse($cart, 'Products retrieved successfully.');
+        $total_qty = Keranjang::where('user_id', $daftar)->where('store_id', $user)->get()->sum('qty');
+        return $this->sendResponse([$cart, $total_qty], 'Products retrieved successfully.');
     }
 
     public function hapus_action(Request $request){
@@ -69,6 +69,7 @@ class ProductController extends BaseController
     {
         $user = auth()->user()->id;
         // $tb = auth()->user()->store_id;
+        // $stok = Size::where('id', $request->stok)->first();
         $product = Product::findOrFail($request->id_product);
         $id = User::where('id', $user)->first();
         $size =  Size::where('id', $request->id)->first();
@@ -78,6 +79,7 @@ class ProductController extends BaseController
             'gambar'=>$product->gambar,
             'harga'=>$size->price,
             'user_id'=>$user,
+            // 'qty'=>$request->qty,
             'qty'=>1,
             'ukuransepatu'=>$size->size,
             'store_id'=>$id->store_id,
