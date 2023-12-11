@@ -321,6 +321,7 @@ class ProductController extends Controller
         $daftar = auth()->user()->id;
         $store = auth()->user()->store_id;
         $cash = Store::where('id', $store)->get();
+        // dd($cash);
         return view('home', compact('cash'));
     }
     public function addpettycash(Request $request)
@@ -330,8 +331,6 @@ class ProductController extends Controller
         $daftar = auth()->user()->id;
         $store = auth()->user()->store_id;
         $name = auth()->user()->name;
-
-        $cash = Store::where('id', $store)->get();
         Store::where('id', $request->store_id)
               ->update([
                 'patty_cash' => $request->patty_cash]);
@@ -341,6 +340,30 @@ class ProductController extends Controller
             'date' => Carbon::now()->format('Y-m-d'),
             'store_id' => $store,
         ]);
-        return view('home', compact('cash'));
+        return view('home');
+    }
+    public function mostcheckout()
+    {
+        $daftar = auth()->user()->id;
+        $store = auth()->user()->store_id;
+        // Mengambil data produk yang sering dipesan dari order detail
+        $frequentlyOrderedProducts = OrderDetail::select('product_id', \DB::raw('COUNT(*) as total_orders'))
+            ->groupBy('product_id')
+            ->orderByDesc('total_orders')
+            ->limit(3) // Ubah sesuai kebutuhan
+            ->get();
+        // dd($frequentlyOrderedProducts);
+        // Mengambil informasi produk berdasarkan hasil query sebelumnya
+        $products = [];
+        foreach ($frequentlyOrderedProducts as $item) {
+            $product = Product::find($item->product_id);
+            if ($product) {
+                $product->total_orders = $item->total_orders;
+                $products[] = $product;
+                // dd($product);
+            }
+        }
+
+        return view('home', compact('products'));
     }
 }

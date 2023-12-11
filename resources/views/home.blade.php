@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-              @foreach ($cash as $item)
+              {{-- @foreach ($cash as $item)
               <div class="card-header">Patty Cash : Rp.{{ number_format($item->patty_cash, 0, ',', '.') }}</div>
-              @endforeach
+              @endforeach --}}
                 <form action="{{route('addpettycash')}}" method="POST">
                   {{ csrf_field() }}
                   <div class="card-body">
@@ -25,61 +25,69 @@
         </div>
     </div>
 </div>
-{{-- <section class="invoice">
-    <!-- title row -->
-    <!-- info row -->
-    <!-- /.row -->
+<div>
+  PRODUK FAVORIT  
+  <table id="cart" class="table table-hover table-condensed">
 
-    <!-- Table row -->
-    <div class="row">
-      <div class="col-12 table-responsive">
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th>No</th>
-            <th>Nama_Product</th>
-            <th>Tanggal_pemasukan</th>
-            <th>Descripsi</th>
-            <th>Nama_Customer</th>
-            <th>qty</th>
-            <th>Nominal</th>
-          </tr>
-          </thead>
-          <tbody>
-            @php $i=1 @endphp
-            @foreach ($products as $product)
-            <tr class="expandable-row">
-              <td>{{ $i++ }}</td>
-              <td>{{$product->name_product}}</td>
-              <td>{{$product->tanggal_pemasukan}}</td>
-              <td>{{$product->note}}</td>
-              <td>{{$product->name_customer}}</td>
-              <td>{{$product->qty}}</td>
-              <td>Rp.{{ number_format($product->nominal, 2, ',', '.') }}</td>
-            </tr>
-            
-                
+    <thead>
+
+        <tr>
+
+            <th style="width:70%">Produk</th>
+
+            <th style="width:15%">Merk</th>
+    
+            <th style="width:15%" >Total Terjual</th>
+
+            <th style="width:10%"></th>
+
+        </tr>
+
+      </thead>
+      <tbody>
+        @php $total = 0 @endphp
+
+        {{-- @if(session('keranjang')) --}}
+
+            {{-- @foreach(session('cart') as $id => $details) --}}
+            @foreach($products as $product)
+
+                <tr >
+
+                    <td data-th="Product">
+
+                        <div class="row">
+
+                            <div class="col-sm-3 hidden-xs"><img src="{{asset('/gambar/').'/'  . $product->gambar}}" width="100" height="50" class="img-responsive"/></div>
+
+                            <div class="col-sm-9">
+
+                                <h4 class="nomargin">{{ $product->nama_product }}</h4>
+
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <td data-th="Merk">{{ $product->merk }}</td>
+
+                    <td data-th="Total Terjual">{{ $product->total_orders }}</td>
+
+
+                    <td class="actions" data-th="">
+
+                      {{-- <a  href="{{ route('addtobatal', $details->id) }}" class="btn btn-success"> BATAL </a>                         --}}
+                    </td>
+
+                </tr>
+
             @endforeach
-          </tbody>
-        </table>
-      </div>
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
-
-    <div class="row">
-      <div class="col-6">
-
-        <div class="table-responsive">
-          <table class="table">
-            <tr>
-              
-              <th>Total:</th>
-              <td>Rp.{{ number_format($total, 2, ',', '.') }}<td>
-            </tr>
-      </div>
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
-</section> --}}
+        {{-- @endif --}}
+      </tbody>
+      <tfoot>
+    </tfoot>
+  </table>
+</div>
 @endsection

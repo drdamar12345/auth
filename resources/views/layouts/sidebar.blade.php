@@ -245,6 +245,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/coba" class="nav-link">
+              <i class="nav-icon fas fa-ad"></i>
+              <p>
+                Percob
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('Logout')}}" class="nav-link">
               <p>
                 Log Out

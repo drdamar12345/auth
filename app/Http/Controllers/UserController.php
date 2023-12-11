@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Store;
 use App\Models\UangMasuk;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -33,7 +34,8 @@ class UserController extends Controller
         $store = auth()->user()->store_id;
         $total = UangMasuk::where('store_id', $store)->get()->sum('nominal');
         $products = UangMasuk::where('store_id', $store)->get();
-        return view('home', compact('products', 'total'));
+        $cash = Store::where('id', $store)->get();
+        return view('home', compact('products', 'total', 'cash'));
     }
     public function actionregister(Request $request)
     {
