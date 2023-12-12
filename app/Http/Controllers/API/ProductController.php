@@ -79,8 +79,8 @@ class ProductController extends BaseController
             'gambar'=>$product->gambar,
             'harga'=>$size->price,
             'user_id'=>$user,
-            // 'qty'=>$request->qty,
-            'qty'=>1,
+            'qty'=>$request->qty,
+            // 'qty'=>1,
             'ukuransepatu'=>$size->size,
             'store_id'=>$id->store_id,
         ]);
@@ -261,7 +261,7 @@ class ProductController extends BaseController
             'store_id'=>$store,
             'name_customer'=>$request->nama,
             'total'=>$total,
-            'qty'=>1,
+            'qty'=>$request->qty,
         ]);
         
         if (isset($pesanan)) {
@@ -278,7 +278,7 @@ class ProductController extends BaseController
                     'status'=>'belum lunas',
                     'name_customer'=>$request->nama,
                     'tanggal_pemesanan'=>$formattedDate,
-                    'qty'=>1,
+                    'qty'=>$request->qty,
                 ]);
 
             }
