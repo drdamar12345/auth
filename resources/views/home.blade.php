@@ -8,6 +8,8 @@
               {{-- @foreach ($cash as $item)
               <div class="card-header">Patty Cash : Rp.{{ number_format($item->patty_cash, 0, ',', '.') }}</div>
               @endforeach --}}
+
+            
                 <form action="{{route('addpettycash')}}" method="POST">
                   {{ csrf_field() }}
                   <div class="card-body">

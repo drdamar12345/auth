@@ -10,6 +10,7 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\StatisticController;
 
 /*
 |--------------------------------------------------------------------------
@@ -133,6 +134,8 @@ Route::middleware('auth')->group( function () {
     Route::get('logpattycash', [LogController::class, 'logpattycash'])->name('logpattycash');
     // Statistik Penjulan Product
     Route::get('statistics/{id}', [SuperController::class, 'salesStatistics'])->name('salesStatistics');
+    Route::get('coba', [StatisticController::class, 'weeklystatistic'])->name('coba');
+
 
 
 

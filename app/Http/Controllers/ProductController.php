@@ -339,8 +339,26 @@ class ProductController extends Controller
             'nominal' => $request->patty_cash,
             'date' => Carbon::now()->format('Y-m-d'),
             'store_id' => $store,
+        
         ]);
-        return view('home');
+        $frequentlyOrderedProducts = OrderDetail::select('product_id', \DB::raw('COUNT(*) as total_orders'))
+            ->groupBy('product_id')
+            ->orderByDesc('total_orders')
+            ->limit(3) // Ubah sesuai kebutuhan
+            ->get();
+        // dd($frequentlyOrderedProducts);
+        // Mengambil informasi produk berdasarkan hasil query sebelumnya
+        $products = [];
+        foreach ($frequentlyOrderedProducts as $item) {
+            $product = Product::find($item->product_id);
+            if ($product) {
+                $product->total_orders = $item->total_orders;
+                $products[] = $product;
+                // dd($product);
+            }
+        }
+        $cash = Store::where('id', $store)->get();
+        return view('home', compact('products', 'cash'));
     }
     public function mostcheckout()
     {
