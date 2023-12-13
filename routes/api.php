@@ -124,4 +124,13 @@ Route::post('rekapp_keluar', [PesananController::class, 'generateuangkeluar']);
 
 //logAktivity
 Route::get('aktivity_uang_masuk', [LogAktivityController::class, 'aktivitymasuk']);
+
+//log produk
+Route::get('data_log_produk', [LogAktivityController::class, 'logproduct']);
+
+//rekap log produk
+Route::post('rekap_log_produk', [LogAktivityController::class, 'generatelogproduct']);
+
+//ubah data uang masuk
+Route::post('ubah', [PesananController::class, 'actionincome']);
 });

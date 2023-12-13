@@ -168,9 +168,10 @@ class PesananController extends BaseController
         $admin = auth()->user()->id;
         // $total = UangKeluar::sum('total');
         $store = auth()->user()->store_id;
-        // $nameadmin = User::where('id', $admin)->first();
         $products = UangKeluar::where('store_id', $store)->get();
-        return $this->sendResponse($products, 'Products retrieved successfully.');
+        // $nameadmin = User::where('id', $admin)->first();
+        $total = UangKeluar::where('store_id', $store)->get()->sum('total');
+        return $this->sendResponse([$products, $total], 'Products retrieved successfully.');
     }
 
     public function generateuangkeluar(Request $request)
@@ -184,5 +185,19 @@ class PesananController extends BaseController
         $products = UangKeluar::whereBetween('tanggal_pengeluaran', [$startDate, $endDate])->where('store_id', $store)->get();
         // $total = UangKeluar::whereBetween('tanggal_pengeluaran', [$startDate, $endDate])->get()->sum('total');
         return $this->sendResponse($products, 'Products retrieved successfully.');
+    }
+
+    //mengerjakan ini hari iniu
+    public function actionincome(Request $request)
+    {
+        // dd($request->all());
+        $uangmasuk = UangMasuk::where('id', $request->id)
+              ->update([
+                'nominal' => $request->nominal,
+                'qty' => $request->qty,
+                'name_customer' => $request->name_customer,
+                'tanggal_pemasukan' => $request->tanggal_pemasukan]);
+        return $this->sendResponse($uangmasuk, 'Products retrieved successfully.');
+
     }
 }
