@@ -64,7 +64,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button id="addproductButton" type="submit" class="btn btn-primary">Submit</button>
                 </div>
               </form>
             </div>
@@ -74,6 +74,34 @@
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
+    <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="buyModalLabel">Anda Berhasil Menambahkan Produk Baru</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Animasi untuk memunculkan modal dengan efek fadeIn
+      $('#addproductButton').click(function() {
+        $('#buyModal').modal('show');
+        $('#buyModal .modal-dialog').attr('class', 'modal-dialog  fadeIn  animated'); // Animasi fadeIn
+      });
+    
+      function confirmPurchase() {
+        // Di sini Anda dapat menambahkan logika pembelian
+        // Misalnya, panggil fungsi atau kirim request ke backend untuk melakukan pembelian
+    
+        // Contoh sederhana: menampilkan alert
+        alert('Pembelian berhasil!');
+        $('#buyModal').modal('hide'); // Sembunyikan modal setelah pembelian
+      }
+    </script>
     <script>
       $(document).ready(function() {
           var addButton = $("#addButton");

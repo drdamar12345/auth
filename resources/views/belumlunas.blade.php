@@ -41,7 +41,8 @@
               <td>{{$product->date}}</td>
               <td class="actions" data-th="">
 
-                <a  href="{{ route('pesananlunas', $product->id) }}"> <button class="btn btn-success">LUNAS</button> </a>                        
+                <a  href="{{ route('pesananlunas', $product->id) }}"> <button class="btn btn-success"  id="orderButton" >LUNAS</button> </a>
+                <a> <button class="btn btn-danger remove-from-pesanan"row-id='{{$product->id}}'> BATAL</button> </a>                                                
               </td>
               <td class="actions" data-th="">
                 <p class="small"><a href="{{ url('bayars/'). '/'  .$product->id}}" class="text-muted">Cestak Struk</a></p>
@@ -63,4 +64,73 @@
   </section>
   <!-- /.content -->
 </div>
+<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="buyModalLabel">Pesanan Sudah Lunas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // Animasi untuk memunculkan modal dengan efek fadeIn
+  $('#orderButton').click(function() {
+    $('#buyModal').modal('show');
+    $('#buyModal .modal-dialog').attr('class', 'modal-dialog  fadeIn  animated'); // Animasi fadeIn
+  });
+
+  function confirmPurchase() {
+    // Di sini Anda dapat menambahkan logika pembelian
+    // Misalnya, panggil fungsi atau kirim request ke backend untuk melakukan pembelian
+
+    // Contoh sederhana: menampilkan alert
+    alert('Pembelian berhasil!');
+    $('#buyModal').modal('hide'); // Sembunyikan modal setelah pembelian
+  }
+</script>
+<script type="text/javascript">
+  $(".remove-from-pesanan").click(function (e) {
+  let rowid = $(this).attr('row-id');
+    e.preventDefault();
+
+
+
+    var ele = $(this);
+
+
+
+    if(confirm("Apakah Yakin Ingin Di Remove?")) {
+
+        $.ajax({
+
+            url: '{{ url('remove-from-pesanan') }}' + '/' + rowid,
+
+
+            method: "post",
+
+            data: {
+
+                _token: '{{ csrf_token() }}', 
+
+                id: rowid
+                
+
+            },
+
+            success: function (response) {
+
+                window.location.reload();
+
+            }
+
+        });
+
+    }
+
+});
+</script>
 @endsection

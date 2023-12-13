@@ -104,7 +104,7 @@
                   <a  href="{{ route('addtocheckout', $details->id) }}"> <button class="btn btn-success">Checkout</button> </a>
                   @endif
                    --}}
-                   <button type="submit" button class="btn btn-success" >Pesan</button>
+                   <button type="submit" id="orderButton" button class="btn btn-success" >Pesan</button>
   
               </td>
   
@@ -112,6 +112,34 @@
       </tfoot>
       </table>
 </form>
+<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="buyModalLabel">Anda Berhasil Membuat pesanan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Animasi untuk memunculkan modal dengan efek fadeIn
+    $('#orderButton').click(function() {
+      $('#buyModal').modal('show');
+      $('#buyModal .modal-dialog').attr('class', 'modal-dialog  fadeIn  animated'); // Animasi fadeIn
+    });
+  
+    function confirmPurchase() {
+      // Di sini Anda dapat menambahkan logika pembelian
+      // Misalnya, panggil fungsi atau kirim request ke backend untuk melakukan pembelian
+  
+      // Contoh sederhana: menampilkan alert
+      alert('Pembelian berhasil!');
+      $('#buyModal').modal('hide'); // Sembunyikan modal setelah pembelian
+    }
+  </script>
 <script type="text/javascript">
     $(".remove-from-keranjang").click(function (e) {
     let rowid = $(this).attr('row-id');

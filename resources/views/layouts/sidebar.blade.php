@@ -336,7 +336,7 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
+@stack('script')
 <!-- jQuery -->
 <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->

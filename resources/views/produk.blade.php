@@ -38,7 +38,7 @@
       
                     {{-- <input type="hidden" class="text-dark mb-0" name="harga" value="{{$item['harga']}}">Rp.<span id="priceDisplay"></span></h5> --}}
                   </div>
-                  <button type="submit" button class="btn btn-info btn-block text-center" >Add To Cart</button>
+                  <button type="submit" id="buyButton" button class="btn btn-info btn-block text-center" >Add To Cart</button>
                   {{-- <p class="btn-holder"><a href="{{ route('add.to.cart', $item->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to Keranjang</a> </p> --}}
                   {{-- <p class="btn-holder"><a href="{{ route('add.to.favourite', $item->id) }}" class="btn btn-info btn-block text-center" role="button">Add to favourite</a> </p> --}}
       
@@ -61,48 +61,33 @@
       @endforeach
   </div>
 </div>
+<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="buyModalLabel">Anda Berhasil Menambahkan Produk</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // Animasi untuk memunculkan modal dengan efek fadeIn
+  $('#buyButton').click(function() {
+    $('#buyModal').modal('show');
+    $('#buyModal .modal-dialog').attr('class', 'modal-dialog  fadeIn  animated'); // Animasi fadeIn
+  });
 
+  function confirmPurchase() {
+    // Di sini Anda dapat menambahkan logika pembelian
+    // Misalnya, panggil fungsi atau kirim request ke backend untuk melakukan pembelian
 
-<script type="text/javascript">
-      $(".remove-from-keranjang").click(function (e) {
-      let rowid = $(this).attr('row-id');
-        e.preventDefault();
-
-  
-
-        var ele = $(this);
-
-  
-
-        if(confirm("Are you sure want to remove?")) {
-
-            $.ajax({
-
-                url: '{{ url('remove-from-keranjang') }}' + '/' + rowid,
-
-
-                method: "post",
-
-                data: {
-
-                    _token: '{{ csrf_token() }}', 
-
-                    id: rowid
-                    
-
-                },
-
-                success: function (response) {
-
-                    window.location.reload();
-
-                }
-
-            });
-
-        }
-
-    });
+    // Contoh sederhana: menampilkan alert
+    alert('Pembelian berhasil!');
+    $('#buyModal').modal('hide'); // Sembunyikan modal setelah pembelian
+  }
 </script>
 <script>
   $(document).ready(function() {

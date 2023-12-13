@@ -144,6 +144,19 @@ class PesananController extends Controller
         return redirect()->back()->with('success', 'Product added to cart successfully!');
 
     }
+    public function removepesanan($id, Request $request)
+
+    {
+        $productId = $request->input('id');
+    
+    // Logic to remove the product from the cart
+    Order::where('id', $id)->delete();
+    OrderDetail::where('order_id', $id)->delete();
+    
+    // Redirect back to the cart page or any other appropriate page
+    return redirect()->route('keranjang');
+
+    }
     public function produklunas()
     {
         $daftar = auth()->user()->store_id;

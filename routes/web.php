@@ -103,7 +103,8 @@ Route::middleware('auth')->group( function () {
     Route::get('pesananlunas/{order_id}', [PesananController::class, 'pesananlunas'])->name('pesananlunas');
     Route::get('produklunas', [PesananController::class, 'produklunas'])->name('produklunas');
     Route::get('previews/{order_id}', [PesananController::class, 'getdetail'])->name('getdetail');
-
+    // Hapus Pesanan
+    Route::post('remove-from-pesanan/{id}', [PesananController::class, 'removepesanan'])->name('remove.from.pesanan');
     // Invoice Pemasukkan
     Route::get('rekappemasukan_pdf', [InvoiceController::class, 'rekappemasukan_pdf'])->name('rekappemasukan_pdf');
     Route::post('rekappemasukan_pdf', [InvoiceController::class, 'generateuangmasuk'])->name('generateuangmasuk');
