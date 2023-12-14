@@ -316,14 +316,6 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Product added to cart successfully!');
 
     }
-    public function pettycash()
-    {
-        $daftar = auth()->user()->id;
-        $store = auth()->user()->store_id;
-        $cash = Store::where('id', $store)->get();
-        // dd($cash);
-        return view('home', compact('cash'));
-    }
     public function addpettycash(Request $request)
     {
         // dd($request->all);
@@ -364,6 +356,7 @@ class ProductController extends Controller
     {
         $daftar = auth()->user()->id;
         $store = auth()->user()->store_id;
+        $cash = Store::where('id', $store)->get();
         // Mengambil data produk yang sering dipesan dari order detail
         $frequentlyOrderedProducts = OrderDetail::select('product_id', \DB::raw('COUNT(*) as total_orders'))
             ->groupBy('product_id')
@@ -381,7 +374,21 @@ class ProductController extends Controller
                 // dd($product);
             }
         }
-
-        return view('home', compact('products'));
+        // $stockminim = Size::where('store_id', $store)->get();
+        $stockminims = Size::
+        leftJoin('tb_product_utama', 'tb_product_utama.id', 'tb_size.id_product')
+        ->select(
+            'tb_size.id_product',
+            'tb_size.size',
+            'tb_size.stok',
+            'tb_size.status',
+            'tb_size.store_id',
+            'tb_size.price',
+            'tb_product_utama.nama_product',
+            'tb_product_utama.gambar',
+            'tb_product_utama.merk',
+        ) 
+        ->where('stok', '<', 3)->get();   
+        return view('home', compact('products', 'cash', 'stockminims'));
     }
 }
