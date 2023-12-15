@@ -184,7 +184,7 @@ class PesananController extends Controller
             'tb_product_utama.gambar',
             'tb_product_utama.merk',
         ) 
-        ->where('order_id', $order_id)->get();
+        ->where('tb_order_detail.order_id', $order_id)->get();
         // $post = OrderDetail::leftJoin('tb_product_utama', 'tb_product_utama.id', 'tb_order_detail.product_id') 
         // ->select(
         //     'tb_order_detail.user_id',

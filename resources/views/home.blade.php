@@ -182,8 +182,8 @@
               <!-- Isi pesan atau informasi di sini -->
               Terdapat Produk Stok Sedikit.
               <div>{{ $stockminim->nama_product }}</div>
-              <div>{{ $stockminim->price }}</div>
-              <div>{{ $stockminim->size }}</div>
+              <div>Harga:Rp.{{ number_format($stockminim->price, 0, ',', '.') }}</div>
+              <div>Size:{{ $stockminim->size }}</div>
               <div>Sisa Stok:{{ $stockminim->stok }}</div>
           </div>
           <div class="modal-footer">

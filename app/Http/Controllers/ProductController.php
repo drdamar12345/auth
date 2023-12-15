@@ -388,7 +388,7 @@ class ProductController extends Controller
             'tb_product_utama.gambar',
             'tb_product_utama.merk',
         ) 
-        ->where('stok', '<', 3)->get();   
+        ->where('stok', '<', 3)->where('tb_size.store_id', $store)->get();   
         return view('home', compact('products', 'cash', 'stockminims'));
     }
 }

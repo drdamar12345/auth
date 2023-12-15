@@ -9,12 +9,12 @@
         {{ csrf_field() }}
         <div class="container py-2">
           <div class="collumn" >
-            <div class="col-md-12 col-lg-16 mb-4 mb-lg-0">
+            <div class="col-md-14 col-lg-16 mb-5 mb-lg-0">
               <div class="card">
                 <div class="d-flex justify-content-between p-3">
                   <p class="lead mb-0">Daftar Sepatu</p>
                 </div>
-                <img src="{{asset('/gambar/').'/'  . $item['gambar']}}" alt="image" height="300" width="355 "
+                <img src="{{asset('/gambar/').'/'  . $item['gambar']}}" alt="image" height="260" width="310 "
                   class="card-img-top" alt=""  />
                 <div class="card-body">
                   {{-- <div class="d-flex justify-content-between">

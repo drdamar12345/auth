@@ -50,11 +50,14 @@ class StatisticController extends Controller
                     }else{
                         $day = '';
                     }
+                //     $company =  Lunas::select(DB::raw('WEEK(tanggal_pemesanan) as week_number, COUNT(*) as total'))
+                // ->groupBy(DB::raw('WEEK(created_at)'))
+                // ->get();
                   
                 $label[] = '('.$day.') '.$val->format('d M Y');
                 // dd($label);
                 $value[] = $company;
-                // dd($company);
+                dd($company);
             }
     return view('coba', compact('label', 'value'));    }
 }
