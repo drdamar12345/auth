@@ -7,12 +7,14 @@ use DatePeriod;
 use DateInterval;
 use App\Models\Lunas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class StatisticController extends Controller
 {
     public function weeklystatistic()
     {
+        \DB::statement("SET SQL_MODE=''");
         $today = date("l");
             if($today == "Monday"){
                 $start_date = date("Y-m-d");
@@ -29,10 +31,10 @@ class StatisticController extends Controller
            );
 
             $label = [];
-            $value = [];
+            $value = null;
             foreach ($period as $key => $val) {
                 // dd($period);
-                $company = Lunas::whereDate('tanggal_pemesanan',$val->format('Y-m-d'));                    
+                // $company = Lunas::whereDate('tanggal_pemesanan',$val->format('Y-m-d'));                    
                     if($val->format('l') == 'Sunday'){
                         $day = 'Minggu';
                     }elseif($val->format('l') == 'Monday'){
@@ -50,14 +52,25 @@ class StatisticController extends Controller
                     }else{
                         $day = '';
                     }
-                //     $company =  Lunas::select(DB::raw('WEEK(tanggal_pemesanan) as week_number, COUNT(*) as total'))
-                // ->groupBy(DB::raw('WEEK(created_at)'))
-                // ->get();
+                    // $company = $company->select(DB::raw('WEEK(tanggal_pemesanan) as week_number, COUNT(*) as total'))
+                    // ->groupBy(DB::raw('WEEK(created_at)'))
+                    // ->get();
+                    $company =  Lunas::select(DB::raw('WEEK(tanggal_pemesanan) as week_number, COUNT(*) as total'))
+                ->groupBy(DB::raw('WEEK(created_at)'))
+                ->get()->toArray();
                   
                 $label[] = '('.$day.') '.$val->format('d M Y');
                 // dd($label);
-                $value[] = $company;
-                dd($company);
+
+                $data = $company;
+
+                $hasil = [];
+
+                foreach ($data as $key => $value) {
+                    $hasil[$key] = $value['total'];
+                }
+                $value = $hasil;
+                // dd($value);
             }
-    return view('coba', compact('label', 'value'));    }
+    return view('home', compact('label', 'value'));    }
 }

@@ -59,7 +59,7 @@
         </div>
       </form>
 
-      <a href="login1" class="text-center">Saya Sudah Memiliki Akun</a>
+      <a href="login" class="text-center">Saya Sudah Memiliki Akun</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

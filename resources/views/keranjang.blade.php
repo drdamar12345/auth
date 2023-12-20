@@ -52,7 +52,7 @@
   
                       </td>
   
-                      <td data-th="Price">Rp{{ $details->harga }}</td>
+                      <td data-th="Price">Rp.{{ number_format($details->harga, 0, ',', '.') }}</td>
   
                         <input data-th="Subtotal" name="price[]" type="hidden" class="text-center" value="{{ intval($details->harga) * intval($details->qty) }}"></td>
   

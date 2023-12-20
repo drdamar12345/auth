@@ -10,7 +10,7 @@
           <h2 class="page-header">
             <div>
               <h6 class="float_right">
-                <form action="" method="post">
+                <form action="{{ route('generatelogpattycash') }}" method="post">
                   @csrf
                   <label for="start_date">Tanggal Awal:</label>
                   <input type="date" name="start_date" required>
@@ -18,7 +18,7 @@
                   <label for="end_date">Tanggal Akhir:</label>
                   <input type="date" name="end_date" required>
 
-                  <button class="btn btn-success text-center" type="submit">Generate Laporan</button>
+                  <button class="btn btn-success text-center" type="submit">Cari</button>
                 </form>
               </h6>
             </div>    

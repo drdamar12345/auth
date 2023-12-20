@@ -59,7 +59,7 @@ Route::middleware('auth')->group( function () {
     // Home
     Route::get('home', [UserController::class, 'home'])->name('home');
     Route::post('home', [ProductController::class, 'addpettycash'])->name('addpettycash');
-    Route::get('home', [ProductController::class, 'mostcheckout'])->name('home');
+    Route::get('home', [ProductController::class, 'dashboarditem'])->name('home');
     
     // daftar produk
     Route::get('produk', [ProductController::class, 'produk'])->name('produk');
@@ -133,6 +133,7 @@ Route::middleware('auth')->group( function () {
     Route::post('logkaskeluar', [LogController::class, 'generatelogkaskeluar'])->name('generatelogkaskeluar');
     // Log Patty Cash
     Route::get('logpattycash', [LogController::class, 'logpattycash'])->name('logpattycash');
+    Route::post('logpattycash', [LogController::class, 'generatelogpattycash'])->name('generatelogpattycash');
     // Statistik Penjulan Product
     Route::get('statistics/{id}', [SuperController::class, 'salesStatistics'])->name('salesStatistics');
     Route::get('coba', [StatisticController::class, 'weeklystatistic'])->name('coba');

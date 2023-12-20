@@ -192,6 +192,8 @@
       </div>
   </div>
 </div>
+<h2 class="text-center">STATISTIC PENJUALAN PRODUCT</h3>
+<canvas id="myChart"></canvas>
 <script>
   // Lakukan periksa stok
   var stockminims = {!! json_encode($stockminims) !!}; // Ambil data barang dari controller
@@ -211,4 +213,39 @@
       });
   }
 </script>
+@push('script')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.js"></script>
+
+<script>
+  var label =  {{ Js::from($label) }};
+
+var value1 =  {{ Js::from($value) }};
+
+console.log(label, value1);
+
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: label,
+      datasets: [{
+        label: '# of Votes',
+        data: value1,
+        borderWidth: 10
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+@endpush
 @endsection

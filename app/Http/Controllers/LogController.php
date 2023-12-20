@@ -85,4 +85,14 @@ class LogController extends Controller
         $historys = PattyCash::where('store_id', $store)->get();
         return view('logpattycash', compact('historys'));
     }
+    public function generatelogpattycash(Request $request)
+    {
+        $store = auth()->user()->store_id;
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $historys = PattyCash::whereBetween('date', [$startDate, $endDate])->get();
+        $total = PattyCash::whereBetween('date', [$startDate, $endDate])->get()->sum('total');
+
+        return view('logpattycash', compact('historys', 'total'));
+    }
 }

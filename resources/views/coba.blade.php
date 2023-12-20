@@ -16,7 +16,7 @@
 <script>
   var label =  {{ Js::from($label) }};
 
-var value1 =  {{ json_encode($value) }};
+var value1 =  {{ Js::from($value) }};
 
 console.log(label, value1);
 
@@ -29,7 +29,7 @@ console.log(label, value1);
       datasets: [{
         label: '# of Votes',
         data: value1,
-        borderWidth: 1
+        borderWidth: 10
       }]
     },
     options: {
